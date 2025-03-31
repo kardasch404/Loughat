@@ -17,6 +17,6 @@ class Payment extends Model
 
     public function commande ()
     {
-        return $this->hasOne(Commande::class);
+        return $this->belongsTo(Commande::class);
     }
 }
