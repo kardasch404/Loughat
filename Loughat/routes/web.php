@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/signup', function () {
     return view('signup');
@@ -24,5 +24,7 @@ Route::get('/signin', function () {
     return view('signin');
 })->name('signin');
 
+
+// => -/Auth 
 Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
