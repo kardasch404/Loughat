@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cours extends Model
 {
-    //
+    use HasFactory;
 
     protected $fillable = 
     [
@@ -38,5 +38,4 @@ class Cours extends Model
     {
         return $this->belongsTo(Badge::class);
     }
-    
 }
