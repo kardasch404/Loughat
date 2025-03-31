@@ -1,24 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Sign up')
+@section('title', 'Sign In')
 
 @section('content')
-<section class="signup-area overflow-hidden">
+ <!-- SignIn Area Starts Here -->
+ <section class="section signup-area signin-area">
     <div class="container">
-        <div class="row align-items-center justify-content-md-center">
-            <div class="col-lg-5 order-2 order-lg-0">
+        <div class="row align-items-center">
+            <div class="col-xl-5 order-2 order-xl-0">
                 <div class="signup-area-textwrapper">
-                    <h2 class="font-title--md mb-0">Sign Up</h2>
-                    <p class="mt-2 mb-lg-4 mb-3">Already have account? <a href="/signin" class="text-black-50">Sign In</a></p>
-                    <form action="{{ route('register') }}" method="POST">
+                    <h2 class="font-title--md mb-0">Sign in</h2>
+                    <p class="mt-2 mb-lg-4 mb-3">Don't have account? <a href="/signup" class="text-black-50">Sign up</a></p>
+                    <form action="{{ route('login') }}" method="POST">
                         @csrf
-                        {{-- @method(POST) --}}
                         <div class="form-element success">
                             <div class="form-alert">
-                                <label for="name">FirstName</label>
+                                <label for="name">Email</label>
                             </div>
                             <div class="form-alert-input">
-                                <input type="text" placeholder="" id="firstname" name="firstname"/>
+                                <input type="email" placeholder="" id="email" name="email"/>
                                 <div class="form-alert-icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -33,89 +33,19 @@
                                         class="feather feather-check"
                                     >
                                         <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-element success">
-                            <div class="form-alert">
-                                <label for="name">Last Name</label>
-                            </div>
-                            <div class="form-alert-input">
-                                <input type="text" placeholder="" id="lastname" name="lastname" />
-                                <div class="form-alert-icon">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-check"
-                                    >
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-element error">
-                            <div class="form-alert">
-                                <label for="email">Email</label>
-                                <span>*please enter a valid email</span>
-                            </div>
-                            <div class="form-alert-input">
-                                <input type="email" placeholder="" id="email" name="email" />
-                                <div class="form-alert-icon">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-alert-circle"
-                                    >
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                     </svg>
                                 </div>
                             </div>
                         </div>
                         <div class="form-element active">
-                            <label for="password" class="w-100" style="text-align: left;">password</label>
+                            <div class="d-flex justify-content-between">
+                                <label for="confirm-password">Password</label>
+                                <a href="forget-password.html" class="text-primary fs-6">Forget Password</a>
+                            </div>
+
                             <div class="form-alert-input">
                                 <input type="password" placeholder="Type here..." id="password" name="password"/>
-                                <div class="form-alert-icon" onclick="showPassword('password',this)">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-eye"
-                                    >
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-element">
-                            <label for="confirm-password" class="w-100" style="text-align: left;">Confirm password</label>
-                            <div class="form-alert-input">
-                                <input type="password" placeholder="Type here..." id="confirm-password" name="password_confirmation" />
-                                <div class="form-alert-icon" onclick="showPassword('confirm-password',this)">
+                                <div class="form-alert-icon" onclick="showPassword('confirm-password',this);">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -136,12 +66,12 @@
                         </div>
                         <div class="form-element d-flex align-items-center terms">
                             <input class="checkbox-primary me-1" type="checkbox" id="agree" name="agree" />
-                            <label for="agree" class="text-secondary mb-0">Accept the <a href="#" style="text-decoration: underline;">Terms</a> and <a href="#" style="text-decoration: underline;">Privacy Policy</a></label>
+                            <label for="agree" class="text-secondary mb-0 fs-6">Remember me</label>
                         </div>
-                        <div class="form-element">
-                            <button type="submit" name="submit" class="button button-lg button--primary w-100">Sign UP</button>
+                        <div class="form-element" >
+                                <button type="submit" name="submit" class="button button-lg button--primary w-100">Sign in</button>
                         </div>
-                        <span class="d-block text-center text-secondary">or sign up with</span>
+                        <span class="d-block text-center text-secondary">or sign in with</span>
                         <div class="d-flex align-items-center flex-wrap mt-3 signinButtons">
                             <a href="#" class="d-flex text-secondary align-items-center justify-content-center signup-with border fb rounded-1">
                                 <svg class="me-2" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -194,7 +124,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-7 order-1 order-lg-0">
+            <div class="col-xl-7 order-1 order-xl-0">
                 <div class="signup-area-image">
                     <img src="{{asset("assets/dist/images/signup/Illustration.png")}}" alt="Illustration Image" class="img-fluid" />
                 </div>
@@ -202,11 +132,5 @@
         </div>
     </div>
 </section>
-<!-- SignUp Area Ends Here -->
-
-<!-- Dot Images Starts Here -->
-<div class="dot-images">
-    <img src="{{asset("assets/dist/images/shape/dots/dots-img-05.png")}}" alt="shape" class="img-fluid first-dotimage" />
-    <img src="{{asset("assets/dist/images/shape/dots/dots-img-07.png")}}"  alt="shape" class="img-fluid second-dotimage" />
-</div>
+<!-- SignIn Area Ends Here -->
 @endsection
