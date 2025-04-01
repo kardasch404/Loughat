@@ -35,7 +35,8 @@ class JWTAuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','token'), 201);
+        // return response()->json(compact('user','token'), 201);
+        return redirect()->route('signin');
     }
 
     public function login (Request $request)
@@ -51,10 +52,11 @@ class JWTAuthController extends Controller
 
             $user = auth()->user();
             $token = JWTAuth::fromUser($user);
-            return response()->json([
+            // return response()->json([
 
-                'token' => $token
-            ]);
+            //     'token' => $token
+            // ]);
+            return redirect()->route('home');
         }catch (JWTException $e)
         {
             return response()->json([
