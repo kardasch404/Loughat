@@ -10,6 +10,11 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/courses') }}">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ url('/event') }}">
+                            Events
+                        </a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center">
                     <a href="{{ url('/signin') }}" class="button button--text">Sign in</a>
