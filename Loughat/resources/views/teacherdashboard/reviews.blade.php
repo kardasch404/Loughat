@@ -1,3 +1,9 @@
+@extends('layouts.teacher_dashboard')
+
+@section('title', 'Reviews')
+
+@section('content')
+
 <div class="col-md-7 col-lg-8 col-xl-9">
     <div class="doc-review review-listing">
 
@@ -123,3 +129,5 @@
 
     </div>
 </div>
+@endsection
+

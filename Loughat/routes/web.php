@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/test-style', function () {
-    return asset('assets/teacher/css/style.css');
-});
-
 // Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::get('/teacher_dashboard', function () {
         return view('teacherdashboard.teacher_dashboard');

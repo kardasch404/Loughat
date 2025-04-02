@@ -1,3 +1,9 @@
+@extends('layouts.teacher_dashboard')
+
+@section('title', 'Student Course')
+
+@section('content')
+
 <div class="col-md-7 col-lg-8 col-xl-9">
     <div class="card card-table">
         <div class="card-body">
@@ -48,3 +54,5 @@
         </div>
     </div>
 </div>
+@endsection
+
