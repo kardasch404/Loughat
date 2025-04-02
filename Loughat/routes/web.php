@@ -15,40 +15,74 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::middleware(['auth', 'role:teacher'])->group(function () {
-    Route::get('/teacher_dashboard', function () {
-        return view('teacherdashboard.teacher_dashboard');
-    });
+Route::get('/teacher_dashboard', function () {
+    return view('teacherdashboard.teacher_dashboard');
+});
 
-    Route::get('/my-students', function () {
-        return view('teacherdashboard.my-students');
-    });
+Route::get('/my-students', function () {
+    return view('teacherdashboard.my-students');
+});
 
-    Route::get('/student_course', function () {
-        return view('teacherdashboard.student_course');
-    });
+Route::get('/student_course', function () {
+    return view('teacherdashboard.student_course');
+});
 
-    Route::get('/reviews', function () {
-        return view('teacherdashboard.reviews');
-    });
+Route::get('/reviews', function () {
+    return view('teacherdashboard.reviews');
+});
 
-    Route::get('/comming_soon', function () {
-        return view('teacherdashboard.comming-soon');
-    });
+Route::get('/comming_soon', function () {
+    return view('teacherdashboard.comming-soon');
+});
 
-    Route::get('/teacher-profile-settings', function () {
-        return view('teacherdashboard.teacher-profile-settings');
-    });
+Route::get('/teacher-profile-settings', function () {
+    return view('teacherdashboard.teacher-profile-settings');
+});
 
-    Route::get('/teacher-change-password', function () {
-        return view('teacherdashboard.teacher-change-password');
-    });
+Route::get('/teacher-change-password', function () {
+    return view('teacherdashboard.teacher-change-password');
+});
 
-    Route::get('/logout', function () {
-        // auth()->logout();
-        return redirect('/');
-    });
+Route::get('/logout', function () {
+    // auth()->logout();
+    return redirect('/');
+});
 // });
 
+//=========== ->admin admindashboard =============//
+//++++++++++++++++++++++++++++++++++++++++++++++++//
+
+
+Route::get('/admin-dashboard-home', function () {
+    return view('admindashboard.admin-dashboard-home');
+});
+
+Route::get('/categories', function () {
+    return view('admindashboard.categories');
+});
+
+Route::get('/teacher-list', function () {
+    return view('admindashboard.teacher-list');
+});
+
+Route::get('/students-list', function () {
+    return view('admindashboard.students-list');
+});
+
+Route::get('/reviews', function () {
+    return view('admindashboard.reviews');
+});
+
+Route::get('/transactions-list', function () {
+    return view('admindashboard.transactions-list');
+});
+
+Route::get('/profile', function () {
+    return view('admindashboard.profile');
+});
+
+//=================== ->USer ======== =============//
+//++++++++++++++++++++++++++++++++++++++++++++++++//
 
 Route::get('/', function () {
     return view('home');
