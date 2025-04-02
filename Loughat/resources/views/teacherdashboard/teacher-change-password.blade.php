@@ -1,3 +1,9 @@
+@extends('layouts.teacher_dashboard')
+
+@section('title', 'Change PAssword')
+
+@section('content')
+
 <div class="col-md-7 col-lg-8 col-xl-9">
     <div class="card">
         <div class="card-body">
@@ -29,3 +35,4 @@
         </div>
     </div>
 </div>
+@endsection

@@ -9,23 +9,23 @@
     <link href="{{ asset('assets/teacher/img/favicon.png') }}" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href=" {{ asset('assets/teacher/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href=" {{asset('assets/teacher/css/bootstrap.min.css') }}">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/teacher/plugins/fontawesome/css/fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/teacher/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/teacher/plugins/fontawesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/teacher/plugins/fontawesome/css/all.min.css') }}">
 
     <!-- Select2 CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/teacher/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/teacher/plugins/select2/css/select2.min.css') }}">
 
     <!-- Bootstrap Tagsinput CSS -->
-    <link rel="stylesheet" href=" {{ asset('assets/teacher/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href=" {{asset('assets/teacher/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css') }}">
 
     <!-- Dropzone CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/teacher/plugins/dropzone/dropzone.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/teacher/plugins/dropzone/dropzone.min.css') }}">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href=" {{ asset('assets/teacher/css/style.css') }}">
+    <link rel="stylesheet" href=" {{asset('assets/teacher/css/style.css') }}">
 
 
 </head>

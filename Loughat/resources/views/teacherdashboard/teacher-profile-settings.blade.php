@@ -1,3 +1,9 @@
+@extends('layouts.teacher_dashboard')
+
+@section('title', 'profil-Setting')
+
+@section('content')
+
 <div class="col-md-7 col-lg-8 col-xl-9">
 
     <!-- Basic Information -->
@@ -196,3 +202,5 @@
     </div>
 
 </div>
+@endsection
+

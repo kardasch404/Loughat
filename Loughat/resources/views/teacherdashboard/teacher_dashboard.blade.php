@@ -1,3 +1,9 @@
+@extends('layouts.teacher_dashboard')
+
+@section('title', 'Home')
+
+@section('content')
+
 <div class="col-md-7 col-lg-8 col-xl-9">
 
     <div class="row">
@@ -56,3 +62,5 @@
     </div>
 
 </div>
+@endsection
+
