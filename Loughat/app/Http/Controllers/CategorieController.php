@@ -34,4 +34,30 @@ class CategorieController extends Controller
             ]);
         }
     }
+
+    public function update(CategorieRequest $request, $id)
+    {
+        try {
+
+            $categorie = $this->categorieRepository->find($id);
+
+            if (! $categorie) {
+
+                return response()->json([
+                    'message' => 'categorie not found',
+                ]);
+            }
+            $data = $request->validated();
+            $updateCategorie = $this->categorieRepository->update($data,$id);
+
+            return response()->json([
+                'message' => 'categorie updated seccss',
+                'data' => $updateCategorie
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }

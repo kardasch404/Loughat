@@ -31,3 +31,4 @@ Route::post('logout', [JWTAuthController::class, 'logout']);
 // =========================-> Categorie <-=============================//
 // ============================================================== //
 Route::post('/categorie', [CategorieController::class, 'create']);
+Route::put('/categorie/{id}', [CategorieController::class, 'update']); 
