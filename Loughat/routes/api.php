@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\JWTAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [JWTAuthController::class, 'register']);
 Route::post('login', [JWTAuthController::class, 'login']);
 Route::post('logout', [JWTAuthController::class, 'logout']);
+
+// =========================-> Categorie <-=============================//
+// ============================================================== //
+Route::post('/categorie', [CategorieController::class, 'create']);
+Route::put('/categorie/{id}', [CategorieController::class, 'update']); 
+Route::delete('/categorie/{id}', [CategorieController::class, 'delete']); 
