@@ -48,11 +48,34 @@ class CategorieController extends Controller
                 ]);
             }
             $data = $request->validated();
-            $updateCategorie = $this->categorieRepository->update($data,$id);
+            $updateCategorie = $this->categorieRepository->update($data, $id);
 
             return response()->json([
                 'message' => 'categorie updated seccss',
                 'data' => $updateCategorie
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+
+            $categorie = $this->categorieRepository->delete($id);
+
+            if (! $categorie) {
+
+                return response()->json([
+                    'message' => 'categorie not found',
+                ]);
+            }
+            return response()->json([
+                'message' => 'categorie deleted',
+                'categorie' => $categorie,
             ]);
         } catch (\Exception $e) {
             return response()->json([
