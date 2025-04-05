@@ -24,7 +24,7 @@ class CategorieRequest extends FormRequest
         return [
             //
             'name' => 'required|string|max:100',
-            'logo' => 'required|string|max:500'
+            'logo' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ];
     }
 }

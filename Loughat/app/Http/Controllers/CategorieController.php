@@ -16,18 +16,29 @@ class CategorieController extends Controller
         $this->categorieRepository = $categorieRepository;
     }
 
+    public function index ()
+    {
+        $categories = $this->categorieRepository->all();
+        // dd($categories);
+        return view('admindashboard.categories', compact('categories'));
+    }
+
     public function create(CategorieRequest $request)
     {
 
         try {
-
             $data = $request->validated();
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $path = $file->store('categories', 'public'); 
+                $data['logo'] = $path;
+            }
             $categorie = $this->categorieRepository->create($data);
-
-            return response()->json([
-                'message' => 'categorie craeted seccss',
-                'data' => $categorie
-            ]);
+            // return response()->json([
+            //     'message' => 'categorie craeted seccss',
+            //     'data' => $categorie
+            // ]);
+            return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -48,12 +59,18 @@ class CategorieController extends Controller
                 ]);
             }
             $data = $request->validated();
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $path = $file->store('categories', 'public'); 
+                $data['logo'] = $path;
+            }
             $updateCategorie = $this->categorieRepository->update($data, $id);
 
-            return response()->json([
-                'message' => 'categorie updated seccss',
-                'data' => $updateCategorie
-            ]);
+            // return response()->json([
+            //     'message' => 'categorie updated seccss',
+            //     'data' => $updateCategorie
+            // ]);
+            return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -73,10 +90,10 @@ class CategorieController extends Controller
                     'message' => 'categorie not found',
                 ]);
             }
-            return response()->json([
-                'message' => 'categorie deleted',
-                'categorie' => $categorie,
-            ]);
+            // return response()->json([
+            //     'message' => 'categorie deleted',
+            // ]);
+            return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

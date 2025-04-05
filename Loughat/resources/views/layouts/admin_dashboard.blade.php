@@ -60,6 +60,7 @@
 
     <!-- Custom JS -->
     <script src="{{ asset('assets/admin/js/script.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/app.js') }}"></script>
 </body>
 
 </html>
