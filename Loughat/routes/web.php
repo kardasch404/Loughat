@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,9 @@ Route::get('/students-list', function () {
 Route::get('/reviews', function () {
     return view('admindashboard.reviews');
 });
+Route::get('/roles', function () {
+    return view('admindashboard.roles');
+});
 
 Route::get('/transactions-list', function () {
     return view('admindashboard.transactions-list');
@@ -110,5 +114,11 @@ Route::get('/categories',[CategorieController::class, 'index'])->name('admin.cat
 Route::post('/categories', [CategorieController::class, 'create'])->name('admin.categories.create');
 Route::delete('/categories/{id}', [CategorieController::class, 'delete'])->name('admin.categories.delete');
 Route::put('/categories/{id}', [CategorieController::class, 'update'])->name('admin.categories.update');
+
+// => -/Role
+Route::get('/roles',[RoleController::class, 'index'])->name('admin.roles');
+Route::post('/roles', [RoleController::class, 'create'])->name('admin.roles.create');
+Route::delete('/roles/{id}', [RoleController::class, 'delete'])->name('admin.roles.delete');
+Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.update');
 
 
