@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\JWTAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -103,3 +104,11 @@ Route::get('/signin', function () {
 Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
 Route::post('/logout', [JWTAuthController::class, 'logout'])->name('logout');
+
+// => -/Categorie
+Route::get('/categories',[CategorieController::class, 'index'])->name('admin.categories');
+Route::post('/categories', [CategorieController::class, 'create'])->name('admin.categories.create');
+Route::delete('/categories/{id}', [CategorieController::class, 'delete'])->name('admin.categories.delete');
+Route::put('/categories/{id}', [CategorieController::class, 'update'])->name('admin.categories.update');
+
+

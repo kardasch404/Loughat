@@ -15,7 +15,7 @@ class CategorieRepository
     public function update(array $data, $id)
     {
         $categorie = Categorie::findOrFail($id);
-        $categorie-> update($data);
+        $categorie->update($data);
         return $categorie;
     }
     public function find($id)
@@ -27,10 +27,14 @@ class CategorieRepository
     {
         $categorie = Categorie::find($id);
 
-        if (! $categorie)
-        {
+        if (!$categorie) {
             return false;
         }
-        $categorie->delete();
+        return $categorie->delete();
+    }
+
+    public function all()
+    {
+        return Categorie::all();
     }
 }
