@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,14 +26,24 @@ class JWTAuthController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
-
+        
+        $requestedRole = $request->get('role');
+        $status = ($requestedRole === 'Teacher') ? 'Valide' : 'pending';
+        
         $user = User::create([
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
+            'status' => $status
+            
         ]);
 
+        $userRole = Role::where('name','Teacher')->first();
+        if ($userRole)
+        {
+            $user->roles()->attach($userRole->id);
+        }
         $token = JWTAuth::fromUser($user);
 
         // return response()->json(compact('user','token'), 201);
@@ -62,7 +73,6 @@ class JWTAuthController extends Controller
             return response()->json([
                 'error' => 'error invaled data'.$e->getMessage(),
             ],500);
-
         }
     }
 
