@@ -18,4 +18,37 @@ class CoursRepository {
         $cours->save();
         return $cours;
     }
+
+    public function update (array $data, $coursId,$categorieId)
+    {
+        $cours = Cours::find($coursId);
+        if (!$cours) {
+            return false;
+        }
+
+        $cours->title = $data['title'];
+        $cours->description = $data['description'];
+        $cours->photo = $data['photo'];
+        $cours->price = $data['price'];
+        $cours->level = $data['level'];
+        $cours->categorie_id = $categorieId ;
+        $cours->save();
+        return $cours;
+    }
+
+    public function find($coursId)
+    {
+        $cours = Cours::find($coursId);
+        return $cours;
+    }
+
+    public function delete($coursId)
+    {
+        $cours = Cours::find($coursId);
+        if (!$cours) {
+            return false;
+        }
+        $cours->delete();
+        return true;
+    }
 }
