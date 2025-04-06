@@ -15,19 +15,30 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function index()
+    public function showTeachers()
     {
         try {
-            $users = $this->userRepository->all();
-            return response()->json([
-                'message' => 'get all users',
-                'user' => $users
-            ]);
-            // return view('admindashboard.teacher-list', compact('users'));
+            $teachers = $this->userRepository->allTeachers();
+            return view('admindashboard.teacher-list', compact('teachers'));
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ]);
+            return response()->json(['error' => $e->getMessage()]);
         }
+    }
+    
+    public function showStudents()
+    {
+        try {
+            $students = $this->userRepository->allStudents();
+            return view('admindashboard.students-list', compact('students'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+    
+
+    public function getAllusersWithRole()
+    {
+        $users = $this->userRepository->getAllusersWithRole();
+        return response()->json($users);
     }
 }

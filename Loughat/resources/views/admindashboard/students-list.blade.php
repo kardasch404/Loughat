@@ -39,20 +39,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($students as $student)
                                     <tr>
-                                        <td>E22335</td>
+                                        <td>{{ $student->id }}</td>
                                         <td>
                                             <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
+                                                <a href="" class="avatar avatar-sm mr-2"><img
                                                         class="avatar-img rounded-circle"
-                                                        src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Dr. Ruby Perrin</a>
+                                                        src="{{ $student->photo }}" alt="User Image"></a>
+                                                        <a href="">{{ $student->firstname }}
+                                                            {{ $student->lastname }}</a>
                                             </h2>
                                         </td>
 
                                         <td>14 Jan 2019 <br><small>02.59 AM</small></td>
 
-                                        <td>teacher@teacher.cc</td>
+                                        <td>{{ $student->email }}</td>
 
                                         <td>
                                             <div class="status-toggle">
@@ -70,9 +72,7 @@
                                         </td>
 
                                     </tr>
-
-
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

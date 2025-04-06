@@ -13,10 +13,10 @@
                     <a href="/categories"><i class="fe fe-users"></i> <span>Categories</span></a>
                 </li>
                 <li>
-                    <a href="/teacher-list"><i class="fe fe-user-plus"></i> <span>Teacher</span></a>
+                    <a href="/teachers"><i class="fe fe-user-plus"></i> <span>Teacher</span></a>
                 </li>
                 <li>
-                    <a href="/students-list"><i class="fe fe-user"></i> <span>Students</span></a>
+                    <a href="/students"><i class="fe fe-user"></i> <span>Students</span></a>
                 </li>
                 <li>
                     <a href="/reviews"><i class="fe fe-star-o"></i> <span>Reviews</span></a>

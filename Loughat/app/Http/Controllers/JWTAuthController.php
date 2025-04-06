@@ -39,7 +39,7 @@ class JWTAuthController extends Controller
             
         ]);
 
-        $userRole = Role::where('name','Teacher')->first();
+        $userRole = Role::where('name','user')->first();
         if ($userRole)
         {
             $user->roles()->attach($userRole->id);

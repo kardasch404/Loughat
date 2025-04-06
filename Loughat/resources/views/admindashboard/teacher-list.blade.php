@@ -40,72 +40,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Dr. Ruby Perrin</a>
-                                            </h2>
-                                        </td>
-                                        <td>Dental</td>
+                                        @foreach($teachers as $teacher)
+                                            <tr>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="" class="avatar avatar-sm mr-2"><img
+                                                                class="avatar-img rounded-circle" src="{{ $teacher->id }}"
+                                                                alt="User Image"></a>
+                                                        <a href="">{{ $teacher->firstname }}
+                                                            {{ $teacher->lastname }}</a>
+                                                    </h2>
+                                                </td>
+                                                <td>Dental</td>
 
-                                        <td>14 Jan 2019 <br><small>02.59 AM</small></td>
+                                                <td>14 Jan 2019 <br><small>02.59 AM</small></td>
 
-                                        <td>teacher@teacher.cc</td>
-                                        <td>190</td>
+                                                <td>{{ $teacher->email }}</td>
+                                                <td>190</td>
 
-                                        <td>
-                                            <div class="status-toggle">
-                                                <input type="checkbox" id="status_1" class="check" checked>
-                                                <label for="status_1" class="checktoggle">checkbox</label>
-                                            </div>
-                                        </td>
-                                        <td class="text">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-success-light" data-toggle="modal"
-                                                    href="#edit_specialities_details">
-                                                    <i class="fe fe-pencil"></i> Edit
-                                                </a>
-                                            </div>
-                                        </td>
+                                                <td>
+                                                    <div class="status-toggle">
+                                                        <input type="checkbox" id="status_1" class="check" checked>
+                                                        <label for="status_1" class="checktoggle">checkbox</label>
+                                                    </div>
+                                                </td>
+                                                <td class="text">
+                                                    <div class="actions">
+                                                        <a class="btn btn-sm bg-success-light" data-toggle="modal"
+                                                            href="#edit_specialities_details">
+                                                            <i class="fe fe-pencil"></i> Edit
+                                                        </a>
+                                                    </div>
+                                                </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Dr. Ruby Perrin</a>
-                                            </h2>
-                                        </td>
-                                        <td>Dental</td>
-
-                                        <td>14 Jan 2019 <br><small>02.59 AM</small></td>
-
-                                        <td>teacher@teacher.cc</td>
-                                        <td>190</td>
-
-                                        <td>
-                                            <div class="status-toggle">
-                                                <input type="checkbox" id="status_1" class="check" checked>
-                                                <label for="status_1" class="checktoggle">checkbox</label>
-                                            </div>
-                                        </td>
-                                        <td class="text">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-success-light" data-toggle="modal"
-                                                    href="#edit_specialities_details">
-                                                    <i class="fe fe-pencil"></i> Edit
-                                                </a>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-
-
+                                            </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
