@@ -16,8 +16,7 @@ class Cours extends Model
         'photo', 
         'price', 
         'vedios', 
-        'level', 
-        'status'
+        'level'
     ];
 
 

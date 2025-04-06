@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -38,3 +39,7 @@ Route::delete('/categorie/{id}', [CategorieController::class, 'delete']);
 // =========================-> Users <-=============================//
 // ============================================================== //
 Route::get('/getAllusersWithRole', [UserController::class, 'getAllusersWithRole']);
+
+// =========================-> cours <-=============================//
+// ============================================================== //
+Route::post('/create/{categorieId}', [CoursController::class, 'create']);
