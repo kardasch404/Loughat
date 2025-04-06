@@ -29,13 +29,15 @@ class JWTAuthController extends Controller
         
         $requestedRole = $request->get('role');
         $status = ($requestedRole === 'Teacher') ? 'Valide' : 'pending';
+
         
         $user = User::create([
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
-            'status' => $status
+            'status' => $status,
+            'photo' => 'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
             
         ]);
 
@@ -63,11 +65,27 @@ class JWTAuthController extends Controller
 
             $user = auth()->user();
             $token = JWTAuth::fromUser($user);
+
+            $role = $user->roles()->first()->name;
             // return response()->json([
 
             //     'token' => $token
             // ]);
-            return redirect()->route('home');
+
+            session([
+                'user_firstname' => $user->firstname,
+                'user_lastname' => $user->lastname,
+                'user_photo' => $user->photo ,
+                'user_role' => $role,
+            ]);
+            if($role === 'user' ) {
+                return view('home');
+            }elseif($role === 'Teacher') {
+                return view('teacherdashboard.teacher_dashboard');
+            }else if($role === 'admin') {
+                return view('admindashboard.admin-dashboard-home');
+            }
+            // return redirect()->route('/admin-dashboard-home');
         }catch (JWTException $e)
         {
             return response()->json([

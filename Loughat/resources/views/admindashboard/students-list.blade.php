@@ -39,39 +39,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($students as $student)
-                                    <tr>
-                                        <td>{{ $student->id }}</td>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="{{ $student->photo }}" alt="User Image"></a>
-                                                        <a href="">{{ $student->firstname }}
-                                                            {{ $student->lastname }}</a>
-                                            </h2>
-                                        </td>
+                                    @foreach ($students as $student)
+                                        <tr>
+                                            <td>{{ $student->id }}</td>
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    <a href="" class="avatar avatar-sm mr-2"><img
+                                                            class="avatar-img rounded-circle" src="{{ $student->photo }}"
+                                                            alt="User Image"></a>
+                                                    <a href="">{{ $student->firstname }}
+                                                        {{ $student->lastname }}</a>
+                                                </h2>
+                                            </td>
 
-                                        <td>14 Jan 2019 <br><small>02.59 AM</small></td>
+                                            <td>14 Jan 2019 <br><small>02.59 AM</small></td>
 
-                                        <td>{{ $student->email }}</td>
+                                            <td>{{ $student->email }}</td>
 
-                                        <td>
-                                            <div class="status-toggle">
-                                                <input type="checkbox" id="status_1" class="check" checked>
-                                                <label for="status_1" class="checktoggle">checkbox</label>
-                                            </div>
-                                        </td>
-                                        <td class="text">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-success-light" data-toggle="modal"
-                                                    href="#edit_specialities_details">
-                                                    <i class="fe fe-pencil"></i> Edit
-                                                </a>
-                                            </div>
-                                        </td>
+                                            <td>
+                                                <div class="status-toggle">
+                                                    <input type="checkbox" id="status_1" class="check" checked>
+                                                    <label for="status_1" class="checktoggle">checkbox</label>
+                                                </div>
+                                            </td>
+                                            <td class="text">
+                                                <div class="actions">
+                                                    <a class="btn btn-sm bg-success-light" data-toggle="modal"
+                                                        href="#edit_specialities_details">
+                                                        <i class="fe fe-pencil"></i> Edit
+                                                    </a>
+                                                </div>
+                                            </td>
 
-                                    </tr>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

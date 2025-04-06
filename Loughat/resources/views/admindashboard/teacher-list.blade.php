@@ -45,7 +45,7 @@
                                                 <td>
                                                     <h2 class="table-avatar">
                                                         <a href="" class="avatar avatar-sm mr-2"><img
-                                                                class="avatar-img rounded-circle" src="{{ $teacher->id }}"
+                                                                class="avatar-img rounded-circle" src="{{ $teacher->photo }}"
                                                                 alt="User Image"></a>
                                                         <a href="">{{ $teacher->firstname }}
                                                             {{ $teacher->lastname }}</a>
