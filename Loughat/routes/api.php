@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,8 @@ Route::post('logout', [JWTAuthController::class, 'logout']);
 // ============================================================== //
 Route::post('/categorie', [CategorieController::class, 'create']);
 Route::put('/categorie/{id}', [CategorieController::class, 'update']); 
-Route::delete('/categorie/{id}', [CategorieController::class, 'delete']); 
+Route::delete('/categorie/{id}', [CategorieController::class, 'delete']);
+
+// =========================-> Users <-=============================//
+// ============================================================== //
+Route::get('/getAllusersWithRole', [UserController::class, 'getAllusersWithRole']);

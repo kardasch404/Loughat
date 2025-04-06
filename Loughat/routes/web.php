@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,11 +64,11 @@ Route::get('/categories', function () {
     return view('admindashboard.categories');
 });
 
-Route::get('/teacher-list', function () {
+Route::get('/teachers', function () {
     return view('admindashboard.teacher-list');
 });
 
-Route::get('/students-list', function () {
+Route::get('/students', function () {
     return view('admindashboard.students-list');
 });
 
@@ -121,4 +122,8 @@ Route::post('/roles', [RoleController::class, 'create'])->name('admin.roles.crea
 Route::delete('/roles/{id}', [RoleController::class, 'delete'])->name('admin.roles.delete');
 Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.update');
 
+
+// => -/USer
+Route::get('/teachers', [UserController::class, 'showTeachers'])->name('admin.teacher-list');
+Route::get('/students', [UserController::class, 'showStudents'])->name('admin.students-list');
 

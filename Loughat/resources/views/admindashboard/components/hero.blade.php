@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li class="notification-message">
-                            <a href="#">
+                            <a href="">
                                 <div class="media">
                                     <span class="avatar avatar-sm">
                                         <img class="avatar-img rounded-circle" alt="User Image"
@@ -116,25 +116,26 @@
         <!-- User Menu -->
         <li class="nav-item dropdown has-arrow">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg"
-                        width="31" alt="Ryan Taylor"></span>
+                <span class="user-img">
+                    <img class="rounded-circle" src="{{ session('user_photo') }}" width="31" alt="User Image">
+                </span>
             </a>
             <div class="dropdown-menu">
                 <div class="user-header">
                     <div class="avatar avatar-sm">
-                        <img src="assets/img/profiles/avatar-01.jpg" alt="User Image"
-                            class="avatar-img rounded-circle">
+                        <img src="{{ session('user_photo') }}" alt="User Image" class="avatar-img rounded-circle">
                     </div>
                     <div class="user-text">
-                        <h6>Ryan Taylor</h6>
-                        <p class="text-muted mb-0">Administrator</p>
+                        <h6>{{ session('user_firstname') }} {{ session('user_lastname') }}</h6>
+                        <p class="text-muted mb-0">{{ ucfirst(session('user_role')) }}</p>
                     </div>
                 </div>
                 <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="settings.html">Settings</a>
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
             </div>
         </li>
+        
         <!-- /User Menu -->
 
     </ul>
