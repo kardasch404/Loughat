@@ -9,13 +9,13 @@ class Cours extends Model
 {
     use HasFactory;
 
-    protected $fillable = 
+    protected $fillable =
     [
         'title',
-        'description', 
-        'photo', 
-        'price', 
-        'vedios', 
+        'description',
+        'photo',
+        'price',
+        'vedios',
         'level'
     ];
 
@@ -24,7 +24,10 @@ class Cours extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
     public function categorie()
     {
         return $this->belongsTo(Categorie::class);

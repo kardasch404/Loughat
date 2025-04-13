@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware(['auth', 'role:teacher'])->group(function () {
+// Route::middleware(['auth', 'role:Teacher'])->group(function () {
 Route::get('/teacher_dashboard', function () {
     return view('teacherdashboard.teacher_dashboard');
 });
@@ -29,8 +30,17 @@ Route::get('/my-students', function () {
 Route::get('/student_course', function () {
     return view('teacherdashboard.student_course');
 });
+Route::get('/courses', function () {
+    return view('teacherdashboard.courses');
+});
+Route::get('/create-cours', function () {
+    return view('teacherdashboard.create-cours');
+});
+Route::get('/edit-cours', function () {
+    return view('teacherdashboard.edit-cours');
+});
 
-Route::get('/reviews', function () {
+Route::get('/teacher-reviews', function () {
     return view('teacherdashboard.reviews');
 });
 
@@ -127,3 +137,10 @@ Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.
 Route::get('/teachers', [UserController::class, 'showTeachers'])->name('admin.teacher-list');
 Route::get('/students', [UserController::class, 'showStudents'])->name('admin.students-list');
 
+// => -/Course
+Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
+Route::get('/courses', [CoursController::class, 'index'])->name('courses');
+Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
+Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
+Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
+Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');

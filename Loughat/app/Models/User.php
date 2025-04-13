@@ -61,6 +61,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Role::class, 'users_roles');
     }
+    public function coursesCreated()
+    {
+        return $this->hasMany(Cours::class, 'teacher_id');
+    }
     public function cours()
     {
         return $this->belongsToMany(Cours::class);

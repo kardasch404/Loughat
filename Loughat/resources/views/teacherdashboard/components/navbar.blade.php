@@ -31,6 +31,18 @@
                             <span>My students</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/courses">
+                            <i class="fas fa-user-injured"></i>
+                            <span>Courses</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/create-cours">
+                            <i class="fas fa-user-injured"></i>
+                            <span>create-cours</span>
+                        </a>
+                    </li>
                     <li >
                         <a href="/student_course">
                             <i class="fas fa-file-invoice"></i>
@@ -38,7 +50,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/reviews">
+                        <a href="/teacher-reviews">
                             <i class="fas fa-star"></i>
                             <span>Reviews</span>
                         </a>
