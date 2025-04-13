@@ -143,3 +143,4 @@ Route::get('/courses', [CoursController::class, 'index'])->name('courses');
 Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
+Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');

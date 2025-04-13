@@ -50,9 +50,14 @@
                                         <a href="{{ route('courses.edit', ['coursId' => $course->id]) }}" class="btn btn-sm bg-info-light">
                                             edit
                                         </a>                                        
-                                        <a href="" class="btn btn-sm btn-danger">
-                                            delete
-                                        </a>
+                                        <form action="{{ route('courses.delete', ['coursId' => $course->id]) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                delete
+                                            </button>
+                                        </form>
+                                        
                                     </div>
                                 </td>
                             </tr>

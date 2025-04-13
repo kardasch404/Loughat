@@ -54,7 +54,7 @@ class CoursController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
     public function update(Request $request, $coursId)
     {
         try {
@@ -62,7 +62,7 @@ class CoursController extends Controller
                 'title' => 'sometimes|string|max:250',
                 'description' => 'sometimes|string|max:500',
                 'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
-                'price' => 'sometimes|numeric|max:500', 
+                'price' => 'sometimes|numeric|max:500',
                 'level' => 'sometimes|string|max:500',
                 'categorie_id' => 'sometimes|nullable',
             ]);
@@ -81,10 +81,10 @@ class CoursController extends Controller
                 $path = $file->store('courses', 'public');
                 $data['photo'] = $path;
             }
-            
+
             $categorieId = $request->input('categorie_id');
             $cours = $this->coursRepository->update($data, $coursId, $categorieId);
-            
+
             return redirect()->route('courses')->with('success', 'Course updated successfully');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -106,15 +106,13 @@ class CoursController extends Controller
     public function delete($coursId)
     {
         try {
-            $cours = $this->coursRepository->delete($coursId);
-            if (! $cours) {
-                return response()->json(['error' => 'Cours not found'], 404);
+            $deleted = $this->coursRepository->delete($coursId);
+            if (!$deleted) {
+                return redirect()->back();
             }
-            return response()->json([
-                'message' => 'cours deleted'
-            ], 200);
+            return redirect()->route('courses');
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return redirect()->back()->with('error', 'Failed to delete course');
         }
     }
 }
