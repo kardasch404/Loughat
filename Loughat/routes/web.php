@@ -36,6 +36,9 @@ Route::get('/courses', function () {
 Route::get('/create-cours', function () {
     return view('teacherdashboard.create-cours');
 });
+Route::get('/edit-cours', function () {
+    return view('teacherdashboard.edit-cours');
+});
 
 Route::get('/teacher-reviews', function () {
     return view('teacherdashboard.reviews');
@@ -136,4 +139,7 @@ Route::get('/students', [UserController::class, 'showStudents'])->name('admin.st
 
 // => -/Course
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
+Route::get('/courses', [CoursController::class, 'index'])->name('courses');
 Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
+Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
+Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
