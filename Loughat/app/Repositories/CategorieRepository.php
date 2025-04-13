@@ -31,7 +31,7 @@ class CategorieRepository
             return false;
         }
         return $categorie->delete();
-    }
+    }   
 
     public function all()
     {

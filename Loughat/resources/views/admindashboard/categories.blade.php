@@ -10,10 +10,10 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-7 col-auto">
-                    <h3 class="page-title">CAtegories</h3>
+                    <h3 class="page-title">Categories</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active">CAtegories</li>
+                        <li class="breadcrumb-item active">Categories</li>
                     </ul>
                 </div>
                 <div class="col-sm-5 col">
