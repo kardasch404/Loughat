@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\Cours;
+
+class CoursRepository
+{
+
+    public function create(array $data, $categorieId)
+    {
+        $cours = new Cours();
+        $cours->title = $data['title'];
+        $cours->description = $data['description'];
+        $cours->photo = $data['photo'];
+        $cours->price = $data['price'];
+        $cours->level = $data['level'];
+        $cours->categorie_id = $categorieId;
+        $cours->save();
+        return $cours;
+    }
+
+    public function update(array $data, $coursId, $categorieId)
+    {
+        $cours = Cours::find($coursId);
+        if (!$cours) {
+            return false;
+        }
+    
+        if (isset($data['title'])) {
+            $cours->title = $data['title'];
+        }
+        
+        if (isset($data['description'])) {
+            $cours->description = $data['description'];
+        }
+        
+        if (isset($data['photo'])) {
+            $cours->photo = $data['photo'];
+        }
+        
+        if (isset($data['price'])) {
+            $cours->price = $data['price'];
+        }
+        
+        if (isset($data['level'])) {
+            $cours->level = $data['level'];
+        }
+        if ($categorieId) {
+            $cours->categorie_id = $categorieId;
+        }
+        
+        $cours->save();
+        return $cours;
+    }
+
+    public function find($coursId)
+    {
+        $cours = Cours::find($coursId);
+        return $cours;
+    }
+
+    public function delete($coursId)
+    {
+        $cours = Cours::find($coursId);
+        if (!$cours) {
+            return false;
+        }
+        $cours->delete();
+        return true;
+    }
+
+    public function all()
+    {
+        $courses = Cours::all();
+        return $courses;
+    }
+}
