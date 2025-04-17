@@ -136,6 +136,8 @@ Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.
 // => -/USer
 Route::get('/teachers', [UserController::class, 'showTeachers'])->name('admin.teacher-list');
 Route::get('/students', [UserController::class, 'showStudents'])->name('admin.students-list');
+Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
+Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 
 // => -/Course
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -144,3 +146,4 @@ Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.s
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
+

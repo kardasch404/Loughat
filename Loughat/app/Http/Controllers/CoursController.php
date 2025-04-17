@@ -33,6 +33,11 @@ class CoursController extends Controller
     public function store(CoursRequest $request)
     {
         try {
+            $teacher = auth()->user();
+            if (!$teacher) {
+                return redirect()->back()->with('error', 'Please login first');
+            }
+
             $data = $request->validated();
 
             if ($request->hasFile('photo')) {
@@ -42,18 +47,19 @@ class CoursController extends Controller
             }
 
             $categorie = $this->categorieRepository->find($data['categorie_id']);
-            if (! $categorie) {
-                return response()->json(['error' => 'Categorie not found'], 404);
+            if (!$categorie) {
+                return redirect()->back()->with('error', 'Category not found');
             }
-            $cours = $this->coursRepository->create($data, $data['categorie_id']);
 
-            $categories = $this->categorieRepository->all();
+            $cours = $this->coursRepository->create($data, $data['categorie_id'], $teacher->id);
 
-            return view('teacherdashboard.create-cours', compact('cours', 'categories'));
+            return redirect()->route('courses')->with('success', 'Course created successfully');
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return redirect()->back()->with('error', 'Failed to create course');
         }
     }
+
+
 
     public function update(Request $request, $coursId)
     {
@@ -85,7 +91,7 @@ class CoursController extends Controller
             $categorieId = $request->input('categorie_id');
             $cours = $this->coursRepository->update($data, $coursId, $categorieId);
 
-            return redirect()->route('courses')->with('success', 'Course updated successfully');
+            return redirect()->route('courses');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="page-title">List of Patient</h3>
+                    <h3 class="page-title">List of Students</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
@@ -20,7 +20,6 @@
             </div>
         </div>
         <!-- /Page Header -->
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -35,7 +34,6 @@
                                         <th>Email</th>
                                         <th>Account Status</th>
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +43,7 @@
                                             <td>
                                                 <h2 class="table-avatar">
                                                     <a href="" class="avatar avatar-sm mr-2"><img
-                                                            class="avatar-img rounded-circle" src="{{ $student->photo }}"
+                                                            class="avatar-img rounded-circle" src="{{ asset('storage/' . $student->photo) }}"
                                                             alt="User Image"></a>
                                                     <a href="">{{ $student->firstname }}
                                                         {{ $student->lastname }}</a>
@@ -65,12 +63,17 @@
                                             <td class="text">
                                                 <div class="actions">
                                                     <a class="btn btn-sm bg-success-light" data-toggle="modal"
-                                                        href="#edit_specialities_details">
+                                                        href="#edit_specialities_details" onclick="loadUserData(this)"
+                                                        data-id="<?= htmlspecialchars($student->id) ?>"
+                                                        data-firstname="<?= htmlspecialchars($student->firstname) ?>"
+                                                        data-lastname="<?= htmlspecialchars($student->lastname) ?>"
+                                                        data-photo="<?= htmlspecialchars($student->photo) ?>"
+                                                        data-email="<?= htmlspecialchars($student->email) ?>"
+                                                        data-phone="<?= htmlspecialchars($student->phone) ?>">
                                                         <i class="fe fe-pencil"></i> Edit
                                                     </a>
                                                 </div>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -85,29 +88,51 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Specialities</h5>
+                        <h5 class="modal-title">Edit Student</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ route('admin.students.update', $student->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="user_id" id="user_id">
                             <div class="row form-row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Specialities</label>
-                                        <input type="text" class="form-control" value="Cardiology">
+                                        <label>Firstname</label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control">
+                                        <label>Lastname</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Photo</label>
+                                        <input type="file" class="form-control" id="photo" name="photo">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="number" class="form-control" id="phone" name="phone">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-block">Save Changes</button>
                         </form>
                     </div>
                 </div>

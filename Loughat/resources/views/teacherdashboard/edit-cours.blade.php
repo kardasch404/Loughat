@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <div class="change-avatar">
                                     <div class="profile-img">
-                                        <img src="" alt="Cours Image">
+                                        <img src="{{ asset('storage/' . $cours->photo) }}" alt="Cours Image">
                                     </div>
                                     <div class="upload-img">
                                         <div class="change-photo-btn">
