@@ -9,6 +9,33 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository
 {
 
+    public function createUser(array $data)
+    {   
+        // $status = ($data['role'] === 'Teacher') ? 'pending' : 'Valide';
+        $user = User::create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'status' => 'pending',
+            'photo' => 'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+        ]);
+
+        $this->assignUserRole($user);
+        return $user;
+    }
+    public function assignUserRole(User $user)
+    {   
+        $userRole = Role::where('name', 'user')->first();
+        if ($userRole) {
+            $user->roles()->attach($userRole->id);
+        }
+    }
+
+    public function getUserByCredentials(array $credentials)
+    {
+        return User::where('email', $credentials['email'])->first();
+    }
 
     public function allStudents()
     {
@@ -59,4 +86,6 @@ class UserRepository
         $user = User::find($id);
         return $user;
     }
+
+    
 }

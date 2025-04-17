@@ -4,7 +4,6 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,17 +17,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// routes/api.php
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('register', [JWTAuthController::class, 'register']);
+    Route::post('login', [JWTAuthController::class, 'login']);
+    
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::post('logout', [JWTAuthController::class, 'logout']);
+    });
 });
 
 
+// Route::middleware('jwt.auth')->group(function () {
+//     Route::post('logout', [JWTAuthController::class, 'logout']);
+// });
+
  // =========================-> Auth <-=============================//
 // ============================================================== //
-
-Route::post('register', [JWTAuthController::class, 'register']);
-Route::post('login', [JWTAuthController::class, 'login']);
-Route::post('logout', [JWTAuthController::class, 'logout']);
+// Route::post('register', [JWTAuthController::class, 'register']);
+// Route::post('login', [JWTAuthController::class, 'login']);
+// Route::post('logout', [JWTAuthController::class, 'logout']);
 
 // =========================-> Categorie <-=============================//
 // ============================================================== //
