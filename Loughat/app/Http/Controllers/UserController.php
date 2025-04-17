@@ -25,7 +25,7 @@ class UserController extends Controller
             return response()->json(['error' => $e->getMessage()]);
         }
     }
-    
+
     public function showStudents()
     {
         try {
@@ -35,46 +35,48 @@ class UserController extends Controller
             return response()->json(['error' => $e->getMessage()]);
         }
     }
-    
+
     public function getAllusersWithRole()
     {
         $users = $this->userRepository->getAllusersWithRole();
         return response()->json($users);
     }
 
-    public function update (Request $request , $id)
+    public function update(Request $request, $id)
     {
         try {
-        $validator = Validator::make($request->all(), [
-            'firstname' => 'sometimes|string|max:255',
-            'lastname' => 'sometimes|string|max:255',
-            'phone' => 'sometimes|string|max:500',
-            'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'email' => 'sometimes|string|email|max:255|unique:users',
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-        $data = $validator->validated();
-        $user = $this->userRepository->find($id);
-        if( ! $user)
-        {
-            return response()->json([
-                'user' => 'User not found'
+            $validator = Validator::make($request->all(), [
+                'firstname' => 'sometimes|string|max:255',
+                'lastname' => 'sometimes|string|max:255',
+                'phone' => 'sometimes|string|max:500',
+                'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
+                'email' => 'sometimes|string|email|max:255|unique:users,email,' . $id,
             ]);
-        }
-        if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $path = $file->store('users', 'public');
-            $data['photo'] = $path;
-        }
-        $user = $this->userRepository->update($data, $id);
-        return redirect()->back();
-        }catch(\Exception $e)
-        {
-            return response()->json(['error' => $e->getMessage()]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $data = $validator->validated();
+            $user = $this->userRepository->find($id);
+
+            if (!$user) {
+                return redirect()->back()->with('error', 'User not found');
+            }
+
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $path = $file->store('users', 'public');
+                $data['photo'] = $path;
+            }
+
+            $user = $this->userRepository->update($data, $id);
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error' . $e->getMessage());
         }
     }
 }

@@ -50,6 +50,7 @@ class UserRepository
         if (isset($data['email'])) {
             $user->email = $data['email'];
         }
+        $user->save();
         return $user;
     }
 
