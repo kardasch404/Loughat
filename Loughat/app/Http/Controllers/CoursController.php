@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CoursRequest;
+use App\Http\Requests\CoursUpdateRequest;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CoursRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Repositories\UserRepository;
 
 class CoursController extends Controller
 {
     protected $coursRepository;
     protected $categorieRepository;
-    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository)
+    protected $userRepository;
+    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository)
     {
         $this->coursRepository = $coursRepository;
         $this->categorieRepository = $categorieRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index()
@@ -34,10 +36,6 @@ class CoursController extends Controller
     {
         try {
             $teacher = auth()->user();
-            if (!$teacher) {
-                return redirect()->back()->with('error', 'Please login first');
-            }
-
             $data = $request->validated();
 
             if ($request->hasFile('photo')) {
@@ -45,7 +43,6 @@ class CoursController extends Controller
                 $path = $file->store('courses', 'public');
                 $data['photo'] = $path;
             }
-
             $categorie = $this->categorieRepository->find($data['categorie_id']);
             if (!$categorie) {
                 return redirect()->back()->with('error', 'Category not found');
@@ -53,7 +50,7 @@ class CoursController extends Controller
 
             $cours = $this->coursRepository->create($data, $data['categorie_id'], $teacher->id);
 
-            return redirect()->route('courses')->with('success', 'Course created successfully');
+            return redirect()->route('courses')->with('success', 'Course created succes');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create course');
         }
@@ -61,23 +58,16 @@ class CoursController extends Controller
 
 
 
-    public function update(Request $request, $coursId)
+    public function update(CoursUpdateRequest $request, $coursId)
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'title' => 'sometimes|string|max:250',
-                'description' => 'sometimes|string|max:500',
-                'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
-                'price' => 'sometimes|numeric|max:500',
-                'level' => 'sometimes|string|max:500',
-                'categorie_id' => 'sometimes|nullable',
-            ]);
-            if ($validator->fails()) {
+            $data = $request->validated();
+            if ($data->fails()) {
                 return redirect()->back()
-                    ->withErrors($validator)
+                    ->withErrors($data)
                     ->withInput();
             }
-            $data = $validator->validated();
+            $data = $data->validated();
             $cours = $this->coursRepository->find($coursId);
             if (!$cours) {
                 return response()->json(['error' => 'Cours not found'], 404);

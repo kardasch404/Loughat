@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// routes/api.php
 
+ // =========================-> Auth <-=============================//
+// ============================================================== //
 Route::group(['prefix' => 'auth'], function () {
     Route::post('register', [JWTAuthController::class, 'register']);
     Route::post('login', [JWTAuthController::class, 'login']);
@@ -27,17 +28,6 @@ Route::group(['prefix' => 'auth'], function () {
         Route::post('logout', [JWTAuthController::class, 'logout']);
     });
 });
-
-
-// Route::middleware('jwt.auth')->group(function () {
-//     Route::post('logout', [JWTAuthController::class, 'logout']);
-// });
-
- // =========================-> Auth <-=============================//
-// ============================================================== //
-// Route::post('register', [JWTAuthController::class, 'register']);
-// Route::post('login', [JWTAuthController::class, 'login']);
-// Route::post('logout', [JWTAuthController::class, 'logout']);
 
 // =========================-> Categorie <-=============================//
 // ============================================================== //
