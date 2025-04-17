@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CoursRequest extends FormRequest
+class CoursUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,12 @@ class CoursRequest extends FormRequest
     {
         return [
             //
-            'title' => 'required|string|max:250',
-            'description' => 'required|string|max:500',
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'price' => 'required|numeric|max:500', 
-            'categorie_id' => 'nullable',   
-            'level' => 'required|string|max:500',   
+            'title' => 'sometimes|string|max:250',
+            'description' => 'sometimes|string|max:500',
+            'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'price' => 'sometimes|numeric|max:500',
+            'level' => 'sometimes|string|max:500',
+            'categorie_id' => 'sometimes|nullable',
         ];
     }
 }

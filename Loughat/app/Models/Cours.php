@@ -40,4 +40,8 @@ class Cours extends Model
     {
         return $this->belongsTo(Badge::class);
     }
+    public function reviews()
+    {
+        return $this->hasMany(CoursReview::class);
+    }
 }

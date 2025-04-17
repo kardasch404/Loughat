@@ -86,6 +86,7 @@ class JWTAuthController extends Controller
     protected function setUserSession($user, $role)
     {
         session([
+            'user_id' => $user->id,
             'user_firstname' => $user->firstname,
             'user_lastname' => $user->lastname,
             'user_photo' => $user->photo,
