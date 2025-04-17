@@ -2,102 +2,125 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Repositories\UserRepository;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTAuthController extends Controller
 {
     //
+    protected $userRepository ; 
 
-    public function register(Request $request)
+    public function __construct(UserRepository $userRepository)
     {
-        $validator = Validator::make($request->all(), [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-        
-        $requestedRole = $request->get('role');
-        $status = ($requestedRole === 'Teacher') ? 'Valide' : 'pending';
-
-        
-        $user = User::create([
-            'firstname' => $request->get('firstname'),
-            'lastname' => $request->get('lastname'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'status' => $status,
-            'photo' => 'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
-            
-        ]);
-
-        $userRole = Role::where('name','user')->first();
-        if ($userRole)
-        {
-            $user->roles()->attach($userRole->id);
-        }
-        $token = JWTAuth::fromUser($user);
-
-        // return response()->json(compact('user','token'), 201);
-        return redirect()->route('signin');
+        $this->userRepository = $userRepository ; 
     }
 
-    public function login (Request $request)
+    public function register(RegisterRequest $request)
     {
-        $data = $request->only( 'email','password');
         try {
-            if ( ! $token = JWTAuth::attempt( $data) )
-            {
+
+            $user = $this->userRepository->createUser($request->validated());
+
+            $token = JWTAuth::fromUser($user);
+
+            // return response()->json([
+            //     'success' => true,
+            //     'user' => $user,
+            //     'token' => $token,
+            //     'message' => 'User registered'
+            // ], 201);
+
+            return redirect()->route('signin');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Registration failed',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function login (LoginRequest $request)
+    {
+        try {
+            $credentials = $request->validated();
+
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json([
-                    'message' => 'error invaled data',
-                ],401);
+                    'success' => false,
+                    'message' => 'Invalid credentials'
+                ], 401);
             }
 
             $user = auth()->user();
-            $token = JWTAuth::fromUser($user);
-
             $role = $user->roles()->first()->name;
-            // return response()->json([
 
+            // return response()->json([
+            //     'success' => true,
+            //     'user' => [
+            //         'firstname' => $user->firstname,
+            //         'lastname' => $user->lastname,
+            //         'email' => $user->email,
+            //         'photo' => $user->photo,
+            //         'role' => $role
+            //     ],
             //     'token' => $token
             // ]);
 
-            session([
-                'user_firstname' => $user->firstname,
-                'user_lastname' => $user->lastname,
-                'user_photo' => $user->photo ,
-                'user_role' => $role,
-            ]);
-            if($role === 'user' ) {
-                return view('home');
-            }elseif($role === 'Teacher') {
-                return view('teacherdashboard.teacher_dashboard');
-            }else if($role === 'admin') {
-                return view('admindashboard.admin-dashboard-home');
-            }
-            // return redirect()->route('/admin-dashboard-home');
+            $this->setUserSession($user, $role);
+
+            return $this->handleRoleBasedRedirect($role);
+            
         }catch (JWTException $e)
         {
             return response()->json([
-                'error' => 'error invaled data'.$e->getMessage(),
-            ],500);
+                'error' => 'Could not create token',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
-    public function logout()
+    protected function setUserSession($user, $role)
     {
-        JWTAuth::invalidate(JWTAuth::getToken());
+        session([
+            'user_firstname' => $user->firstname,
+            'user_lastname' => $user->lastname,
+            'user_photo' => $user->photo,
+            'user_role' => $role,
+        ]);
+    }
+    protected function handleRoleBasedRedirect($role)
+    {
+        switch ($role) {
+            case 'user':
+                return view('home');
+            case 'Teacher':
+                return view('teacherdashboard.teacher_dashboard');
+            case 'admin':
+                return view('admindashboard.admin-dashboard-home');
+            default:
+                return redirect()->route('home');
+        }
+    }
 
-        return response()->json(['message' => 'Successfully logged out']);
+     public function logout()
+    {
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+            session()->flush();
+            return response()->json([
+                'success' => true,
+                'message' => 'logged out'
+            ]);
+        } catch (JWTException $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Failed to logout',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }
