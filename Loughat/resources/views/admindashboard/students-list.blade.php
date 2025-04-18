@@ -50,7 +50,11 @@
                                                 </h2>
                                             </td>
 
-                                            <td>14 Jan 2019 <br><small>02.59 AM</small></td>
+                                            <td>
+                                                {{ $student->created_at->format('d M Y') }} <br>
+                                                <small>{{ $student->created_at->format('h:i A') }}</small>
+                                            </td>
+                                            
 
                                             <td>{{ $student->email }}</td>
 
