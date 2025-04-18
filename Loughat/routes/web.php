@@ -115,14 +115,6 @@ Route::get('/signin', function () {
     return view('signin');
 })->name('signin');
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
-// });
-// web.php
-
-
-
-// Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
 
 // => -/Auth 
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
@@ -145,6 +137,8 @@ Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.
 // => -/USer
 Route::get('/teachers', [UserController::class, 'showTeachers'])->name('admin.teacher-list');
 Route::get('/students', [UserController::class, 'showStudents'])->name('admin.students-list');
+Route::get('/profile', [UserController::class, 'showAdmin'])->name('admin.profile');
+Route::put('/profile/{id}', [UserController::class, 'update'])->name('admin.profile.update');
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 

@@ -69,4 +69,15 @@ class UserController extends Controller
     {
 
     }
+
+    public function showAdmin()
+    {
+        try{
+            $adminId = session('user_id');
+            $admin = $this->userRepository->find($adminId); 
+            return view('admindashboard.profile', compact('admin'));
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
 }
