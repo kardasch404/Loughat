@@ -68,9 +68,10 @@ class CoursController extends Controller
     public function update(CoursUpdateRequest $request, $coursId)
     {
 
-        dd('fdghjklm');
+        // dd('fdghjklm');
         try {
             $data = $request->validated();
+            // dd('reached update');
             // if ($data->fails()) {
             //     return redirect()->back()
             //         ->withErrors($data)
