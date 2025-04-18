@@ -49,6 +49,13 @@ class UserRepository
             $query->where('name', 'Teacher');
         })->get();
     }
+    public function getAdmin()
+    {
+        return User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+    }
+
 
     public function getAllusersWithRole()
     {
