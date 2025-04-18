@@ -106,6 +106,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+
 Route::get('/signup', function () {
     return view('signup');
 })->name('signup');
@@ -116,8 +117,8 @@ Route::get('/signin', function () {
 
 
 // => -/Auth 
-Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
+Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/logout', [JWTAuthController::class, 'logout'])->name('logout');
 
 // => -/Categorie
@@ -136,6 +137,10 @@ Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.
 // => -/USer
 Route::get('/teachers', [UserController::class, 'showTeachers'])->name('admin.teacher-list');
 Route::get('/students', [UserController::class, 'showStudents'])->name('admin.students-list');
+Route::get('/profile', [UserController::class, 'showAdmin'])->name('admin.profile');
+Route::put('/profile/{id}', [UserController::class, 'update'])->name('admin.profile.update');
+Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
+Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 
 // => -/Course
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -144,3 +149,4 @@ Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.s
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
+

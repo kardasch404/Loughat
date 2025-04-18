@@ -53,7 +53,10 @@
                                                 </td>
                                                 <td>Dental</td>
 
-                                                <td>14 Jan 2019 <br><small>02.59 AM</small></td>
+                                                <td>
+                                                    {{ $teacher->created_at->format('d M Y') }} <br>
+                                                    <small>{{ $teacher->created_at->format('h:i A') }}</small>
+                                                </td>
 
                                                 <td>{{ $teacher->email }}</td>
                                                 <td>190</td>
@@ -67,9 +70,15 @@
                                                 <td class="text">
                                                     <div class="actions">
                                                         <a class="btn btn-sm bg-success-light" data-toggle="modal"
-                                                            href="#edit_specialities_details">
-                                                            <i class="fe fe-pencil"></i> Edit
-                                                        </a>
+                                                        href="#edit_specialities_details" onclick="loadUserData(this)"
+                                                        data-id="<?= htmlspecialchars($teacher->id) ?>"
+                                                        data-firstname="<?= htmlspecialchars($teacher->firstname) ?>"
+                                                        data-lastname="<?= htmlspecialchars($teacher->lastname) ?>"
+                                                        data-photo="<?= htmlspecialchars($teacher->photo) ?>"
+                                                        data-email="<?= htmlspecialchars($teacher->email) ?>"
+                                                        data-phone="<?= htmlspecialchars($teacher->phone) ?>">
+                                                        <i class="fe fe-pencil"></i> Edit
+                                                    </a>
                                                     </div>
                                                 </td>
 
@@ -82,34 +91,56 @@
                 </div>
             </div>
         </div>
-        <!-- Edit Details Modal -->
-        <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+          <!-- Edit Details Modal -->
+          <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Specialities</h5>
+                        <h5 class="modal-title">Edit Teacher</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form method="POST" action="{{ route('admin.teachers.update', $teacher->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="user_id" id="user_id">
                             <div class="row form-row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Specialities</label>
-                                        <input type="text" class="form-control" value="Cardiology">
+                                        <label>Firstname</label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control">
+                                        <label>Lastname</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Photo</label>
+                                        <input type="file" class="form-control" id="photo" name="photo">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="number" class="form-control" id="phone" name="phone">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-block">Save Changes</button>
                         </form>
                     </div>
                 </div>

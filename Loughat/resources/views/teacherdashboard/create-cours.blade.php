@@ -7,6 +7,7 @@
     <div class="col-md-7 col-lg-8 col-xl-9">
         <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method("POST")
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Craete Cours</h4>
@@ -15,7 +16,7 @@
                             <div class="form-group">
                                 <div class="change-avatar">
                                     <div class="profile-img">
-                                        <img src="" alt="Cours Image">
+                                        <img src="{{ asset('storage/') }}" alt="Cours Image">
                                     </div>
                                     <div class="upload-img">
                                         <div class="change-photo-btn">
@@ -74,5 +75,6 @@
                 <button type="submit" name="submit" class="btn btn-primary submit-btn">Create</button>
             </div>
         </form>
+   
     </div>
 @endsection

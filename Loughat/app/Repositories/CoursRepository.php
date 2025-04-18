@@ -7,7 +7,7 @@ use App\Models\Cours;
 class CoursRepository
 {
 
-    public function create(array $data, $categorieId)
+    public function create(array $data, $categorieId, $teacherId)
     {
         $cours = new Cours();
         $cours->title = $data['title'];
@@ -16,6 +16,7 @@ class CoursRepository
         $cours->price = $data['price'];
         $cours->level = $data['level'];
         $cours->categorie_id = $categorieId;
+        $cours->teacher_id = $teacherId;
         $cours->save();
         return $cours;
     }
@@ -68,6 +69,12 @@ class CoursRepository
         }
         $cours->delete();
         return true;
+    }
+
+    public function getCoursesByTeacher($teacherId)
+    {
+        $courses = Cours::where('teacher_id', $teacherId)->get();
+        return $courses;
     }
 
     public function all()
