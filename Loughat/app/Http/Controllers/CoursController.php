@@ -7,6 +7,7 @@ use App\Http\Requests\CoursUpdateRequest;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CoursRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Session;
 
 class CoursController extends Controller
 {
@@ -22,20 +23,28 @@ class CoursController extends Controller
 
     public function index()
     {
-        $courses = $this->coursRepository->all();
+        $teacherId = session('user_id');
+        $courses = $this->coursRepository->getCoursesByTeacher($teacherId);
         return view('teacherdashboard.courses', compact('courses'));
     }
 
     public function create()
     {
+        $teacherId = session('user_id');
         $categories = $this->categorieRepository->all();
-        return view('teacherdashboard.create-cours', compact('categories'));
+        return view('teacherdashboard.create-cours', compact('categories', 'teacherId'));
     }
 
     public function store(CoursRequest $request)
     {
         try {
-            $teacher = auth()->user();
+
+            $teacher = session('user_id');
+            if (! $teacher) {
+                return response()->json([
+                    'message' => false
+                ]);
+            }
             $data = $request->validated();
 
             if ($request->hasFile('photo')) {
@@ -48,7 +57,7 @@ class CoursController extends Controller
                 return redirect()->back()->with('error', 'Category not found');
             }
 
-            $cours = $this->coursRepository->create($data, $data['categorie_id'], $teacher->id);
+            $cours = $this->coursRepository->create($data, $data['categorie_id'], $teacher);
 
             return redirect()->route('courses')->with('success', 'Course created succes');
         } catch (\Exception $e) {
@@ -56,18 +65,18 @@ class CoursController extends Controller
         }
     }
 
-
-
     public function update(CoursUpdateRequest $request, $coursId)
     {
+
+        dd('fdghjklm');
         try {
             $data = $request->validated();
-            if ($data->fails()) {
-                return redirect()->back()
-                    ->withErrors($data)
-                    ->withInput();
-            }
-            $data = $data->validated();
+            // if ($data->fails()) {
+            //     return redirect()->back()
+            //         ->withErrors($data)
+            //         ->withInput();
+            // }
+            // $data = $data->validated();
             $cours = $this->coursRepository->find($coursId);
             if (!$cours) {
                 return response()->json(['error' => 'Cours not found'], 404);

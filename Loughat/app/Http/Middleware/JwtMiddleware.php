@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -21,21 +22,17 @@ class JwtMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-        } catch (TokenExpiredException $e) {
-            return response()->json([
-                'error' => 'Token expired',
-                'message'=> $e->getMessage()
-            ], 401);
-        } catch (TokenInvalidException $e) {
-            return response()->json([
-                'error' => 'Token invalid',
-                'message'=> $e->getMessage()
-            ], 401);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Token not found',
-                'message'=> $e->getMessage()
-            ], 401);
+            if (!$user) {
+                if ($request->expectsJson()) {
+                    return response()->json(['error' => 'Unauthorized'], 401);
+                }
+                return redirect()->route('login');
+            }
+        } catch (Exception $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'Token invalid'], 401);
+            }
+            return redirect()->route('login');
         }
         return $next($request);
     }

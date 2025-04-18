@@ -106,6 +106,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+
 Route::get('/signup', function () {
     return view('signup');
 })->name('signup');
@@ -114,19 +115,18 @@ Route::get('/signin', function () {
     return view('signin');
 })->name('signin');
 
-Route::middleware(['auth'])->group(function () {
-    Route::post('/courses', [CoursController::class, 'store'])->name('courses.store');
-    // other protected routes
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
+// });
+// web.php
+
 
 
 // Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
-// in web.php
-Route::post('/courses', [CoursController::class, 'store'])->name('courses.store')->middleware('auth', 'teacher');
 
 // => -/Auth 
-Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
+Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/logout', [JWTAuthController::class, 'logout'])->name('logout');
 
 // => -/Categorie
@@ -151,7 +151,7 @@ Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.tea
 // => -/Course
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
 Route::get('/courses', [CoursController::class, 'index'])->name('courses');
-// Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
+Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
