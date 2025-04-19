@@ -44,3 +44,6 @@ Route::get('/getAllusersWithRole', [UserController::class, 'getAllusersWithRole'
 Route::post('/create/{categorieId}', [CoursController::class, 'create']);
 Route::put('/update/{coursId}/{categorieId}', [CoursController::class, 'update']);
 Route::delete('/delete/{coursId}', [CoursController::class, 'delete']);
+// ============================================================== //
+
+Route::middleware('auth:api')->put('/profile/{id}/password', [UserController::class, 'changePassword'])->name('api.profile.changePassword');
