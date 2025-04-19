@@ -94,5 +94,23 @@ class UserRepository
         return $user;
     }
 
+    public function updatePassword (array $data, $id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return false;
+        }
+        if (!Hash::check($data['old_password'], $user->password))
+        {
+            return 'old pass incorect'; 
+        }
+        $user->password = Hash::make($data['new_password']);
+        $user->save();
+        return $user;
+           
+    }
+       
+    
+
     
 }
