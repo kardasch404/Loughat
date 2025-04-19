@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Request;
 
 class UserController extends Controller
 {
@@ -65,19 +66,44 @@ class UserController extends Controller
         }
     }
 
-    public function changePassword()
-    {
-
-    }
 
     public function showAdmin()
     {
-        try{
+        try {
             $adminId = session('user_id');
-            $admin = $this->userRepository->find($adminId); 
+            $admin = $this->userRepository->find($adminId);
             return view('admindashboard.profile', compact('admin'));
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+    public function changePassword(PasswordRequest $request, $id)
+    {
+        try {
+            $password = $request->validated();
+            $user = $this->userRepository->find($id);
+            $user = session('user_id');
+            $result = $this->userRepository->updatePassword($password, $user);
+
+            if ($result === false) {
+                return response()->json([
+                    'message' => 'user not found',
+                ],);
+            }
+            if ($result === 'old pass incorect') {
+                return response()->json([
+                    'message' => 'old pass incorect',
+                ],);
+            }
+            return response()->json([
+                'message' => 'Password changed succes',
+                'user' => $user
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Password not changed',
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

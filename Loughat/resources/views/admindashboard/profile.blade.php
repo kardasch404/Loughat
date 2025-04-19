@@ -170,20 +170,23 @@
                                 <h5 class="card-title">Change Password</h5>
                                 <div class="row">
                                     <div class="col-md-10 col-lg-6">
-                                        <form>
+                                         <form method="POST" action="{{ route('admin.profile.changePassword', $admin->id) }}"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
                                             <div class="form-group">
                                                 <label>Old Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" id="old_password" name="old_password" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>New Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" id="new_password" name="new_password" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Confirm Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" id="confirm_password" name="confirm_password" class="form-control">
                                             </div>
-                                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                                            <button class="btn btn-primary" type="submit" name="submit">Save Changes</button>
                                         </form>
                                     </div>
                                 </div>
