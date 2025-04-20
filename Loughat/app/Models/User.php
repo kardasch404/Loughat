@@ -86,4 +86,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(TeacherReview::class, 'student_id');
     }
+    public function portfolio()
+    {
+        return $this->hasOne(Portfolio::class, 'teacher_id');
+    }
 }

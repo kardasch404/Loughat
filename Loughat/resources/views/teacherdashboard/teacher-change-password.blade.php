@@ -11,25 +11,26 @@
                 <div class="col-md-12 col-lg-6">
 
                     <!-- Change Password Form -->
-                    <form>
+                    {{-- <form method="POST" action="{{ route('teacher-change-password.changePassword', $user->id) }}"
+                        enctype="multipart/form-data"> --}}
+                        <form action="">
                         <div class="form-group">
                             <label>Old Password</label>
-                            <input type="password" class="form-control">
+                            <input type="password" id="old_password" name="old_password" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>New Password</label>
-                            <input type="password" class="form-control">
+                            <input type="password" id="new_password" name="new_password" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Confirm Password</label>
-                            <input type="password" class="form-control">
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-control">
                         </div>
                         <div class="submit-section">
-                            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                            <button type="submit" name="submit" class="btn btn-primary submit-btn">Save Changes</button>
                         </div>
                     </form>
                     <!-- /Change Password Form -->
-
                 </div>
             </div>
         </div>
