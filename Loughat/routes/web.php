@@ -114,6 +114,12 @@ Route::get('/signup', function () {
 Route::get('/signin', function () {
     return view('signin');
 })->name('signin');
+Route::get('/course-search', function () {
+    return view('course-search');
+})->name('course-search');
+Route::get('/course-details', function () {
+    return view('course-details');
+})->name('course-details');
 
 
 // => -/Auth 
@@ -151,3 +157,8 @@ Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('cou
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
 
+Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
+Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
+
+
+// {{ route('cours', $cours->id) }}
