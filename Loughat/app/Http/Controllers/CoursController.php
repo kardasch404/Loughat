@@ -21,6 +21,12 @@ class CoursController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    public function getAllCourses()
+    {
+        $courses = $this->coursRepository->all();
+        return view('course-search', compact('courses'));
+    }
+
     public function index()
     {
         $teacherId = session('user_id');

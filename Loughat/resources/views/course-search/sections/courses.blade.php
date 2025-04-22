@@ -151,22 +151,23 @@
                     </div>
                 </div>
                 <div class="row event-search-content">
+                    @foreach ($courses as $cours)
                     <div class="col-md-6 mb-4">
                         <div class="contentCard contentCard--course">
                             <div class="contentCard-top">
-                                <a href="course_deatai.php"><img src="dist/images/courses/demo-img-04.png" alt="images" class="img-fluid" /></a>
+                                <a href="course_deatai.php"><img src="{{ asset('storage/' . $cours->photo) }}" alt="images" class="img-fluid" /></a>
                             </div>
                             <div class="contentCard-bottom">
                                 <h5>
-                                    <a href="course_deatai.php" class="font-title--card">Chicago International Conference on Education</a>
+                                    <a href="course_deatai.php" class="font-title--card">{{$cours->title}}</a>
                                 </h5>
                                 <div class="contentCard-info d-flex align-items-center justify-content-between">
                                     <a href="instructor-profile.html" class="contentCard-user d-flex align-items-center">
-                                        <img src="dist/images/courses/7.png" alt="client-image" class="rounded-circle" />
-                                        <p class="font-para--md">Brandon Dias</p>
+                                        <img src="{{$cours->teacher->photo}}" alt="client-image" class="rounded-circle " style="width: 40px; height: 40px;" />
+                                        <p class="font-para--md">{{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</p>
                                     </a>
                                     <div class="price">
-                                        <span>$12</span>
+                                        <span>{{$cours->price}}</span>
                                         <del>$95</del>
                                     </div>
                                 </div>
@@ -199,54 +200,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="contentCard contentCard--course">
-                            <div class="contentCard-top">
-                                <a href="course_deatai.php"><img src="dist/images/courses/demo-img-01.png" alt="images" class="img-fluid" /></a>
-                            </div>
-                            <div class="contentCard-bottom">
-                                <h5>
-                                    <a href="course_deatai.php" class="font-title--card">Chicago International Conference on Education</a>
-                                </h5>
-                                <div class="contentCard-info d-flex align-items-center justify-content-between">
-                                    <a href="instructor-profile.html" class="contentCard-user d-flex align-items-center">
-                                        <img src="dist/images/courses/7.png" alt="client-image" class="rounded-circle" />
-                                        <p class="font-para--md">Brandon Dias</p>
-                                    </a>
-                                    <div class="price">
-                                        <span>$12</span>
-                                        <del>$95</del>
-                                    </div>
-                                </div>
-                                <div class="contentCard-more">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon">
-                                            <img src="dist/images/icon/star.png" alt="star" />
-                                        </div>
-                                        <span>4.5</span>
-                                    </div>
-                                    <div class="eye d-flex align-items-center">
-                                        <div class="icon">
-                                            <img src="dist/images/icon/eye.png" alt="eye" />
-                                        </div>
-                                        <span>24,517</span>
-                                    </div>
-                                    <div class="book d-flex align-items-center">
-                                        <div class="icon">
-                                            <img src="dist/images/icon/book.png" alt="location" />
-                                        </div>
-                                        <span>37 Lesson</span>
-                                    </div>
-                                    <div class="clock d-flex align-items-center">
-                                        <div class="icon">
-                                            <img src="dist/images/icon/Clock.png" alt="clock" />
-                                        </div>
-                                        <span>3 Hours</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                   
                 </div>
                 <div class="pagination-group mt-lg-5 mt-2">
                     <a href="#" class="p_prev">
