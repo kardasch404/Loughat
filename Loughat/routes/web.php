@@ -114,6 +114,9 @@ Route::get('/signup', function () {
 Route::get('/signin', function () {
     return view('signin');
 })->name('signin');
+Route::get('/course-search', function () {
+    return view('course-search');
+})->name('course-search');
 
 
 // => -/Auth 
