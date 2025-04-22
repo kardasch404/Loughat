@@ -143,7 +143,7 @@ Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 
-// => -/Course
+// => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
 Route::get('/courses', [CoursController::class, 'index'])->name('courses');
 Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');

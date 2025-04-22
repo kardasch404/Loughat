@@ -28,9 +28,4 @@ class PasswordRequest extends FormRequest
             'confirm_password' => 'required|same:new_password',
         ];
     }
-     /**
-     * Custom error messages
-     *
-     * @return array<string, string>
-     */
 }
