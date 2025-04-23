@@ -2516,7 +2516,7 @@
                                                                     <svg
                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                         width="24"
-                                                                        height="24"
+                                                                      height="24"
                                                                         viewBox="0 0 24 24"
                                                                         fill="currentColor"
                                                                         stroke="currentColor"
@@ -2628,11 +2628,18 @@
                         </div>
                         <div class="cart__checkout-process">
                             <p class="time-left text-center"><span>5 hours</span> to remaining this price</p>
-                            <form action="./card.php">
-                                <button type="submit" class="button button-lg button--primary w-100">
-                                    Add to Cart
+                            <form action="{{ route('commande') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="status" value="pending">
+                                <input type="hidden" name="montant" value="{{ $cours->price }}">
+                                <input type="hidden" name="cours_id" value="{{ $cours->id }}">
+                                
+                                <button type="submit" name="submit" class="button button-lg button--primary w-100">
+                                    Checkout
                                 </button>
                             </form>
+                            
+                            
                         </div>
                         <div class="cart__includes-info">
                             <h6 class="font-title--card">This course includes:</h6>

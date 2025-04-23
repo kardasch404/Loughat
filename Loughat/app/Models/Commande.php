@@ -18,10 +18,16 @@ class Commande extends Model
 
     public function cours ()
     {
-        return $this->hasOne(Cours::class);
+        return $this->belongsTo(Cours::class);
     }
     public function payment ()
     {
         return $this->hasOne(Payment::class);
     }
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    
+    
 }

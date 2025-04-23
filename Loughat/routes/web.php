@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
@@ -160,5 +161,7 @@ Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('c
 Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
 Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 
-
 // {{ route('cours', $cours->id) }}
+// => -/Commande$
+Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
+
