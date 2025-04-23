@@ -7,31 +7,27 @@ use Illuminate\Console\Command;
 
 class CommandeRepository 
 {
-
-    public function create(array $data,$coursId)
+    public function create(array $data,$coursId,$userId)
     {
         $commande = new Commande();
         $commande->status = $data['status'];
         $commande->montant = $data['montant'];
         $commande->cours_id = $coursId;
+        $commande->user_id = $userId;
         $commande->save();
 
         return $commande;
     }
-
-    public function update(array $data, $coursId)
+    public function find($id)
     {
-        $commande = Commande::find($commande->id);
-        if (! $commande)
-        {
-            return false; 
-        }
-        $commande->status = $data['status'];
-        $commande->montant = $data['montant'];
-        $commande->cours_id = $coursId;
-        $commande->save();
-
+        $commande = Commande::find($id);
         return $commande;
     }
+    public function all()
+    {
+        $commandes = Commande::all();
+        return $commandes ; 
+    }
+   
 
 }

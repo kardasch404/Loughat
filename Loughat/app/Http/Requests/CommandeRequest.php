@@ -22,10 +22,9 @@ class CommandeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
             'status' => 'required|string|max:250',
-            'montant' => 'required|numeric|max:500', 
-            'cours_id' => 'nullable', 
+            'montant' => 'required|numeric',
+            'cours_id' => 'required|exists:cours,id',
         ];
     }
 }

@@ -4,22 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommandeRequest;
 use App\Repositories\CommandeRepository;
+use App\Repositories\CoursRepository;
 
 class CommandeController extends Controller
 {
     //
     protected $commandeRepository; 
+    protected $coursRepository; 
 
-    public function __construct(CommandeRepository $commandeRepository)
+    public function __construct(CommandeRepository $commandeRepository, CoursRepository $coursRepository)
     {
         $this->commandeRepository = $commandeRepository;
+        $this->coursRepository = $coursRepository;
     }
 
-    public function store(CommandeRequest $request)
+    public function store(CommandeRequest $request )
     {
+        // dd('jhg');
        try{
+        
+        $user = session('user_id');
+        if (! $user) {
+            return response()->json([
+                'message' => false
+            ]);
+        }
         $data = $request->validated();
-        $commande = $this->commandeRepository->create($data);
+        $cours = $this->coursRepository->find($data['cours_id']);
+        if (!$cours) {
+            return redirect()->back();
+        }
+        $commande = $this->commandeRepository->create($data,$data['cours_id'],$user);
         if ($commande) {
             return response()->json([
                 'message' => 'Commande created success'
@@ -66,42 +81,6 @@ class CommandeController extends Controller
         ], 500);
        }
     }
-    public function update(CommandeRequest $request, $id)
-    {
-       try{
-        $data = $request->validated();
-        $commande = $this->commandeRepository->update($id, $data);
-        if ($commande) {
-            return response()->json([
-                'message' => 'Commande updated success'
-            ], 200);
-        }
-       }catch(\Exception $e){
-        return response()->json([
-            'error' => $e->getMessage(),
-            'message' => 'Commande not updated '
-        ], 500);
-       }
-    }
-    public function destroy($id)
-    {
-       try{
-        $commande = $this->commandeRepository->delete($id);
-        if ($commande) {
-            return response()->json([
-                'message' => 'Commande deleted success'
-            ], 200);
-        }
-       }catch(\Exception $e){
-        return response()->json([
-            'error' => $e->getMessage(),
-            'message' => 'Commande not deleted '
-        ], 500);
-       }
-    }
-    
-
-
 
  
 }
