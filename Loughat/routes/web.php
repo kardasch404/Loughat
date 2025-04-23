@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,9 @@ Route::get('/logout', function () {
     return redirect('/');
 });
 // });
+Route::get('/charge', function () {
+    return view('charge');
+});
 
 //=========== ->admin admindashboard =============//
 //++++++++++++++++++++++++++++++++++++++++++++++++//
