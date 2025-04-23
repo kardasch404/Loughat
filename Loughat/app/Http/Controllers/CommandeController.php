@@ -35,11 +35,13 @@ class CommandeController extends Controller
             return redirect()->back();
         }
         $commande = $this->commandeRepository->create($data,$data['cours_id'],$user);
-        if ($commande) {
-            return response()->json([
-                'message' => 'Commande created success'
-            ], 201);
-        } 
+        // if ($commande) {
+        //     return response()->json([
+        //         'message' => 'Commande created success'
+        //     ], 201);
+        // } 
+        return redirect()->route('payment');
+         
        }catch(\Exception $e){
         return response()->json([
             'error' => $e->getMessage(),
