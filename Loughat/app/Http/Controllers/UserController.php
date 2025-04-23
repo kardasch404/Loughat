@@ -85,25 +85,32 @@ class UserController extends Controller
             $user = session('user_id');
             $result = $this->userRepository->updatePassword($password, $user);
 
-            if ($result === false) {
-                return response()->json([
-                    'message' => 'user not found',
-                ],);
-            }
-            if ($result === 'old pass incorect') {
-                return response()->json([
-                    'message' => 'old pass incorect',
-                ],);
-            }
-            return response()->json([
-                'message' => 'Password changed succes',
-                'user' => $user
-            ], 200);
+            // if ($result === false) {
+            //     return response()->json([
+            //         'message' => 'user not found',
+            //     ],);
+            // }
+            // if ($result === 'old pass incorect') {
+            //     return response()->json([
+            //         'message' => 'old pass incorect',
+            //     ],);
+            // }
+            // return response()->json([
+            //     'message' => 'Password changed succes',
+            //     'user' => $user
+            // ], 200);
+            return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Password not changed',
                 'error' => $e->getMessage()
             ]);
         }
+    }
+    public function showChangePasswordForm($id)
+    {
+        $user = $this->userRepository->find($id);
+
+        return view('teacherdashboard.teacher-change-password', compact('user'));
     }
 }

@@ -20,6 +20,18 @@ class CoursController extends Controller
         $this->categorieRepository = $categorieRepository;
         $this->userRepository = $userRepository;
     }
+    public function show($coursId)
+    {
+        // dd("fdghjkl");
+        $cours = $this->coursRepository->find($coursId);
+        return view('course-details', compact('cours'));
+    }
+
+    public function getAllCourses()
+    {
+        $courses = $this->coursRepository->all();
+        return view('course-search', compact('courses'));
+    }
 
     public function index()
     {

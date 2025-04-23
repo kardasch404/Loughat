@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\RoleController;
@@ -114,6 +115,12 @@ Route::get('/signup', function () {
 Route::get('/signin', function () {
     return view('signin');
 })->name('signin');
+Route::get('/course-search', function () {
+    return view('course-search');
+})->name('course-search');
+Route::get('/course-details', function () {
+    return view('course-details');
+})->name('course-details');
 
 
 // => -/Auth 
@@ -143,11 +150,18 @@ Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 
-// => -/Course
+// => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
 Route::get('/courses', [CoursController::class, 'index'])->name('courses');
 Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.store');
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
+
+Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
+Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
+
+// {{ route('cours', $cours->id) }}
+// => -/Commande$
+Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
 
