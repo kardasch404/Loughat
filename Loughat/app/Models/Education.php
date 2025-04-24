@@ -10,8 +10,8 @@ class Education extends Model
     use HasFactory;
     protected $fillable = [
         'description',
-        'start_date',
-        'start_end',
+        'from',
+        'to',
         'degree'
     ];
 

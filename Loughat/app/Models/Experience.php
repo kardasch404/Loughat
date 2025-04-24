@@ -11,8 +11,8 @@ class Experience extends Model
 
     protected $fillable = [
         'description',
-        'start_date',
-        'start_end',
+        'from',
+        'to',
         'degree'
     ];
 

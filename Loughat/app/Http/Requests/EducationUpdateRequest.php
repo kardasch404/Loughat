@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PortfolioUpdateRequest extends FormRequest
+class EducationUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,10 @@ class PortfolioUpdateRequest extends FormRequest
     {
         return [
             //
-            'about_me' => 'sometimes|string|max:500',
+            'degree' => 'sometimes|string|max:250',
+            'description' => 'sometimes|string|max:500',
+            'from' => 'sometimes|integer', 
+            'to' => 'sometimes|integer', 
         ];
     }
 }
