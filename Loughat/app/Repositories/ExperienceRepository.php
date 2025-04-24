@@ -16,6 +16,40 @@ class ExperienceRepository
         $experience->save;
         return $experience ; 
     }
+    public function update(array $data, $experienceId)
+    {
+        $experience = Experience::find($experienceId);
+        if(! $experience)
+        {
+            return false;
+        }
+        $experience->degree = $data['degree'];
+        $experience->from = $data['from'];
+        $experience->to = $data['to'];
+        $experience->description = $data['description'];
+        $experience->save;
+        return $experience ;
+    }
+
+    public function getAllExperienceForPortfolio ()
+    {
+        $experiences = Experience::all();
+        if(! $experiences)
+        {
+            return false;
+        }
+        return $experiences ;
+    }
+    public function find($experienceId)
+    {
+        $experience = Experience::find($experienceId);
+        if(! $experience)
+        {
+            return false;
+        }
+        return $experience ;
+    }
+
 
     
 }
