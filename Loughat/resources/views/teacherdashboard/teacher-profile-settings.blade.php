@@ -7,54 +7,56 @@
 <div class="col-md-7 col-lg-8 col-xl-9">
 
     <!-- Basic Information -->
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Basic Information</h4>
-            <div class="row form-row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="change-avatar">
-                            <div class="profile-img">
-                                <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
-                            </div>
-                            <div class="upload-img">
-                                <div class="change-photo-btn">
-                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                    <input type="file" class="upload" name="photo" id="photo">
+    <form action="">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Basic Information</h4>
+                <div class="row form-row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="change-avatar">
+                                <div class="profile-img">
+                                    <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                                 </div>
-                                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                <div class="upload-img">
+                                    <div class="change-photo-btn">
+                                        <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                        <input type="file" class="upload" name="photo" id="photo">
+                                    </div>
+                                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" name="email" id="email" >
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" name="email" id="email" >
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>First Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="firstname" id="firstname">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>First Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="firstname" id="firstname">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Last Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="lastname" id="lastname">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Last Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="lastname" id="lastname">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="text" name="phone" id="phone" class="form-control">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone" id="phone" class="form-control">
+                        </div>
                     </div>
+                    <div class="col-md-6">
                 </div>
-                <div class="col-md-6">
             </div>
         </div>
-    </div>
+    </form>
     <!-- /Basic Information -->
 
     <!-- About Me -->
