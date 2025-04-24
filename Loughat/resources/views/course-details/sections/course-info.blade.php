@@ -2635,7 +2635,7 @@
                                 <input type="hidden" name="cours_id" value="{{ $cours->id }}">
                                 
                                 <button type="submit" name="submit" class="button button-lg button--primary w-100">
-                                    Checkout
+                                    <a href="/payment">Checkout</a>
                                 </button>
                             </form>
                             

@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -149,6 +150,7 @@ Route::put('/profile/{id}/password', [UserController::class, 'changePassword'])-
 Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin.profile.update');
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -164,4 +166,16 @@ Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 // {{ route('cours', $cours->id) }}
 // => -/Commande$
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
+
+// => -/Payment
+Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+Route::get('/payment/success', function () {
+    return view('payment-success');
+})->name('payment.success');
+
+Route::get('/payment/failure', function () {
+    return view('payment-failure');
+})->name('payment.failure');
+
 
