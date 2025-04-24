@@ -3,7 +3,6 @@
 @section('title', 'Home')
 
 @section('content')
-
     <div class="content container-fluid">
 
         <!-- Page Header -->
@@ -353,5 +352,4 @@
 
 
     </div>
-
 @endsection
