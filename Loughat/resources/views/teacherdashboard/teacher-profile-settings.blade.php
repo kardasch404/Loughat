@@ -27,12 +27,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" readonly>
-                    </div>
-                </div> --}}
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
@@ -58,21 +52,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    {{-- <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control select">
-                            <option>Select</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-0">
-                        <label>Date of Birth</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -89,7 +68,6 @@
         </div>
     </div>
     <!-- /About Me -->
-
     <!-- Education -->
     <div class="card">
         <div class="card-body">
@@ -132,7 +110,6 @@
         </div>
     </div>
     <!-- /Education -->
-
     <!-- Experience -->
     <div class="card">
         <div class="card-body">
@@ -175,38 +152,9 @@
         </div>
     </div>
     <!-- /Experience -->
-
-    <!-- Awards -->
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Awards</h4>
-            <div class="awards-info">
-                <div class="row form-row awards-cont">
-                    <div class="col-12 col-md-5">
-                        <div class="form-group">
-                            <label>Awards</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-5">
-                        <div class="form-group">
-                            <label>Year</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="add-more">
-                <a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
-            </div>
-        </div>
-    </div>
-    <!-- /Awards -->
-
     <div class="submit-section submit-btn-bottom">
-        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+        <button type="submit" name="submit" class="btn btn-primary submit-btn">Save Changes</button>
     </div>
-
 </div>
 @endsection
 
