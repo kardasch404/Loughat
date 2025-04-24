@@ -150,6 +150,7 @@ Route::put('/profile/{id}/password', [UserController::class, 'changePassword'])-
 Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin.profile.update');
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -176,3 +177,5 @@ Route::get('/payment/success', function () {
 Route::get('/payment/failure', function () {
     return view('payment-failure');
 })->name('payment.failure');
+
+
