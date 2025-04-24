@@ -14,6 +14,27 @@ class EducationRepository
         $education->description =$data['description'];
         $education->portfolio_id = $portfolioId;
         $education->save();
+        return $education;
     }
+
+    public function update(array $data, $id)
+    {
+        $education = Education::find($id);
+        $education->degree =$data['degree'];
+        $education->from =$data['from'];
+        $education->to =$data['to'];
+        $education->description =$data['description'];
+        $education->save();
+        return $education; 
+    }
+    public function find($id)
+    {
+        return Education::find($id);
+    }
+
+    public function getAllEducationFromPortfolio(){
+        return Education::all();
+    }
+
 
 }
