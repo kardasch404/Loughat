@@ -6,6 +6,7 @@ use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +57,9 @@ Route::get('/teacher-profile-settings', function () {
 
 Route::get('/teacher-change-password', function () {
     return view('teacherdashboard.teacher-change-password');
+});
+Route::get('/create-cours-section', function () {
+    return view('teacherdashboard.create-cours-section');
 });
 
 Route::get('/logout', function () {
@@ -177,5 +181,10 @@ Route::get('/payment/success', function () {
 Route::get('/payment/failure', function () {
     return view('payment-failure');
 })->name('payment.failure');
+
+
+// => -/Sections
+Route::post('/create-cours-section', [SectionController::class, 'store'])->name('sections.store');
+Route::get('/create-cours-section', [SectionController::class, 'create'])->name('sections.create');
 
 

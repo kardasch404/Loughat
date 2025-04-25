@@ -15,7 +15,7 @@ class Section extends Model
 
     public function course()
     {
-        return $this->belongsTo(cours::class);
+        return $this->belongsTo(cours::class, 'cours_id');
     }
 
     public function lessons()

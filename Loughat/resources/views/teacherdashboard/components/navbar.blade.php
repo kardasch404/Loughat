@@ -43,6 +43,12 @@
                             <span>create-cours</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/create-cours-section">
+                            <i class="fas fa-user-injured"></i>
+                            <span>create-cours-section</span>
+                        </a>
+                    </li>
                     <li >
                         <a href="/student_course">
                             <i class="fas fa-file-invoice"></i>
