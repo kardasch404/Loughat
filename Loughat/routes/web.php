@@ -65,6 +65,9 @@ Route::get('/create-cours-section', function () {
 Route::get('/create-cours-lessons', function () {
     return view('teacherdashboard.create-cours-lessons');
 });
+Route::get('/show-lessons', function () {
+    return view('teacherdashboard.show-lessons');
+});
 
 Route::get('/logout', function () {
     // auth()->logout();
@@ -195,3 +198,4 @@ Route::get('/create-cours-section', [SectionController::class, 'create'])->name(
 Route::post('/create-cours-lessons', [LessonController::class, 'store'])->name('lessons.store');
 Route::get('/create-cours-lessons', [LessonController::class, 'create'])->name('lessons.create');
 Route::get('/teacher/sections/by-course/{courseId}', [SectionController::class, 'getSectionsByCourse']);
+Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCours'])->name('lessons.show');

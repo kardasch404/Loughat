@@ -18,7 +18,7 @@
                                 <th>Price</th>
                                 <th>level</th>
                                 <th>categorie</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +46,9 @@
                                 <td>{{$course->categorie->name}}</td>
                                 <td class="">
                                     <div class="table-action">
+                                        <a href="{{ route('lessons.show', $course->id) }}" class="btn btn-sm bg-info-light">
+                                            Show Lesson
+                                        </a>                                        
                                         <a href="{{ route('courses.edit', ['coursId' => $course->id]) }}" class="btn btn-sm bg-info-light">
                                             edit
                                         </a>                                        

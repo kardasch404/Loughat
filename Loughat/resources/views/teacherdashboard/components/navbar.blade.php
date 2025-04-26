@@ -8,7 +8,7 @@
                     <img src="{{ session('user_photo') }}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    <h3>{{ session('user_firstname') }}{{ session('user_lastname') }}</h3>
+                    <h3>{{ session('user_firstname') }} {{ session('user_lastname') }}</h3>
                     
                     <div class="patient-details">
                         <h5 class="mb-0">deutsch</h5>
