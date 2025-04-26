@@ -8,7 +8,6 @@ use App\Repositories\SectionRepository;
 
 class SectionController extends Controller
 {
-    //
 
     protected $sectionRepository;
     protected $coursRepository;
@@ -27,36 +26,39 @@ class SectionController extends Controller
         return view('teacherdashboard.create-cours-section', compact('courses'));
     }
 
-    public function store(SectionRequest $request) 
-{
-    try {
-        // dd('gfhjkl');
-      
-        $data = $request->validated();
-        
-        $coursId = $request->input('cours_id');
-        // dd($coursId);
+    public function store(SectionRequest $request)
+    {
+        try {
+            // dd('gfhjkl');
 
-        // dd($request->all());
-        
-        $sections = $this->sectionRepository->create($data, $coursId);
-      
-        // dd($sections);
-        
-        if (! $sections) {
+            $data = $request->validated();
+
+            $coursId = $request->input('cours_id');
+            // dd($coursId);
+
+            // dd($request->all());
+
+            $sections = $this->sectionRepository->create($data, $coursId);
+
+            // dd($sections);
+
+            if (! $sections) {
+                return response()->json([
+                    'message' => "sections not created"
+                ]);
+            }
             return response()->json([
-                'message' => "sections not created" 
+                'message' => "sections created seccss"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
             ]);
         }
-        return response()->json([
-            'message' => "sections created seccss" 
-        ]);
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'error' => $e->getMessage()
-        ]);
     }
+    public function getSectionsByCourse($courseId)
+{
+    $sections = $this->sectionRepository->getSectionsByCourse($courseId);
+    return response()->json(['sections' => $sections]);
 }
-
 }

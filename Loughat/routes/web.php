@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
@@ -60,6 +61,9 @@ Route::get('/teacher-change-password', function () {
 });
 Route::get('/create-cours-section', function () {
     return view('teacherdashboard.create-cours-section');
+});
+Route::get('/create-cours-lessons', function () {
+    return view('teacherdashboard.create-cours-lessons');
 });
 
 Route::get('/logout', function () {
@@ -187,4 +191,7 @@ Route::get('/payment/failure', function () {
 Route::post('/create-cours-section', [SectionController::class, 'store'])->name('sections.store');
 Route::get('/create-cours-section', [SectionController::class, 'create'])->name('sections.create');
 
-
+// => -/Lessons
+Route::post('/create-cours-lessons', [LessonController::class, 'store'])->name('lessons.store');
+Route::get('/create-cours-lessons', [LessonController::class, 'create'])->name('lessons.create');
+Route::get('/teacher/sections/by-course/{courseId}', [SectionController::class, 'getSectionsByCourse']);

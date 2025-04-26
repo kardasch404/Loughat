@@ -24,4 +24,9 @@ class SectionRepository
         $section->save();
         return $section;
     }
+
+    public function getSectionsByCourse($courseId)
+    {
+        return Section::where('course_id', $courseId)->get();
+    }
 }
