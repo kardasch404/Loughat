@@ -108,7 +108,22 @@ class LessonController extends Controller
         }
         $coursId = $lesson->section->course_id;
         $sections = $this->sectionRepository->getSectionsByCourse($coursId);
-
         return view('teacherdashboard.edit-lesson', compact('lesson', 'sections'));
+    }
+    public function destroy($lessonId)
+    {
+        try {
+            $lesson = $this->lessonRepository->find($lessonId);
+            if (!$lesson) {
+                return redirect()->back()->with('error', 'Lesson not found');
+            }
+            $courseId = $lesson->section->course_id;
+
+            $deleted = $this->lessonRepository->delete($lessonId);
+
+            return redirect()->route('lessons.show', ['coursId' => $courseId]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

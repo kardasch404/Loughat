@@ -201,3 +201,4 @@ Route::get('/teacher/sections/by-course/{courseId}', [SectionController::class, 
 Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCours'])->name('lessons.show');
 Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
 Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
+Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
