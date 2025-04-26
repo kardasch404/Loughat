@@ -41,4 +41,51 @@ class LessonRepository
             ->orderBy('lessons.order')
             ->get();
     }
+
+    public function update(array $data, $lessonId)
+    {
+        $lesson = Lesson::find($lessonId);
+        if (!$lesson) {
+            return false;
+        }
+
+        if (isset($data['section_id'])) {
+            $lesson->section_id  = $data['section_id'];
+        }
+
+        if (isset($data['title'])) {
+            $lesson->title = $data['title'];
+        }
+
+        if (isset($data['type'])) {
+            $lesson->type = $data['type'];
+        }
+
+        if (isset($data['duration'])) {
+            $lesson->duration = $data['duration'];
+        }
+
+        if (isset($data['file_path'])) {
+            $lesson->file_path = $data['file_path'];
+        }
+        if (isset($data['order'])) {
+            $lesson->order = $data['order'];
+        }
+        $lesson->save();
+        return $lesson;
+    }
+    public function find($lessonId)
+    {
+        $lesson = Lesson::find($lessonId);
+        return $lesson;
+    }
+    public function delete($lessonId)
+    {
+        $lesson = Lesson::find($lessonId);
+        if (! $lesson) {
+            return false;
+        }
+        $lesson->delete(); 
+        return true;
+    }
 }

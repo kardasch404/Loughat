@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LessonRequest;
+use App\Http\Requests\LessonUpdateRequest;
 use App\Repositories\LessonRepository;
 use App\Repositories\SectionRepository;
 use App\Repositories\CoursRepository;
 use Exception;
+use Illuminate\Support\Facades\Request;
 
 class LessonController extends Controller
 {
@@ -69,5 +71,59 @@ class LessonController extends Controller
         $lessons = $this->lessonRepository->getAllLessonBySection($sections);
 
         return view('teacherdashboard.show-lessons', compact('lessons', 'course'));
+    }
+
+    public function update(LessonUpdateRequest $request, $lessonId)
+    {
+        // dd('gfd');
+        try {
+            $data = $request->validated();
+            $lesson = $this->lessonRepository->find($lessonId);
+            if (! $lesson) {
+                return response()->json([
+                    'message' => 'Lesson not found',
+                ], 201);
+            }
+            $updatelesson = $this->lessonRepository->update($data, $lessonId);
+            // return response()->json([
+            //     'message' => 'Lesson update success',
+            //     'data' => $updatelesson
+            // ], 201);
+            return redirect()->route('lessons.show', ['coursId' => $lesson->section->course_id]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 201);
+        }
+    }
+
+    public function edit($lessonId)
+    {
+        $lesson = $this->lessonRepository->find($lessonId);
+
+        if (!$lesson) {
+            return response()->json([
+                'error' => 'Lesson not found'
+            ]);
+        }
+        $coursId = $lesson->section->course_id;
+        $sections = $this->sectionRepository->getSectionsByCourse($coursId);
+        return view('teacherdashboard.edit-lesson', compact('lesson', 'sections'));
+    }
+    public function destroy($lessonId)
+    {
+        try {
+            $lesson = $this->lessonRepository->find($lessonId);
+            if (!$lesson) {
+                return redirect()->back()->with('error', 'Lesson not found');
+            }
+            $courseId = $lesson->section->course_id;
+
+            $deleted = $this->lessonRepository->delete($lessonId);
+
+            return redirect()->route('lessons.show', ['coursId' => $courseId]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

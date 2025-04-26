@@ -37,10 +37,12 @@
                                 <td>{{$lesson->duration}}</td>
                                 <td class="">
                                     <div class="table-action">                                       
-                                        <a href="" class="btn btn-sm bg-info-light">
+                                        <a href="{{ route('lesson.edit', ['lessonId' => $lesson->id]) }}" class="btn btn-sm bg-info-light">
                                             edit
                                         </a>                                        
-                                        <form action="" method="POST" style="display: inline;">
+                                        <form action="{{ route('lesson.destroy', ['lessonId' => $lesson->id]) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">
                                                 delete
                                             </button>

@@ -199,3 +199,6 @@ Route::post('/create-cours-lessons', [LessonController::class, 'store'])->name('
 Route::get('/create-cours-lessons', [LessonController::class, 'create'])->name('lessons.create');
 Route::get('/teacher/sections/by-course/{courseId}', [SectionController::class, 'getSectionsByCourse']);
 Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCours'])->name('lessons.show');
+Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
+Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
+Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
