@@ -37,7 +37,7 @@
                                 <td>{{$lesson->duration}}</td>
                                 <td class="">
                                     <div class="table-action">                                       
-                                        <a href="" class="btn btn-sm bg-info-light">
+                                        <a href="{{ route('lesson.edit', ['lessonId' => $lesson->id]) }}" class="btn btn-sm bg-info-light">
                                             edit
                                         </a>                                        
                                         <form action="" method="POST" style="display: inline;">
