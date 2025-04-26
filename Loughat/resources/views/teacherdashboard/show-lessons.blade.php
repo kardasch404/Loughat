@@ -33,7 +33,7 @@
 
                                 <td>{{$lesson->title}}</td>
                                 <td>{{$lesson->type}}</td>
-                                <td>{{$lesson->file_path}}</td>
+                                <td class="w-25 text-wrap" style="word-break: break-word;">{{$lesson->file_path}}</td>
                                 <td>{{$lesson->duration}}</td>
                                 <td class="">
                                     <div class="table-action">                                       
