@@ -8,7 +8,7 @@
                     <img src="{{ session('user_photo') }}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    <h3>{{ session('user_firstname') }}{{ session('user_lastname') }}</h3>
+                    <h3>{{ session('user_firstname') }} {{ session('user_lastname') }}</h3>
                     
                     <div class="patient-details">
                         <h5 class="mb-0">deutsch</h5>
@@ -41,6 +41,18 @@
                         <a href="/create-cours">
                             <i class="fas fa-user-injured"></i>
                             <span>create-cours</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/create-cours-section">
+                            <i class="fas fa-user-injured"></i>
+                            <span>create-cours-section</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/create-cours-lessons">
+                            <i class="fas fa-user-injured"></i>
+                            <span>create-cours-lessons</span>
                         </a>
                     </li>
                     <li >

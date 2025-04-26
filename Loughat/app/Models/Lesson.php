@@ -10,12 +10,14 @@ class Lesson extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'content',
+        'type',
+        'duration',
+        'file_path',
         'order'
     ];
 
     public function section()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Section::class ,'section_id');
     }
 }
