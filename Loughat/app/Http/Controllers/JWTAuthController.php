@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Cookie;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTAuthController extends Controller
 {
     //
-    protected $userRepository ; 
+    protected $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository ; 
+        $this->userRepository = $userRepository;
     }
 
     public function register(RegisterRequest $request)
@@ -43,7 +44,7 @@ class JWTAuthController extends Controller
         }
     }
 
-    public function login (LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         try {
             $credentials = $request->validated();
@@ -71,11 +72,10 @@ class JWTAuthController extends Controller
             // ]);
 
             $this->setUserSession($user, $role);
+            Cookie::queue('token', $token, 600 * 24);
 
             return $this->handleRoleBasedRedirect($role);
-            
-        }catch (JWTException $e)
-        {
+        } catch (JWTException $e) {
             return response()->json([
                 'error' => 'Could not create token',
                 'message' => $e->getMessage()
@@ -108,15 +108,17 @@ class JWTAuthController extends Controller
         }
     }
 
-     public function logout()
+    public function logout()
     {
         try {
             JWTAuth::invalidate(JWTAuth::getToken());
             session()->flush();
-            return response()->json([
-                'success' => true,
-                'message' => 'logged out'
-            ]);
+            Cookie::queue(Cookie::forget('token'));
+            // return response()->json([
+            //     'success' => true,
+            //     'message' => 'logged out'
+            // ]);
+            return redirect()->route('home');
         } catch (JWTException $e) {
             return response()->json([
                 'success' => false,
