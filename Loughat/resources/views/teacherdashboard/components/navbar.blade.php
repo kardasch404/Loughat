@@ -68,6 +68,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/teacher-transaction">
+                            <i class="fas fa-star"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/comming_soon">
                             <i class="fas fa-comments"></i>
                             <span>Message</span>

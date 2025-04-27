@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Models\Commande;
 
 class CommandeRepository
@@ -26,5 +27,12 @@ class CommandeRepository
         $commandes = Commande::all();
         return $commandes;
     }
+    public function getAllCommandeFromTeacher($teacherId)
+    {
+        $commandes = Commande::whereHas('cours', function ($query) use ($teacherId) {
+            $query->where('teacher_id', $teacherId);
+        })->with(['user', 'cours.teacher'])->get();
 
+        return $commandes;
+    }
 }

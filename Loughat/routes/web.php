@@ -68,6 +68,9 @@ Route::get('/create-cours-lessons', function () {
 Route::get('/show-lessons', function () {
     return view('teacherdashboard.show-lessons');
 });
+Route::get('/teacher-transaction', function () {
+    return view('teacherdashboard.teacher-transaction');
+});
 
 Route::get('/logout', function () {
     // auth()->logout();
@@ -208,4 +211,5 @@ Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name(
 
 // => -/Transactions
 Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');
+Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByteacher'])->name('teacher.teacher-transaction');
 

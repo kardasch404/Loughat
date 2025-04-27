@@ -68,7 +68,24 @@ class CommandeController extends Controller
         ], 500);
        }
     }
-  
+    public function showCommandeByteacher()
+    {
+       try{
+        $teacherId = session('user_id');
+        $commandes = $this->commandeRepository->getAllCommandeFromTeacher($teacherId);
+        // if ($commandes) {
+        //     return response()->json([
+        //         'commandes' => $commandes
+        //     ], 200);
+        // }
+        return view('teacherdashboard.teacher-transaction', compact('commandes'));
+       }catch(\Exception $e){
+        return response()->json([
+            'error' => $e->getMessage(),
+            'message' => 'Commande not found '
+        ], 500);
+       }
+    }
 
     public function show($id)
     {
