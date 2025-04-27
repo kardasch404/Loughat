@@ -35,4 +35,16 @@ class CommandeRepository
 
         return $commandes;
     }
+    public function getAllCommandeFromStudent($studentId)
+    {
+        $commandes = Commande::where('user_id', $studentId)
+            ->with(['cours', 'payments'])
+            ->get();
+    
+        if ($commandes->isEmpty()) {
+            return false;
+        }
+    
+        return $commandes;
+    }
 }

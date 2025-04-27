@@ -9,14 +9,15 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $fillable = 
+    protected $fillable =
     [
-        'method', 
+        'method',
         'montant'
     ];
 
-    public function commande ()
+
+    public function commande()
     {
-        return $this->belongsTo(Commande::class);
+        return $this->belongsTo(Commande::class, 'command_id');
     }
 }
