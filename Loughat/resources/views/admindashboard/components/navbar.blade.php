@@ -31,7 +31,6 @@
                 <li>
                     <a href="/profile"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                 </li>
-
             </ul>
         </div>
     </div>
