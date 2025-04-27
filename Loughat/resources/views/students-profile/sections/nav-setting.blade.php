@@ -10,23 +10,23 @@
                         <div class="row g-3">
                             <div class="col-lg-6">
                                 <label for="firstname">First Name</label>
-                                <input type="text" class="form-control" placeholder="Phillip" name="firstname" id="firstname" value="{{ $user->firstname }}" />
+                                <input type="text" class="form-control"  name="firstname" id="firstname" value="{{ $user->firstname }}" />
                             </div>
                             <div class="col-lg-6">
                                 <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Bergson" name="lastname" id="lastname" value="{{ $user->lastname }}" />
+                                <input type="text" class="form-control"  name="lastname" id="lastname" value="{{ $user->lastname }}" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="phillip.bergson@gmail.com" value="{{ $user->email }}" />
+                                <input type="email" name="email" id="email" class="form-control"  value="{{ $user->email }}" />
                             </div>
                         </div>
                         <div class="row g-3">
                             <div class="col-lg-6">
                                 <label for="phone">Phone Number</label>
-                                <input type="text" class="form-control" placeholder="+8801236-858966" id="phone" name="phone" value="{{ $user->phone }}" />
+                                <input type="text" class="form-control"  id="phone" name="phone" value="{{ $user->phone }}" />
                             </div>
                         </div>
                         <div class="d-flex justify-content-lg-end justify-content-center mt-2">
@@ -121,20 +121,43 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 order-1 order-lg-0 mt-4 mt-lg-0">
+        {{-- <div class="col-lg-3 order-1 order-lg-0 mt-4 mt-lg-0">
             <div class="white-bg">
                 <div class="change-image-wizard">
                     <div class="image mx-auto">
-                        <img src="{{ Session::get('user_photo')}}" alt="User" />
+                        <img src="{{ $user->photo }}" alt="User" />
                     </div>
-                    <form action="#">
+                    <form action="{{ route('students-profile.update', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="button button--primary-outline">CHANGE iMAGE</button>
+                            <button type="submit" name="submit" class="button button--primary-outline">CHANGE iMAGE</button>
                         </div>
                     </form>
                     <p>Image size should be under 1MB image ratio 200px.</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
+        <div class="col-lg-3 order-1 order-lg-0 mt-4 mt-lg-0">
+            <div class="white-bg">
+                <div class="change-image-wizard">
+                    <div class="image mx-auto">
+                        <img src="{{ $user->photo }}" alt="User" id="preview-image" style="width: 200px; height: 200px; object-fit: cover;"/>
+                    </div>
+                    <form action="{{ route('students-profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="d-flex justify-content-center">
+                            <label for="photo" class="btn btn-primary">Choose Image</label>
+                            <input type="file" name="photo" id="photo" style="display: none;" />
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" name="submit" class="button button--primary-outline">CHANGE IMAGE</button>
+                        </div>
+                    </form>
+                    <p>Image size should be under 1MB and image ratio 200px.</p>    
+                </div>
+            </div>
+        </div>        
     </div>
 </div>

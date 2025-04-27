@@ -12,13 +12,13 @@
         </div>
         <div class="tab-content__profile-content">
             <div class="info-student">
-                <h6 class="font-title--card">Philip Information</h6>
+                <h6 class="font-title--card">{{ $user->lastname }} Information</h6>
                 <dl class="row my-0 info-student-topic">
                     <dt class="col-sm-4">
                         <span>Name</span>
                     </dt>
                     <dd class="col-sm-8">
-                        <p>{{ Session::get('user_firstname')}} {{ Session::get('user_lastname')}}</p>
+                        <p>{{ $user->firstname }} {{ $user->lastname }}</p>
                     </dd>
                 </dl>
                 <dl class="row my-0 info-student-topic">
@@ -26,7 +26,7 @@
                         <span>E-mail</span>
                     </dt>
                     <dd class="col-sm-8">
-                        <p>name.@mail.cc</p>
+                        <p>{{ $user->email }}</p>
                     </dd>
                 </dl>
                 <dl class="row my-0 info-student-topic">
@@ -42,7 +42,7 @@
                         <span>Phone Number</span>
                     </dt>
                     <dd class="col-sm-8">
-                        <p>+968966</p>
+                        <p>{{ $user->phone }}</p>
                     </dd>
                 </dl>
                 <dl class="row my-0 info-student-topic">
