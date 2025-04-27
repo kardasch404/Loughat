@@ -141,6 +141,9 @@ Route::get('/become-teacher', function () {
 Route::get('/teacher-register', function () {
     return view('teacher-register');
 })->name('teacher-register');
+Route::get('/watch', function () {
+    return view('watch');
+})->name('watch');
 
 // => -/Auth 
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');

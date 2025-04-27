@@ -26,7 +26,7 @@
                                     <p>Finish</p>
                                 </div>
                             </div>
-                            <a class="button button-md button--primary-outline w-100 my-3" href="">Watch
+                            <a class="button button-md button--primary-outline w-100 my-3" href="/watch">Watch
                                 Course</a>
                             <div class="contentCard-watch--progress">
                                 <span class="percentage" style="width: 43%;"></span>
