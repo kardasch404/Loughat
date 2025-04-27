@@ -133,6 +133,9 @@ Route::get('/course-search', function () {
 Route::get('/course-details', function () {
     return view('course-details');
 })->name('course-details');
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
 
 
 // => -/Auth 
@@ -179,15 +182,9 @@ Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
 
 // => -/Payment
-Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
-Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
-Route::get('/payment/success', function () {
-    return view('payment-success');
-})->name('payment.success');
-
-Route::get('/payment/failure', function () {
-    return view('payment-failure');
-})->name('payment.failure');
+Route::post('/checkout/payment', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/checkout/payment/success/{payment}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/checkout/{commandeId}', [PaymentController::class, 'index'])->name('checkout');
 
 
 // => -/Sections
@@ -202,3 +199,4 @@ Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCou
 Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
 Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
