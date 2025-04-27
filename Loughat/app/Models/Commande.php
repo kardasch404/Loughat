@@ -22,7 +22,7 @@ class Commande extends Model
     }
     public function payment ()
     {
-        return $this->hasOne(Payment::class);
+        return $this->hasOne(Payment::class, 'command_id');
     }
     public function user() {
         return $this->belongsTo(User::class);

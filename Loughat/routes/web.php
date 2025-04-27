@@ -68,12 +68,18 @@ Route::get('/create-cours-lessons', function () {
 Route::get('/show-lessons', function () {
     return view('teacherdashboard.show-lessons');
 });
+Route::get('/teacher-transaction', function () {
+    return view('teacherdashboard.teacher-transaction');
+});
 
 Route::get('/logout', function () {
     // auth()->logout();
     return redirect('/');
 });
 // });
+Route::get('/charge', function () {
+    return view('charge');
+});
 
 //=========== ->admin admindashboard =============//
 //++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -102,9 +108,9 @@ Route::get('/roles', function () {
     return view('admindashboard.roles');
 });
 
-Route::get('/transactions-list', function () {
-    return view('admindashboard.transactions-list');
-});
+// Route::get('/transactions-list', function () {
+//     return view('admindashboard.transactions-list');
+// });
 
 Route::get('/profile', function () {
     return view('admindashboard.profile');
@@ -202,4 +208,8 @@ Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCou
 Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
 Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
+// => -/Transactions
+Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');
+Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByteacher'])->name('teacher.teacher-transaction');
 
