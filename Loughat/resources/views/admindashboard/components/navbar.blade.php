@@ -22,7 +22,7 @@
                     <a href="/reviews"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
                 </li>
                 <li>
-                    <a href="/transactions-list"><i class="fe fe-activity"></i> <span>Transactions</span></a>
+                    <a href="/transactions"><i class="fe fe-activity"></i> <span>Transactions</span></a>
                 </li>
                 <li>
                     <a href="/roles"><i class="fe fe-activity"></i> <span>Roles</span></a>
@@ -31,7 +31,6 @@
                 <li>
                     <a href="/profile"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                 </li>
-
             </ul>
         </div>
     </div>

@@ -40,31 +40,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($commandes as $commande)
                                     <tr>
-                                        <td><a href="invoice.html">#IN0001</td>
-                                        <td>#PT001</td>
+                                        <td><a href="">#{{$commande->id}}</td>
+                                        <td>#{{$commande->user->id}}</td>
                                         <td>
                                             <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
+                                                <a href="" class="avatar avatar-sm mr-2"><img
                                                         class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Charlene Reed </a>
+                                                        src="{{$commande->user->photo}}" alt="User Image"></a>
+                                                <a href="">{{$commande->user->firstname}} {{$commande->user->lastname}} </a>
                                             </h2>
                                         </td>
                                         <td>
                                             <h2 class="table-avatar">
                                                 <a href="profile.html" class="avatar avatar-sm mr-2"><img
                                                         class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Charlene Reed </a>
+                                                        src="{{$commande->cours->teacher->photo}}" alt="User Image"></a>
+                                                <a href="profile.html">{{$commande->cours->teacher->firstname}} {{$commande->cours->teacher->lastname}}</a>
                                             </h2>
                                         </td>
-                                        <td>Deutsch sprache</td>
-                                        <td class="">$100.00</td>
-                                        <td class="">9 Sep 2025</td>
+                                        <td class="w-25 text-wrap" style="word-break: break-word;">{{$commande->cours->title}}</td>
+                                        <td class="">${{$commande->montant}}</td>
+                                        <td class="">{{ $commande->created_at->format('Y-m-d') }}</td>
                                         <td class="text-center">
-                                            <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                        </td>
+                                            @if ($commande->payment)
+                                                <span class="badge badge-pill bg-success inv-badge">Paid</span>
+                                            @else
+                                                <span class="badge badge-pill bg-danger inv-badge">Not Paid</span>
+                                            @endif
+                                        </td>                                        
                                         <td class="text-right">
                                             <div class="actions">
                                                 <a class="btn btn-sm bg-danger-light" data-toggle="modal"
@@ -74,43 +79,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="invoice.html">#IN0001</td>
-                                        <td>#PT001</td>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Charlene Reed </a>
-                                            </h2>
-                                        </td>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Charlene Reed </a>
-                                            </h2>
-                                        </td>
-                                        <td>Deutsch sprache</td>
-                                        <td class="">$100.00</td>
-                                        <td class="">9 Sep 2025</td>
-                                        <td class="text-center">
-                                            <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                    href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> Delete
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

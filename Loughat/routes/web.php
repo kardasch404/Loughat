@@ -68,12 +68,18 @@ Route::get('/create-cours-lessons', function () {
 Route::get('/show-lessons', function () {
     return view('teacherdashboard.show-lessons');
 });
+Route::get('/teacher-transaction', function () {
+    return view('teacherdashboard.teacher-transaction');
+});
 
 Route::get('/logout', function () {
     // auth()->logout();
     return redirect('/');
 });
 // });
+Route::get('/charge', function () {
+    return view('charge');
+});
 
 //=========== ->admin admindashboard =============//
 //++++++++++++++++++++++++++++++++++++++++++++++++//
@@ -102,9 +108,9 @@ Route::get('/roles', function () {
     return view('admindashboard.roles');
 });
 
-Route::get('/transactions-list', function () {
-    return view('admindashboard.transactions-list');
-});
+// Route::get('/transactions-list', function () {
+//     return view('admindashboard.transactions-list');
+// });
 
 Route::get('/profile', function () {
     return view('admindashboard.profile');
@@ -136,12 +142,22 @@ Route::get('/course-details', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
+Route::get('/students-profile', function () {
+    return view('students-profile');
+})->name('students-profile');
+Route::get('/become-teacher', function () {
+    return view('become-teacher');
+})->name('become-teacher');
+Route::get('/teacher-register', function () {
+    return view('teacher-register');
+})->name('teacher-register');
 
 
 // => -/Auth 
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
 Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/logout', [JWTAuthController::class, 'logout'])->name('logout');
+Route::post('/teacher-register', [JWTAuthController::class, 'registerTeacher'])->name('teacher.register');
 
 // => -/Categorie
 Route::get('/categories',[CategorieController::class, 'index'])->name('admin.categories');
@@ -165,6 +181,8 @@ Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::get('/students-profile', [UserController::class, 'edit'])->name('students-profile.edit');
+Route::put('/students-profile/{id}', [UserController::class, 'update'])->name('students-profile.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -173,11 +191,9 @@ Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.s
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
-
 Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
 Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 
-// {{ route('cours', $cours->id) }}
 // => -/Commande$
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
 
@@ -199,4 +215,8 @@ Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCou
 Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
 Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
+// => -/Transactions
+Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');
+Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByteacher'])->name('teacher.teacher-transaction');
 

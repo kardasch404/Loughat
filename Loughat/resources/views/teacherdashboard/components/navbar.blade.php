@@ -68,6 +68,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/teacher-transaction">
+                            <i class="fas fa-star"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/comming_soon">
                             <i class="fas fa-comments"></i>
                             <span>Message</span>
@@ -87,11 +93,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span>Logout</span>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" style="background: none; border: none; width: 100%; text-align: left; padding: 7px 20px;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
                     </li>
+                    
                 </ul>
             </nav>
         </div>

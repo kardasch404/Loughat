@@ -9,6 +9,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/course-search') }}">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/become-teacher') }}">Become Teacher</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url('/event') }}">
@@ -17,9 +18,20 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    <a href="{{ url('/signin') }}" class="button button--text">Sign in</a>
-                    <a href="{{ url('/signup') }}" class="button button--dark">Sign Up</a>
+                    @if(Cookie::has('token'))
+                        <div class="user-image ms-3">
+                            <a href="{{ url('/students-profile') }}">
+                                <img src="{{ Session::get('user_photo')}}" alt="User" />
+                            </a>
+                        </div>
+                    @else
+                        <a href="{{ url('/signin') }}" class="button button--text">Sign in</a>
+                        <a href="{{ url('/signup') }}" class="button button--dark">Sign Up</a>
+                    @endif
                 </div>
+                
+                
+                
             </div>
         </div>
     </nav>
