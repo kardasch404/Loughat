@@ -9,6 +9,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/course-search') }}">Courses</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/become-teacher') }}">Become Teacher</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ url('/event') }}">
