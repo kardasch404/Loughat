@@ -10,22 +10,27 @@ class UserRepository
 {
 
     public function createUser(array $data)
-    {   
-        // $status = ($data['role'] === 'Teacher') ? 'pending' : 'Valide';
-        $user = User::create([
+    {
+        $status = (isset($data['role']) && $data['role'] === 'Teacher') ? 'pending' : 'Valide';
+
+        $userData = [
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => 'pending',
+            'status' => $status,
             'photo' => 'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
-        ]);
+        ];
+        if (isset($data['specialization'])) {
+            $userData['specialization'] = $data['specialization'];
+        }
 
-        $this->assignUserRole($user);
+        $user = User::create($userData);
+
         return $user;
     }
     public function assignUserRole(User $user)
-    {   
+    {
         $userRole = Role::where('name', 'user')->first();
         if ($userRole) {
             $user->roles()->attach($userRole->id);
@@ -94,23 +99,17 @@ class UserRepository
         return $user;
     }
 
-    public function updatePassword (array $data, $id)
+    public function updatePassword(array $data, $id)
     {
         $user = User::find($id);
         if (!$user) {
             return false;
         }
-        if (!Hash::check($data['old_password'], $user->password))
-        {
-            return 'old pass incorect'; 
+        if (!Hash::check($data['old_password'], $user->password)) {
+            return 'old pass incorect';
         }
         $user->password = Hash::make($data['new_password']);
         $user->save();
         return $user;
-           
     }
-       
-    
-
-    
 }

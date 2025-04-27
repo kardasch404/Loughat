@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegisterTeacherRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -57,7 +59,12 @@ class JWTAuthController extends Controller
             }
 
             $user = auth()->user();
-            $role = $user->roles()->first()->name;
+            $roleModel = $user->roles()->first();
+            if ($roleModel) {
+                $role = $roleModel->name;
+            } else {
+                $role = 'User';
+            }
 
             // return response()->json([
             //     'success' => true,
@@ -125,6 +132,32 @@ class JWTAuthController extends Controller
                 'error' => 'Failed to logout',
                 'message' => $e->getMessage()
             ], 500);
+        }
+    }
+    public function registerTeacher(RegisterTeacherRequest $request)
+    {
+        try {
+            $validated = $request->validated();
+
+            $user = $this->userRepository->createUser([
+                'firstname' => $validated['firstname'],
+                'lastname' => $validated['lastname'],
+                'email' => $validated['email'],
+                'password' => $validated['password'],
+                'specialization' => $validated['specialization'],
+                'role' => 'Teacher'
+            ]);
+            $teacherRole = \App\Models\Role::where('name', 'Teacher')->first();
+            if ($teacherRole) {
+                $user->roles()->attach($teacherRole->id);
+            }
+
+            $token = JWTAuth::fromUser($user);
+            $this->setUserSession($user, 'Teacher');
+            Cookie::queue('token', $token, 600 * 24);
+            return redirect()->route('signin');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Registration failed: ' . $e->getMessage()]);
         }
     }
 }

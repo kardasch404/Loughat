@@ -148,12 +148,16 @@ Route::get('/students-profile', function () {
 Route::get('/become-teacher', function () {
     return view('become-teacher');
 })->name('become-teacher');
+Route::get('/teacher-register', function () {
+    return view('teacher-register');
+})->name('teacher-register');
 
 
 // => -/Auth 
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
 Route::post('/register', [JWTAuthController::class, 'register'])->name('register');
 Route::post('/logout', [JWTAuthController::class, 'logout'])->name('logout');
+Route::post('/teacher-register', [JWTAuthController::class, 'registerTeacher'])->name('teacher.register');
 
 // => -/Categorie
 Route::get('/categories',[CategorieController::class, 'index'])->name('admin.categories');
