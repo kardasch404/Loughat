@@ -2,10 +2,10 @@
     <div>
         <div class="students-info-intro-start">
             <div class="image">
-                <img src="dist/images/user/user-img-01.jpg" alt="Student" />
+                <img src="{{ Session::get('user_photo')}}" alt="Student" />
             </div>
             <div class="text">
-                <h5>Phillip Bergson</h5>
+                <h5>{{ Session::get('user_firstname')}} {{ Session::get('user_lastname')}}</h5>
                 <p>UI/UX Designer</p>
             </div>
         </div>

@@ -17,6 +17,12 @@
 
             <button class="nav-link" id="nav-setting-tab" data-bs-toggle="tab" data-bs-target="#nav-setting" type="button" role="tab" aria-controls="nav-setting" aria-selected="false">Setting</button>
 
-            <button class="nav-link" id="nav-logout-tab" data-bs-toggle="tab" data-bs-target="#nav-logout" type="button" role="tab" aria-controls="nav-logout-tab" aria-selected="false">Logout</button>
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="nav-link" id="nav-logout-tab">
+                    Logout
+                </button>
+            </form>
+            
         </div>
     </nav>

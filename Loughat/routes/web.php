@@ -168,6 +168,8 @@ Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::get('/students-profile', [UserController::class, 'edit'])->name('students-profile.edit');
+Route::put('/students-profile/{id}', [UserController::class, 'update'])->name('students-profile.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -176,11 +178,9 @@ Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.s
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
-
 Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
 Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 
-// {{ route('cours', $cours->id) }}
 // => -/Commande$
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
 

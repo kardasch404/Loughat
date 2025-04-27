@@ -22,7 +22,6 @@
                 <!-- profile Details   -->
                 @include('students-profile.sections.students-info-intro__profile')
                 @include('students-profile.sections.students-info-intro__nav')
-
             </div>
             <div class="students-info-main">
                 <div class="tab-content" id="nav-tabContent">
@@ -32,7 +31,6 @@
                     @include('students-profile.sections.nav-completedcourses')
                     @include('students-profile.sections.nav-purchase')
                     @include('students-profile.sections.nav-setting')
-
                 </div>
             </div>
         </div>

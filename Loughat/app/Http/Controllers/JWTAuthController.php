@@ -72,7 +72,7 @@ class JWTAuthController extends Controller
             // ]);
 
             $this->setUserSession($user, $role);
-            Cookie::queue('token', $token, 60 * 24);
+            Cookie::queue('token', $token, 600 * 24);
 
             return $this->handleRoleBasedRedirect($role);
         } catch (JWTException $e) {
@@ -114,10 +114,11 @@ class JWTAuthController extends Controller
             JWTAuth::invalidate(JWTAuth::getToken());
             session()->flush();
             Cookie::queue(Cookie::forget('token'));
-            return response()->json([
-                'success' => true,
-                'message' => 'logged out'
-            ]);
+            // return response()->json([
+            //     'success' => true,
+            //     'message' => 'logged out'
+            // ]);
+            return redirect()->route('home');
         } catch (JWTException $e) {
             return response()->json([
                 'success' => false,

@@ -4,43 +4,35 @@
             <div class="white-bg">
                 <div class="students-info-form">
                     <h6 class="font-title--card">Your Information</h6>
-                    <form action="#">
+                    <form action="{{ route('students-profile.update', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="row g-3">
                             <div class="col-lg-6">
-                                <label for="fname">First Name</label>
-                                <input type="text" class="form-control" placeholder="Phillip" id="fname" />
+                                <label for="firstname">First Name</label>
+                                <input type="text" class="form-control" placeholder="Phillip" name="firstname" id="firstname" value="{{ $user->firstname }}" />
                             </div>
                             <div class="col-lg-6">
-                                <label for="lname">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Bergson" id="lname" />
+                                <label for="lastname">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Bergson" name="lastname" id="lastname" value="{{ $user->lastname }}" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" class="form-control" placeholder="phillip.bergson@gmail.com" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <label for="do">What Do You Do</label>
-                                <input type="text" id="do" class="form-control" placeholder="UI/UX Designer" />
+                                <input type="email" name="email" id="email" class="form-control" placeholder="phillip.bergson@gmail.com" value="{{ $user->email }}" />
                             </div>
                         </div>
                         <div class="row g-3">
                             <div class="col-lg-6">
-                                <label for="pnumber">Phone Number</label>
-                                <input type="text" class="form-control" placeholder="+8801236-858966" id="pnumber" />
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="nationality">Nationality</label>
-                                <input type="text" class="form-control" placeholder="Bangladesh" id="nationality" />
+                                <label for="phone">Phone Number</label>
+                                <input type="text" class="form-control" placeholder="+8801236-858966" id="phone" name="phone" value="{{ $user->phone }}" />
                             </div>
                         </div>
                         <div class="d-flex justify-content-lg-end justify-content-center mt-2">
-                            <button class="button button-lg button--primary" type="submit">Save Changes</button>
+                            <button class="button button-lg button--primary" type="submit" name="submit">Save Changes</button>
                         </div>
-                    </form>
+                    </form>   
                 </div>
             </div>
             <div class="white-bg mt-4">
@@ -133,7 +125,7 @@
             <div class="white-bg">
                 <div class="change-image-wizard">
                     <div class="image mx-auto">
-                        <img src="dist/images/user/user-img-01.jpg" alt="User" />
+                        <img src="{{ Session::get('user_photo')}}" alt="User" />
                     </div>
                     <form action="#">
                         <div class="d-flex justify-content-center">

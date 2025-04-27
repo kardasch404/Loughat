@@ -62,8 +62,20 @@ class UserController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error' . $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+    public function edit()
+    {
+        $userId = session('user_id');
+        $user = $this->userRepository->find($userId);
+        if (!$user) {
+            return response()->json([
+                'error',
+                'User not found'
+            ]);
+        }
+        return view('students-profile', compact('user'));
     }
 
 

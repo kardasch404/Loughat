@@ -18,7 +18,7 @@
                         <span>Name</span>
                     </dt>
                     <dd class="col-sm-8">
-                        <p>Phillip Bergson</p>
+                        <p>{{ Session::get('user_firstname')}} {{ Session::get('user_lastname')}}</p>
                     </dd>
                 </dl>
                 <dl class="row my-0 info-student-topic">
@@ -26,7 +26,7 @@
                         <span>E-mail</span>
                     </dt>
                     <dd class="col-sm-8">
-                        <p>phillip.bergson@gmail.com</p>
+                        <p>name.@mail.cc</p>
                     </dd>
                 </dl>
                 <dl class="row my-0 info-student-topic">
@@ -42,7 +42,7 @@
                         <span>Phone Number</span>
                     </dt>
                     <dd class="col-sm-8">
-                        <p>+8801236 968966</p>
+                        <p>+968966</p>
                     </dd>
                 </dl>
                 <dl class="row my-0 info-student-topic">
