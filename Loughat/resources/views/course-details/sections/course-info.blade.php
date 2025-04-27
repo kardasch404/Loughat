@@ -2633,9 +2633,10 @@
                                 <input type="hidden" name="status" value="pending">
                                 <input type="hidden" name="montant" value="{{ $cours->price }}">
                                 <input type="hidden" name="cours_id" value="{{ $cours->id }}">
+                                <input type="hidden" name="redirect_to_checkout" value="1">
                                 
-                                <button type="submit" name="submit" class="button button-lg button--primary w-100">
-                                    <a href="/payment">Checkout</a>
+                                <button type="submit" class="button button-lg button--primary w-100">
+                                    Checkout
                                 </button>
                             </form>
                             

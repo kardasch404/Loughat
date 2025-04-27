@@ -40,7 +40,9 @@ class CommandeController extends Controller
         //         'message' => 'Commande created success'
         //     ], 201);
         // } 
-        return redirect()->route('payment');
+        if ($request->has('redirect_to_checkout')) {
+            return redirect()->route('checkout', ['commandeId' => $commande->id]);
+        }
          
        }catch(\Exception $e){
         return response()->json([
