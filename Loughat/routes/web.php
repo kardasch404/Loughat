@@ -136,6 +136,9 @@ Route::get('/course-details', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
+Route::get('/students-profile', function () {
+    return view('students-profile');
+})->name('students-profile');
 
 
 // => -/Auth 
