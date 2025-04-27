@@ -76,7 +76,6 @@ class CoursRepository
         $courses = Cours::where('teacher_id', $teacherId)->get();
         return $courses;
     }
-
     public function all()
     {
         $courses = Cours::all();

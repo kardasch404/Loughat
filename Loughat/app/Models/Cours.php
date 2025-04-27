@@ -44,4 +44,8 @@ class Cours extends Model
     {
         return $this->hasMany(CoursReview::class);
     }
+    public function Sections()
+    {
+        return $this->hasMany(Section::class, 'course_id');
+    }
 }

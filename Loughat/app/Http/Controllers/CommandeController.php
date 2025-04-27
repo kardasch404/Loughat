@@ -35,11 +35,15 @@ class CommandeController extends Controller
             return redirect()->back();
         }
         $commande = $this->commandeRepository->create($data,$data['cours_id'],$user);
-        if ($commande) {
-            return response()->json([
-                'message' => 'Commande created success'
-            ], 201);
-        } 
+        // if ($commande) {
+        //     return response()->json([
+        //         'message' => 'Commande created success'
+        //     ], 201);
+        // } 
+        if ($request->has('redirect_to_checkout')) {
+            return redirect()->route('checkout', ['commandeId' => $commande->id]);
+        }
+         
        }catch(\Exception $e){
         return response()->json([
             'error' => $e->getMessage(),
@@ -47,16 +51,16 @@ class CommandeController extends Controller
         ], 500);
        }
     }
-
     public function index()
     {
        try{
         $commandes = $this->commandeRepository->all();
-        if ($commandes) {
-            return response()->json([
-                'commandes' => $commandes
-            ], 200);
-        }
+        // if ($commandes) {
+        //     return response()->json([
+        //         'commandes' => $commandes
+        //     ], 200);
+        // }
+        return view('admindashboard.transactions-list', compact('commandes'));
        }catch(\Exception $e){
         return response()->json([
             'error' => $e->getMessage(),
@@ -64,6 +68,7 @@ class CommandeController extends Controller
         ], 500);
        }
     }
+  
 
     public function show($id)
     {

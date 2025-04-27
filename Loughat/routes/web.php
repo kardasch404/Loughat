@@ -4,8 +4,10 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +59,15 @@ Route::get('/teacher-profile-settings', function () {
 Route::get('/teacher-change-password', function () {
     return view('teacherdashboard.teacher-change-password');
 });
+Route::get('/create-cours-section', function () {
+    return view('teacherdashboard.create-cours-section');
+});
+Route::get('/create-cours-lessons', function () {
+    return view('teacherdashboard.create-cours-lessons');
+});
+Route::get('/show-lessons', function () {
+    return view('teacherdashboard.show-lessons');
+});
 
 Route::get('/logout', function () {
     // auth()->logout();
@@ -94,9 +105,9 @@ Route::get('/roles', function () {
     return view('admindashboard.roles');
 });
 
-Route::get('/transactions-list', function () {
-    return view('admindashboard.transactions-list');
-});
+// Route::get('/transactions-list', function () {
+//     return view('admindashboard.transactions-list');
+// });
 
 Route::get('/profile', function () {
     return view('admindashboard.profile');
@@ -125,6 +136,12 @@ Route::get('/course-search', function () {
 Route::get('/course-details', function () {
     return view('course-details');
 })->name('course-details');
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
+Route::get('/students-profile', function () {
+    return view('students-profile');
+})->name('students-profile');
 
 
 // => -/Auth 
@@ -153,6 +170,9 @@ Route::put('/profile/{id}/password', [UserController::class, 'changePassword'])-
 Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin.profile.update');
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::get('/students-profile', [UserController::class, 'edit'])->name('students-profile.edit');
+Route::put('/students-profile/{id}', [UserController::class, 'update'])->name('students-profile.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -161,11 +181,31 @@ Route::post('/create-cours', [CoursController::class, 'store'])->name('courses.s
 Route::get('/edit-cours/{coursId}', [CoursController::class, 'edit'])->name('courses.edit');
 Route::put('/update-cours/{coursId}', [CoursController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('courses.delete');
-
 Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
 Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 
-// {{ route('cours', $cours->id) }}
 // => -/Commande$
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
+
+// => -/Payment
+Route::post('/checkout/payment', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/checkout/payment/success/{payment}', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/checkout/{commandeId}', [PaymentController::class, 'index'])->name('checkout');
+
+
+// => -/Sections
+Route::post('/create-cours-section', [SectionController::class, 'store'])->name('sections.store');
+Route::get('/create-cours-section', [SectionController::class, 'create'])->name('sections.create');
+
+// => -/Lessons
+Route::post('/create-cours-lessons', [LessonController::class, 'store'])->name('lessons.store');
+Route::get('/create-cours-lessons', [LessonController::class, 'create'])->name('lessons.create');
+Route::get('/teacher/sections/by-course/{courseId}', [SectionController::class, 'getSectionsByCourse']);
+Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCours'])->name('lessons.show');
+Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
+Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
+Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
+// => -/Transactions
+Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');
 

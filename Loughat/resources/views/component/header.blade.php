@@ -17,9 +17,20 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    <a href="{{ url('/signin') }}" class="button button--text">Sign in</a>
-                    <a href="{{ url('/signup') }}" class="button button--dark">Sign Up</a>
+                    @if(Cookie::has('token'))
+                        <div class="user-image ms-3">
+                            <a href="{{ url('/students-profile') }}">
+                                <img src="{{ Session::get('user_photo')}}" alt="User" />
+                            </a>
+                        </div>
+                    @else
+                        <a href="{{ url('/signin') }}" class="button button--text">Sign in</a>
+                        <a href="{{ url('/signup') }}" class="button button--dark">Sign Up</a>
+                    @endif
                 </div>
+                
+                
+                
             </div>
         </div>
     </nav>

@@ -8,7 +8,7 @@
                     <img src="{{ session('user_photo') }}" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    <h3>{{ session('user_firstname') }}{{ session('user_lastname') }}</h3>
+                    <h3>{{ session('user_firstname') }} {{ session('user_lastname') }}</h3>
                     
                     <div class="patient-details">
                         <h5 class="mb-0">deutsch</h5>
@@ -43,6 +43,18 @@
                             <span>create-cours</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/create-cours-section">
+                            <i class="fas fa-user-injured"></i>
+                            <span>create-cours-section</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/create-cours-lessons">
+                            <i class="fas fa-user-injured"></i>
+                            <span>create-cours-lessons</span>
+                        </a>
+                    </li>
                     <li >
                         <a href="/student_course">
                             <i class="fas fa-file-invoice"></i>
@@ -75,11 +87,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span>Logout</span>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" style="background: none; border: none; width: 100%; text-align: left; padding: 7px 20px;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
                     </li>
+                    
                 </ul>
             </nav>
         </div>

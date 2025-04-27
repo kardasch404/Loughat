@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Repositories;
-
 use App\Models\Commande;
-use Illuminate\Console\Command;
 
-class CommandeRepository 
+class CommandeRepository
 {
-    public function create(array $data,$coursId,$userId)
+    public function create(array $data, $coursId, $userId)
     {
         $commande = new Commande();
         $commande->status = $data['status'];
@@ -26,8 +24,7 @@ class CommandeRepository
     public function all()
     {
         $commandes = Commande::all();
-        return $commandes ; 
+        return $commandes;
     }
-   
 
 }

@@ -1,9 +1,3 @@
-/*
-Author       : Dreamguys
-Template Name: Doccure - Bootstrap Template
-Version      : 1.0
-*/
-
 (function($) {
     "use strict";
 	
@@ -40,13 +34,19 @@ Version      : 1.0
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>College/Institute</label>' +
+							'<label>From</label>' +
 							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
 					'<div class="col-12 col-md-6 col-lg-4">' +
 						'<div class="form-group">' +
-							'<label>Year of Completion</label>' +
+							'<label>To</label>' +
+							'<input type="text" class="form-control">' +
+						'</div>' +
+					'</div>' +
+					'<div class="col-12 col-md-6 col-lg-12">' +
+						'<div class="form-group">' +
+							'<label>Description</label>' +
 							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
@@ -89,9 +89,9 @@ Version      : 1.0
 							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
-					'<div class="col-12 col-md-6 col-lg-4">' +
+					'<div class="col-12 col-md-6 col-lg-12">' +
 						'<div class="form-group">' +
-							'<label>Designation</label>' +
+							'<label>Description</label>' +
 							'<input type="text" class="form-control">' +
 						'</div>' +
 					'</div>' +
