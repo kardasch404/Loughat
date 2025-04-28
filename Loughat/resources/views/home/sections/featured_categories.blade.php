@@ -10,7 +10,7 @@
          <div class="categories categories__slider">
              <div class="category">
                  <div class="category__img">
-                     <a href="#"><img src="dist/images/category/1.png" alt="images" class="img-fluid" /></a>
+                     <a href="#"><img src="{{ asset('assets/user/dist/images/category/1.png') }}" alt="images" class="img-fluid" /></a>
                  </div>
                  <div class="category__tittle">
                      <h6><a href="#">UI/UX Design</a></h6>
@@ -22,8 +22,9 @@
      <div class="row">
          <div class="col-lg-12">
              <div class="d-flex justify-content-center">
-                 <a href="course-search.html" class="button button-lg button--primary">Browse all Courses</a>
+                 <a href="/course-search" class="button button-lg button--primary">Browse all Courses</a>
              </div>
          </div>
      </div>
  </section>
+

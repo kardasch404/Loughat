@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CoursRequest;
 use App\Http\Requests\CoursUpdateRequest;
+use App\Models\Lesson;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
@@ -161,7 +162,6 @@ class CoursController extends Controller
                 if (!$payment) {
                     dd('No payment found ' . $commande->id);
                 }
-
                 if ($commande->cours) {
                     $courses[] = $commande->cours;
                 }
@@ -175,29 +175,44 @@ class CoursController extends Controller
         }
     }
 
-    public function watchCours($id)
+    public function watchCours($id, $lessonId = null)
     {
         try {
             $course = $this->coursRepository->find($id);
 
             if (!$course) {
                 return response()->json([
-                    'error' => 'cours nt found'
+                    'error' => 'cours not found'
                 ], 404);
             }
+            $sections = $this->sectionRepository->getCoursesWithSection($id);
 
-            $coursSections = $this->sectionRepository->getCoursesWithSection($id);
-            // dd($coursSections);
-
-            if (! $coursSections) {
+            if (empty($sections)) {
                 return response()->json([
                     'error' => 'no section in this cours'
                 ]);
             }
-            // dd('gfhjklm');
-            $lessonsBySection = $this->lessonRepository->getLessonsBySection($coursSections);
-            return view('watch', compact('cours'));
-            // dd($lessonsBySection);
+            $sectionsWithLessons = [];
+            $firstLesson = null;
+
+            foreach ($sections as $section) {
+                $lessons = $this->lessonRepository->getLessonsBySection($section->id);
+                if (empty($firstLesson) && $lessons->isNotEmpty()) {
+                    $firstLesson = $lessons->first();
+                }
+
+                $sectionsWithLessons[] = [
+                    'section' => $section,
+                    'lessons' => $lessons
+                ];
+            }
+            if ($lessonId) {
+                $currentLesson = $this->lessonRepository->find($lessonId);
+            } else {
+                $currentLesson = $firstLesson;
+            }
+
+            return view('watch', compact('course', 'sectionsWithLessons', 'currentLesson'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

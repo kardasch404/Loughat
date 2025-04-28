@@ -17,7 +17,7 @@
                          </a>
                      </div>
                      <div class="topic-info-text">
-                         <h6 class="font-title--xs"><a href="#">{{$cours->title}}</a></h6>
+                         <h6 class="font-title--xs"><a href="#">{{$course->title}}</a></h6>
                          <div class="lesson-hours">
                              <div class="book-lesson">
                                  <svg width="18" height="19" viewBox="0 0 18 19" fill="none"

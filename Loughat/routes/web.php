@@ -132,9 +132,9 @@ Route::get('/course-details', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
-// Route::get('/students-profile', function () {
-//     return view('students-profile');
-// })->name('students-profile');
+Route::get('/course-search', function () {
+    return view('course-search');
+})->name('course-search');
 Route::get('/become-teacher', function () {
     return view('become-teacher');
 })->name('become-teacher');
@@ -207,7 +207,7 @@ Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('
 Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
 Route::get('/watch/{id}', [CoursController::class, 'watchCours'])->name('watch.watchCours');
-Route::get('/courses', [CoursController::class, 'watchCours'])->name('courses');
+Route::get('/watch/{id}/{lessonId?}', [CoursController::class, 'watchCours'])->name('watch');
 
 // => -/Transactions
 Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');

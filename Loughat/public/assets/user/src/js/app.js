@@ -27,3 +27,63 @@ function openSearch() {
 function closeSearch() {
   document.getElementById('myOverlay').style.display = 'none';
 }
+
+
+// watch course 
+
+document.addEventListener('DOMContentLoaded', function() {
+  const lessonLinks = document.querySelectorAll('.lesson-link');
+  lessonLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const lessonWrapper = this.closest('.main-wizard__wrapper');
+          document.querySelectorAll('.main-wizard__wrapper').forEach(function(wrapper) {
+              wrapper.classList.remove('active');
+          });
+          lessonWrapper.classList.add('active');
+          const lessonType = lessonWrapper.getAttribute('data-lesson-type');
+          const lessonTitle = lessonWrapper.getAttribute('data-lesson-title');
+          document.getElementById('lesson-title').textContent = lessonTitle;
+          if (lessonType === 'video') {
+              const videoUrl = lessonWrapper.getAttribute('data-video-url');
+
+              if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                  document.getElementById('main-video-player').style.display = 'none';
+                  let iframe = document.getElementById('youtube-iframe');
+                  if (!iframe) {
+                      iframe = document.createElement('iframe');
+                      iframe.id = 'youtube-iframe';
+                      iframe.width = "100%";
+                      iframe.height = "500";
+                      iframe.allow =
+                          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                      iframe.allowFullscreen = true;
+                      document.querySelector('.video-area').appendChild(iframe);
+                  }
+                  iframe.style.display = 'block';
+                  let embedUrl = videoUrl;
+                  if (videoUrl.includes('youtu.be')) {
+                      embedUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+                  }
+                  iframe.src = embedUrl;
+              } else {
+                  const videoPlayer = document.getElementById('main-video-player');
+                  videoPlayer.style.display = 'block';
+                  const iframe = document.getElementById('youtube-iframe');
+                  if (iframe) iframe.style.display = 'none';
+
+                  while (videoPlayer.firstChild) {
+                      videoPlayer.removeChild(videoPlayer.firstChild);
+                  }
+                  const source = document.createElement('source');
+                  source.src = videoUrl;
+                  source.className = 'w-100';
+                  videoPlayer.appendChild(source);
+                  videoPlayer.load();
+                  videoPlayer.play();
+              }
+          }
+      });
+  });
+
+});

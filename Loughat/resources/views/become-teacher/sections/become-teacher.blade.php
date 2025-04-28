@@ -5,10 +5,10 @@
              <div class="col-lg-6">
                  <div class="hero__img-content">
                      <div class="hero__img-content--main">
-                         <img src="dist/images/instructor/become.jpg" alt="image" />
+                         <img src="{{ asset('assets/user/dist/images/instructor/become.jpg') }}" alt="image" />
                      </div>
-                     <img src="dist/images/shape/rec02.png" alt="shape" class="hero hero__img-content--shape-01" />
-                     <img src="dist/images/shape/dots/dots-img-06.png" alt="shape"
+                     <img src="{{ asset('assets/user/dist/images/shape/rec02.png') }}" alt="shape" class="hero hero__img-content--shape-01" />
+                     <img src="{{ asset('assets/user/dist/images/shape/dots/dots-img-06.png') }}" alt="shape"
                          class="hero hero__img-content--shape-02" />
                  </div>
              </div>
@@ -26,3 +26,4 @@
          </div>
      </div>
  </section>
+

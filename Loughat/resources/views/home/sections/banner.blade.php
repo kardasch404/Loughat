@@ -32,12 +32,12 @@
              <div class="col-lg-5 order-1 order-lg-0">
                  <div class="banner-two-end">
                      <div class="image">
-                         <img src="dist/images/banner/banner-image-02.png" alt="Instructor" class="img-fluid" />
+                         <img src="{{ asset('assets/user/dist/images/banner/banner-image-02.png') }}" alt="teacher" class="img-fluid" />
                      </div>
                      <div class="image-shapes">
-                         <img src="dist/images/shape/dots/dots-img-01.png" alt="shape" class="img-fluid shape01" />
-                         <img src="dist/images/shape/rec07.png" alt="shape" class="img-fluid shape02" />
-                         <img src="dist/images/shape/rec06.png" alt="shape" class="img-fluid shape03" />
+                         <img src="{{ asset('assets/user/dist/images/shape/dots/dots-img-01.png') }}" alt="shape" class="img-fluid shape01" />
+                         <img src="{{ asset('assets/user/dist/images/shape/rec07.png') }}" alt="shape" class="img-fluid shape02" />
+                         <img src="{{ asset('assets/user/dist/images/shape/rec06.png') }}" alt="shape" class="img-fluid shape03" />
                      </div>
                  </div>
              </div>

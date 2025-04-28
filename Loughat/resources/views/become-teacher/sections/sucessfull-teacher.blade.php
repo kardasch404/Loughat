@@ -68,18 +68,17 @@
                 </div>
             </div>
         </div>
-
         <div class="section hero hero--four row align-items-center">
             <div class="col-lg-6">
                 <div class="hero__img-content">
                     <div class="hero__img-content--main">
-                        <img src="dist/images/instructor/info-desk.jpg" alt="image" />
+                        <img src="{{ asset('assets/user/dist/images/instructor/info-desk.jpg') }}" alt="image" />
                     </div>
-                    <img src="dist/images/shape/reactangle-lg.png" alt="shape"
+                    <img src="{{ asset('assets/user/dist/images/shape/reactangle-lg.png') }}" alt="shape"
                         class="hero hero__img-content--shape-01" />
-                    <img src="dist/images/shape/dots/dots-img-15.png" alt="shape"
+                    <img src="{{ asset('assets/user/dist/images/shape/dots/dots-img-15.png') }}" alt="shape"
                         class="hero hero__img-content--shape-02" />
-                    <img src="dist/images/shape/circle2.png" alt="shape" class="hero hero__img-content--shape-03" />
+                    <img src="{{ asset('assets/user/dist/images/shape/circle2.png') }}" alt="shape" class="hero hero__img-content--shape-03" />
                 </div>
             </div>
             <div class="col-lg-6">
@@ -116,7 +115,7 @@
 
     <div class="section__overlay">
         <span class="section__overlay--shape-01">
-            <img src="dist/images/shape//circle3.png" alt="shape circle" />
+            <img src="{{ asset('assets/user/dist/images/shape//circle3.png') }}" alt="shape circle" />
         </span>
     </div>
 </section>
