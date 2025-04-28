@@ -34,7 +34,7 @@ class Cours extends Model
     }
     public function commande()
     {
-        return $this->hasMany(Commande::class);
+        return $this->hasMany(Commande::class, 'cours_id');
     }
     public function badge()
     {
@@ -44,7 +44,7 @@ class Cours extends Model
     {
         return $this->hasMany(CoursReview::class);
     }
-    public function Sections()
+    public function section()
     {
         return $this->hasMany(Section::class, 'course_id');
     }

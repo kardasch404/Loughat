@@ -16,25 +16,26 @@
              <div class="col-lg-12">
                  <div class="brand-area">
                      <div class="brand-area-image">
-                         <img src="dist/images/versity/1.png" alt="Brand" class="img-fluid" />
+                         <img src=" {{ asset('assets/user/dist/images/versity/1.png') }}" alt="Brand" class="img-fluid" />
                      </div>
                      <div class="brand-area-image">
-                         <img src="dist/images/versity/2.png" alt="Brand" class="img-fluid" />
+                         <img src=" {{ asset('assets/user/dist/images/versity/2.png') }}" alt="Brand" class="img-fluid" />
                      </div>
                      <div class="brand-area-image">
-                         <img src="dist/images/versity/3.png" alt="Brand" class="img-fluid" />
+                         <img src=" {{ asset('assets/user/dist/images/versity/3.png') }}" alt="Brand" class="img-fluid" />
                      </div>
                      <div class="brand-area-image">
-                         <img src="dist/images/versity/4.png" alt="Brand" class="img-fluid" />
+                         <img src=" {{ asset('assets/user/dist/images/versity/4.png') }}" alt="Brand" class="img-fluid" />
                      </div>
                      <div class="brand-area-image">
-                         <img src="dist/images/versity/2.png" alt="Brand" class="img-fluid" />
+                         <img src=" {{ asset('assets/user/dist/images/versity/2.png') }}" alt="Brand" class="img-fluid" />
                      </div>
                      <div class="brand-area-image">
-                         <img src="dist/images/versity/5.png" alt="Brand" class="img-fluid" />
+                         <img src=" {{ asset('assets/user/dist/images/versity/5.png') }}" alt="Brand" class="img-fluid" />
                      </div>
                  </div>
              </div>
          </div>
      </div>
  </section>
+

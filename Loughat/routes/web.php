@@ -11,16 +11,6 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 // Route::middleware(['auth', 'role:Teacher'])->group(function () {
 Route::get('/teacher_dashboard', function () {
@@ -142,16 +132,18 @@ Route::get('/course-details', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
-Route::get('/students-profile', function () {
-    return view('students-profile');
-})->name('students-profile');
+Route::get('/course-search', function () {
+    return view('course-search');
+})->name('course-search');
 Route::get('/become-teacher', function () {
     return view('become-teacher');
 })->name('become-teacher');
 Route::get('/teacher-register', function () {
     return view('teacher-register');
 })->name('teacher-register');
-
+Route::get('/watch', function () {
+    return view('watch');
+})->name('watch');
 
 // => -/Auth 
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
@@ -181,8 +173,6 @@ Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
-Route::get('/students-profile', [UserController::class, 'edit'])->name('students-profile.edit');
-Route::put('/students-profile/{id}', [UserController::class, 'update'])->name('students-profile.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -194,7 +184,7 @@ Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('c
 Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
 Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 
-// => -/Commande$
+// => -/Commande
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
 
 // => -/Payment
@@ -216,7 +206,16 @@ Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->na
 Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
 
+Route::get('/watch/{id}', [CoursController::class, 'watchCours'])->name('watch.watchCours');
+Route::get('/watch/{id}/{lessonId?}', [CoursController::class, 'watchCours'])->name('watch');
+
 // => -/Transactions
 Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');
 Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByteacher'])->name('teacher.teacher-transaction');
 
+// Students Profile Routes
+Route::prefix('students-profile')->group(function () {
+    Route::get('/', [UserController::class, 'edit'])->name('students-profile.edit');
+    Route::get('/', [CoursController::class, 'getAllCoursesByStudent'])->name('students-profile.courses');
+    Route::put('/{id}', [UserController::class, 'update'])->name('students-profile.update');
+});

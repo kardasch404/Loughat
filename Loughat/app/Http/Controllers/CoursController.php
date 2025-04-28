@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CoursRequest;
 use App\Http\Requests\CoursUpdateRequest;
+use App\Models\Lesson;
 use App\Repositories\CategorieRepository;
+use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
+use App\Repositories\LessonRepository;
+use App\Repositories\PaymentRepository;
+use App\Repositories\SectionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -14,11 +19,19 @@ class CoursController extends Controller
     protected $coursRepository;
     protected $categorieRepository;
     protected $userRepository;
-    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository)
+    protected $commandeRepository;
+    protected $paymentRepository;
+    protected $sectionRepository;
+    protected $lessonRepository;
+    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository, CommandeRepository $commandeRepository, PaymentRepository $paymentRepository, SectionRepository $sectionRepository, LessonRepository $lessonRepository)
     {
         $this->coursRepository = $coursRepository;
         $this->categorieRepository = $categorieRepository;
         $this->userRepository = $userRepository;
+        $this->commandeRepository = $commandeRepository;
+        $this->paymentRepository = $paymentRepository;
+        $this->sectionRepository = $sectionRepository;
+        $this->lessonRepository = $lessonRepository;
     }
     public function show($coursId)
     {
@@ -80,7 +93,7 @@ class CoursController extends Controller
     public function update(CoursUpdateRequest $request, $coursId)
     {
 
-        // dd('fdghjklm');
+        dd('fdghjklm');
         try {
             $data = $request->validated();
             // dd('reached update');
@@ -131,6 +144,79 @@ class CoursController extends Controller
             return redirect()->route('courses');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to delete course');
+        }
+    }
+
+    public function getAllCoursesByStudent()
+    {
+        try {
+            $studentId = session('user_id');
+            // dd($studentId);
+            $user = $this->userRepository->find($studentId);
+            // dd($user);
+            $commandes = $this->commandeRepository->getAllCommandeFromStudent($studentId);
+            // dd($commandes);
+            $courses = [];
+            foreach ($commandes as $commande) {
+                $payment = $this->paymentRepository->findByCommandId($commande->id);
+                if (!$payment) {
+                    dd('No payment found ' . $commande->id);
+                }
+                if ($commande->cours) {
+                    $courses[] = $commande->cours;
+                }
+            }
+            // dd($courses);
+            return view('students-profile', compact('courses', 'user'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function watchCours($id, $lessonId = null)
+    {
+        try {
+            $course = $this->coursRepository->find($id);
+
+            if (!$course) {
+                return response()->json([
+                    'error' => 'cours not found'
+                ], 404);
+            }
+            $sections = $this->sectionRepository->getCoursesWithSection($id);
+
+            if (empty($sections)) {
+                return response()->json([
+                    'error' => 'no section in this cours'
+                ]);
+            }
+            $sectionsWithLessons = [];
+            $firstLesson = null;
+
+            foreach ($sections as $section) {
+                $lessons = $this->lessonRepository->getLessonsBySection($section->id);
+                if (empty($firstLesson) && $lessons->isNotEmpty()) {
+                    $firstLesson = $lessons->first();
+                }
+
+                $sectionsWithLessons[] = [
+                    'section' => $section,
+                    'lessons' => $lessons
+                ];
+            }
+            if ($lessonId) {
+                $currentLesson = $this->lessonRepository->find($lessonId);
+            } else {
+                $currentLesson = $firstLesson;
+            }
+
+            return view('watch', compact('course', 'sectionsWithLessons', 'currentLesson'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

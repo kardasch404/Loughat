@@ -13,9 +13,9 @@ class Section extends Model
         'order'
     ];
 
-    public function course()
+    public function cours()
     {
-        return $this->belongsTo(cours::class, 'course_id');
+        return $this->belongsTo(Cours::class, 'course_id');
     }
 
     public function lessons()

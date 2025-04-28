@@ -9,25 +9,24 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable = 
+    protected $fillable =
     [
         'status',
-        'date', 
+        'date',
         'montant'
     ];
 
-    public function cours ()
+    public function cours()
     {
-        return $this->belongsTo(Cours::class);
+        return $this->belongsTo(Cours::class, 'cours_id');
     }
-    public function payment ()
+
+    public function payments()
     {
-        return $this->hasOne(Payment::class, 'command_id');
+        return $this->hasMany(Payment::class, 'command_id');
     }
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
-    
-    
-    
 }
