@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CoursRequest;
 use App\Http\Requests\CoursUpdateRequest;
 use App\Repositories\CategorieRepository;
+use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
+use App\Repositories\PaymentRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -14,11 +16,15 @@ class CoursController extends Controller
     protected $coursRepository;
     protected $categorieRepository;
     protected $userRepository;
-    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository)
+    protected $commandeRepository;
+    protected $paymentRepository;
+    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository, CommandeRepository $commandeRepository, PaymentRepository $paymentRepository)
     {
         $this->coursRepository = $coursRepository;
         $this->categorieRepository = $categorieRepository;
         $this->userRepository = $userRepository;
+        $this->commandeRepository = $commandeRepository;
+        $this->paymentRepository = $paymentRepository;
     }
     public function show($coursId)
     {
@@ -80,7 +86,7 @@ class CoursController extends Controller
     public function update(CoursUpdateRequest $request, $coursId)
     {
 
-        // dd('fdghjklm');
+        dd('fdghjklm');
         try {
             $data = $request->validated();
             // dd('reached update');
@@ -131,6 +137,36 @@ class CoursController extends Controller
             return redirect()->route('courses');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to delete course');
+        }
+    }
+
+    public function getAllCoursesByStudent()
+    {
+        try {
+            $studentId = session('user_id');
+            // dd($studentId);
+            $user = $this->userRepository->find($studentId);
+            // dd($user);
+            $commandes = $this->commandeRepository->getAllCommandeFromStudent($studentId);
+            // dd($commandes);
+            $courses = [];
+            foreach ($commandes as $commande) {
+                $payment = $this->paymentRepository->findByCommandId($commande->id);
+                if (!$payment) {
+                    dd('No payment found ' . $commande->id);
+                }
+
+                if ($commande->cours) {
+                    $courses[] = $commande->cours;
+                }
+            }
+            // dd($courses);
+
+            return view('students-profile', compact('courses', 'user'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }
