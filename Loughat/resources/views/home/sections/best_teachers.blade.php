@@ -8,7 +8,7 @@
                      <div class="ourinstructor-active">
                          <div class="mentor">
                              <div class="mentor__img">
-                                 <img src="dist/images/instructor/03.jpg" alt="Mentor image" />
+                                 <img src="{{ asset('assets/user/dist/images/instructor/03.jpg') }}" alt="Mentor image" />
 
                                  <ul class="list-inline">
                                      <li class="list-inline-item">
@@ -83,7 +83,7 @@
                          </div>
                          <div class="mentor">
                              <div class="mentor__img">
-                                 <img src="dist/images/instructor/02.jpg" alt="Mentor image" />
+                                 <img src="{{ asset('assets/user/dist/images/instructor/02.jpg') }}" alt="Mentor image" />
 
                                  <ul class="list-inline">
                                      <li class="list-inline-item">

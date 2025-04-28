@@ -22,4 +22,5 @@ return new class extends Migration
             $table->date('date')->nullable(); 
         });
     }
+
 };

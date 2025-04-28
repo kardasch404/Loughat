@@ -57,8 +57,7 @@ class CoursRepository
 
     public function find($coursId)
     {
-        $cours = Cours::find($coursId);
-        return $cours;
+        return Cours::find($coursId);
     }
 
     public function delete($coursId)
@@ -70,15 +69,15 @@ class CoursRepository
         $cours->delete();
         return true;
     }
-
     public function getCoursesByTeacher($teacherId)
     {
-        $courses = Cours::where('teacher_id', $teacherId)->get();
-        return $courses;
+        return Cours::where('teacher_id', $teacherId)->get();
     }
     public function all()
     {
-        $courses = Cours::all();
-        return $courses;
+        return Cours::all(); 
     }
+
+   
+
 }

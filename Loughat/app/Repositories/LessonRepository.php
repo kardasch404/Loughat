@@ -85,7 +85,13 @@ class LessonRepository
         if (! $lesson) {
             return false;
         }
-        $lesson->delete(); 
+        $lesson->delete();
         return true;
+    }
+    public function getLessonsBySection($sectionId)
+    {
+        return Lesson::where('section_id', $sectionId)
+        ->orderBy('order')
+        ->get();
     }
 }

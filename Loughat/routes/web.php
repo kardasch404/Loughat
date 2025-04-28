@@ -132,9 +132,9 @@ Route::get('/course-details', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
-// Route::get('/students-profile', function () {
-//     return view('students-profile');
-// })->name('students-profile');
+Route::get('/course-search', function () {
+    return view('course-search');
+})->name('course-search');
 Route::get('/become-teacher', function () {
     return view('become-teacher');
 })->name('become-teacher');
@@ -184,7 +184,7 @@ Route::delete('/courses/{coursId}', [CoursController::class, 'delete'])->name('c
 Route::get('/course-search', [CoursController::class, 'getAllCourses'])->name('courses');
 Route::get('/cours/{coursId}', [CoursController::class, 'show'])->name('cours');
 
-// => -/Commande$
+// => -/Commande
 Route::post('/commande', [CommandeController::class, 'store'])->name('commande');
 
 // => -/Payment
@@ -205,6 +205,9 @@ Route::get('/show-lessons/{coursId}', [LessonController::class, 'showLessonByCou
 Route::put('/update-lesson/{lessonId}', [LessonController::class, 'update'])->name('lesson.update');
 Route::get('/edit-lesson/{lessonId}', [LessonController::class, 'edit'])->name('lesson.edit');
 Route::delete('/lesson/{lessonId}', [LessonController::class, 'destroy'])->name('lesson.destroy');
+
+Route::get('/watch/{id}', [CoursController::class, 'watchCours'])->name('watch.watchCours');
+Route::get('/watch/{id}/{lessonId?}', [CoursController::class, 'watchCours'])->name('watch');
 
 // => -/Transactions
 Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.transactions');
