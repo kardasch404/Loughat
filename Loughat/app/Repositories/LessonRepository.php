@@ -85,7 +85,22 @@ class LessonRepository
         if (! $lesson) {
             return false;
         }
-        $lesson->delete(); 
+        $lesson->delete();
         return true;
+    }
+    public function getLessonsBySection($sectionId)
+    {
+        if ($sectionId->isEmpty()) {
+            return collect();
+        }
+        $sectionIds = $sectionId->pluck('id')->toArray();
+    
+        return Lesson::whereIn('section_id', $sectionIds)
+            ->join('sections', 'lessons.section_id', '=', 'sections.id')
+            ->select('lessons.*', 'sections.order as section_order')
+            ->with('section')
+            ->orderBy('sections.order')
+            ->orderBy('lessons.order')
+            ->get();
     }
 }

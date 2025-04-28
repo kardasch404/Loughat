@@ -7,7 +7,9 @@ use App\Http\Requests\CoursUpdateRequest;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
+use App\Repositories\LessonRepository;
 use App\Repositories\PaymentRepository;
+use App\Repositories\SectionRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Session;
 
@@ -18,13 +20,17 @@ class CoursController extends Controller
     protected $userRepository;
     protected $commandeRepository;
     protected $paymentRepository;
-    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository, CommandeRepository $commandeRepository, PaymentRepository $paymentRepository)
+    protected $sectionRepository;
+    protected $lessonRepository;
+    public function __construct(CoursRepository $coursRepository, CategorieRepository $categorieRepository, UserRepository $userRepository, CommandeRepository $commandeRepository, PaymentRepository $paymentRepository, SectionRepository $sectionRepository, LessonRepository $lessonRepository)
     {
         $this->coursRepository = $coursRepository;
         $this->categorieRepository = $categorieRepository;
         $this->userRepository = $userRepository;
         $this->commandeRepository = $commandeRepository;
         $this->paymentRepository = $paymentRepository;
+        $this->sectionRepository = $sectionRepository;
+        $this->lessonRepository = $lessonRepository;
     }
     public function show($coursId)
     {
@@ -161,12 +167,41 @@ class CoursController extends Controller
                 }
             }
             // dd($courses);
-
             return view('students-profile', compact('courses', 'user'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function watchCours($id)
+    {
+        try {
+            $course = $this->coursRepository->find($id);
+
+            if (!$course) {
+                return response()->json([
+                    'error' => 'cours nt found'
+                ], 404);
+            }
+
+            $coursSections = $this->sectionRepository->getCoursesWithSection($id);
+            // dd($coursSections);
+
+            if (! $coursSections) {
+                return response()->json([
+                    'error' => 'no section in this cours'
+                ]);
+            }
+            // dd('gfhjklm');
+            $lessonsBySection = $this->lessonRepository->getLessonsBySection($coursSections);
+            return view('watch', compact('cours'));
+            // dd($lessonsBySection);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }
