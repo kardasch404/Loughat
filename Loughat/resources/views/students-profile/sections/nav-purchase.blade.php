@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
 
     <div class="row mt-3">
-        <div class="col-lg-12">
+        <div class="col-lg-12"> 
             @foreach ($commandes as $commande)
             <div class="purchase-area">
                 <div class="purchase-area-close">
@@ -44,7 +44,8 @@
 
                                 <dt class="col-sm-4">Payment Type</dt>
                                 <dd class="col-sm-8">
-                                    {{ $commande->payment ? $commande->payment->method : 'Not paid' }}
+                                    {{-- {{ $commande->payment ? $commande->payment->method : 'Not paid' }} --}}
+
                                 </dd>
                             </dl>
                         </div>

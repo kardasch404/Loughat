@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommandeRequest;
 use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
+use App\Repositories\PaymentRepository;
 use App\Repositories\UserRepository;
 
 class CommandeController extends Controller
@@ -13,12 +14,14 @@ class CommandeController extends Controller
     protected $commandeRepository;
     protected $coursRepository;
     protected $userRepository;
+    protected $paymentRepository;
 
-    public function __construct(CommandeRepository $commandeRepository, CoursRepository $coursRepository, UserRepository $userRepository)
+    public function __construct(CommandeRepository $commandeRepository, CoursRepository $coursRepository, UserRepository $userRepository, PaymentRepository $paymentRepository)
     {
         $this->commandeRepository = $commandeRepository;
         $this->coursRepository = $coursRepository;
         $this->userRepository = $userRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     public function store(CommandeRequest $request)
@@ -112,7 +115,12 @@ class CommandeController extends Controller
             $userId = session('user_id');
             $user = $this->userRepository->find($userId);
             $commandes = $this->commandeRepository->getAllCommnadeFromstudentPayedOrNotPayed($userId);
-            return view('students-profile', compact('commandes', 'user'));
+            $courses = [];
+            foreach ($commandes as $commande) {
+                $payment = $this->paymentRepository->findByCommandId($commande->id);
+                $courses[] = $commande->cours;
+            }
+            return view('students-profile', compact('commandes', 'user', 'courses'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
