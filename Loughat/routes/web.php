@@ -217,5 +217,6 @@ Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByte
 Route::prefix('students-profile')->group(function () {
     Route::get('/', [UserController::class, 'edit'])->name('students-profile.edit');
     Route::get('/', [CoursController::class, 'getAllCoursesByStudent'])->name('students-profile.courses');
+    Route::get('/', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.commandes');
     Route::put('/{id}', [UserController::class, 'update'])->name('students-profile.update');
 });
