@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommandeRequest;
 use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
+use App\Repositories\UserRepository;
 
 class CommandeController extends Controller
 {
     //
     protected $commandeRepository;
     protected $coursRepository;
+    protected $userRepository;
 
-    public function __construct(CommandeRepository $commandeRepository, CoursRepository $coursRepository)
+    public function __construct(CommandeRepository $commandeRepository, CoursRepository $coursRepository, UserRepository $userRepository)
     {
         $this->commandeRepository = $commandeRepository;
         $this->coursRepository = $coursRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function store(CommandeRequest $request)
@@ -100,6 +103,20 @@ class CommandeController extends Controller
                 'error' => $e->getMessage(),
                 'message' => 'Commande not found '
             ], 500);
+        }
+    }
+
+    public function getAllCommandeByStudent()
+    {
+        try {
+            $userId = session('user_id');
+            $user = $this->userRepository->find($userId);
+            $commandes = $this->commandeRepository->getAllCommnadeFromstudentPayedOrNotPayed($userId);
+            return view('students-profile', compact('commandes', 'user'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }
