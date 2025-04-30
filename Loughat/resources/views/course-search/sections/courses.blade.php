@@ -57,15 +57,17 @@
                                             1,54,750
                                         </p>
                                     </div>
-                                    <div class="accordion-body__item">
+                                    @foreach ($categories as $categorie)
+                                         <div class="accordion-body__item">
                                         <div class="check-box">
                                             <input type="checkbox" class="checkbox-primary" />
-                                            <label> Development </label>
+                                            <label> {{ $categorie->name}} </label>
                                         </div>
                                         <p class="check-details">
-                                            45,770
+                                            45
                                         </p>
                                     </div>
+                                    @endforeach
                                 </form>
                             </div>
                         </div>
@@ -91,42 +93,62 @@
                                             1,54,750
                                         </p>
                                     </div>
+                                    
                                     <div class="accordion-body__item">
                                         <div class="check-box">
                                             <input type="checkbox" class="checkbox-primary" />
-                                            <label> Beginner </label>
+                                            <label> A1 </label>
                                         </div>
                                         <p class="check-details">
-                                            45,770
+                                            000
                                         </p>
                                     </div>
                                     <div class="accordion-body__item">
                                         <div class="check-box">
                                             <input type="checkbox" class="checkbox-primary" />
-                                            <label> Intermediate </label>
+                                            <label> A2 </label>
                                         </div>
                                         <p class="check-details">
-                                            35,790
+                                            000
                                         </p>
                                     </div>
                                     <div class="accordion-body__item">
                                         <div class="check-box">
                                             <input type="checkbox" class="checkbox-primary" />
-                                            <label> Advanced </label>
+                                            <label> B1 </label>
                                         </div>
                                         <p class="check-details">
-                                            5,770
+                                            000
                                         </p>
                                     </div>
                                     <div class="accordion-body__item">
                                         <div class="check-box">
                                             <input type="checkbox" class="checkbox-primary" />
-                                            <label> Expert </label>
+                                            <label> B2 </label>
                                         </div>
                                         <p class="check-details">
-                                            765
+                                            000
                                         </p>
                                     </div>
+                                    <div class="accordion-body__item">
+                                        <div class="check-box">
+                                            <input type="checkbox" class="checkbox-primary" />
+                                            <label> C1 </label>
+                                        </div>
+                                        <p class="check-details">
+                                            000
+                                        </p>
+                                    </div>
+                                    <div class="accordion-body__item">
+                                        <div class="check-box">
+                                            <input type="checkbox" class="checkbox-primary" />
+                                            <label> C2 </label>
+                                        </div>
+                                        <p class="check-details">
+                                            000
+                                        </p>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -237,7 +259,8 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="pagination-group mt-lg-5 mt-2">
+                {{ $courses->links('vendor.pagination.custom') }}
+                {{-- <div class="pagination-group mt-lg-5 mt-2">
                     <a href="#" class="p_prev">
                         <svg xmlns="http://www.w3.org/2000/svg" width="9.414" height="16.828"
                             viewBox="0 0 9.414 16.828">
@@ -257,8 +280,10 @@
                                 stroke-linejoin="round"></path>
                         </svg>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
+    
+
 </section>

@@ -223,3 +223,4 @@ Route::prefix('students-profile')->group(function () {
 
 // recherche 
 Route::post('/course-search', [CoursController::class, 'searchCours'])->name('course.search');
+Route::get('/course-search', [CoursController::class, 'showAllCategorie'])->name('course-search.categories');

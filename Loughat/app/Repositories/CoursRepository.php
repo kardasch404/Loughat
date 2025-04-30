@@ -85,4 +85,9 @@ class CoursRepository
    
         return Cours::where('title', 'like', "%$search%")->get();
     }
+    public function pagination ()
+    {
+        return Cours::paginate(5);
+    }
 }
+

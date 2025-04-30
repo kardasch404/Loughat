@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CoursRequest;
 use App\Http\Requests\CoursUpdateRequest;
+use App\Models\Categorie;
 use App\Models\Cours;
 use App\Models\Lesson;
 use App\Repositories\CategorieRepository;
@@ -228,11 +229,20 @@ class CoursController extends Controller
         try {
             $search = $request->input('search');
             $courses = $this->coursRepository->searchCours($search);
-            return view('course-search', compact('courses'));
+            $categories = $this->categorieRepository->all();
+            return view('course-search', compact('courses','categories'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
             ]);
         }
     }
+
+    public function showAllCategorie()
+    {
+        $categories = $this->categorieRepository->all();
+        $courses = $this->coursRepository->pagination();
+        return view('course-search', compact('categories', 'courses'));
+    }
+
 }

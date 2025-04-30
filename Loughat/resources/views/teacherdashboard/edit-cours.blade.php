@@ -50,9 +50,12 @@
                             <div class="form-group">
                                 <label>level</label>
                                 <select class="form-control select" name="level">
-                                    <option value="basic" {{ $cours->level == 'basic' ? 'selected' : '' }}>basic</option>
-                                    <option value="intermediar" {{ $cours->level == 'intermediar' ? 'selected' : '' }}>intermediar</option>
-                                    <option value="advanced" {{ $cours->level == 'advanced' ? 'selected' : '' }}>advanced</option>
+                                    <option value="A1" {{ $cours->level == 'A1' ? 'selected' : '' }}>A1</option>
+                                    <option value="A2" {{ $cours->level == 'A2' ? 'selected' : '' }}>A2</option>
+                                    <option value="B1" {{ $cours->level == 'B1' ? 'selected' : '' }}>B1</option>
+                                    <option value="B2" {{ $cours->level == 'B2' ? 'selected' : '' }}>B2</option>
+                                    <option value="C1" {{ $cours->level == 'C1' ? 'selected' : '' }}>C1</option>
+                                    <option value="C2" {{ $cours->level == 'C2' ? 'selected' : '' }}>C2</option>
                                 </select>
                             </div>
                         </div>

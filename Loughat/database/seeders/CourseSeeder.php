@@ -19,52 +19,52 @@ class CourseSeeder extends Seeder
         $now = Carbon::now();
         $courses = [
             [
-                'title' => 'Español A1 para Principiantes',
+                'title' => 'Fransh A1',
                 'description' => 'Curso introductorio para aprender español desde cero.',
-                'photo' => 'https://d8285fmxt3duy.cloudfront.net/teleusers/vid_presentacion_cursos/courseImage_ESPANOL_1495097309_.png',
+                'photo' => 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
                 'price' => 39.99,
                 'level' => 'A1',
             ],
             [
-                'title' => 'Español A2: Primeros Pasos',
+                'title' => 'Fransh A2',
                 'description' => 'Curso de nivel A2 para avanzar con frases cotidianas.',
-                'photo' => 'https://turbolangs.com/wp-content/uploads/2019/11/Espanol-DELE-A2.jpg',
+                'photo' => 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
                 'price' => 44.99,
                 'level' => 'A2',
             ],
             [
-                'title' => 'Español B1: Nivel Intermedio',
+                'title' => 'Fransh B1',
                 'description' => 'Curso intermedio para mejorar tu comunicación en español.',
-                'photo' => 'https://img.freepik.com/premium-psd/b1-spanish-level-concept-b1-intermediate-3d-rendering-isolated-transparent-background_823159-21083.jpg?w=1380',
+                'photo' => 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
                 'price' => 54.99,
                 'level' => 'B1',
             ],
             [
-                'title' => 'Español B2: Comunicación Avanzada',
+                'title' => 'Fransh B2',
                 'description' => 'Aprende a debatir y expresar opiniones complejas en español.',
-                'photo' => 'https://eduenligne.com/wp-content/uploads/2018/04/Languages-18.jpg',
+                'photo' => 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
                 'price' => 64.99,
                 'level' => 'B2',
             ],
             [
-                'title' => 'Español C1: Profesional y Académico',
+                'title' => 'Fransh C1',
                 'description' => 'Domina el español formal para contextos académicos y laborales.',
-                'photo' => 'https://www.linguaspanish.es/_media/img/medium/spanish-lanuage-immersion-in-spain-programs.jpg',
+                'photo' => 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
                 'price' => 69.99,
                 'level' => 'C1',
             ],
             [
-                'title' => 'Español C2: Dominio Completo',
+                'title' => 'Fransh C2',
                 'description' => 'Alcanza un nivel nativo con este curso intensivo C2.',
-                'photo' => 'c2_dominio.jpg',
+                'photo' => 'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
                 'price' => 74.99,
                 'level' => 'C2',
             ],
         ];
 
         foreach ($courses as &$course) {
-            $course['categorie_id'] = 17;
-            $course['teacher_id'] = 33;
+            $course['categorie_id'] = 16;
+            $course['teacher_id'] = 36;
             $course['created_at'] = $now;
             $course['updated_at'] = $now;
         }

@@ -39,60 +39,6 @@
                                         45,770
                                     </p>
                                 </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Finance & Accounting </label>
-                                    </div>
-                                    <p class="check-details">
-                                        35,790
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> IT & Software </label>
-                                    </div>
-                                    <p class="check-details">
-                                        5,770
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Offices Productivity </label>
-                                    </div>
-                                    <p class="check-details">
-                                        765
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Personal Development </label>
-                                    </div>
-                                    <p class="check-details">
-                                        65
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Digatal Marketing </label>
-                                    </div>
-                                    <p class="check-details">
-                                        9,870
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Health & Fitness </label>
-                                    </div>
-                                    <p class="check-details">
-                                        70
-                                    </p>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -124,34 +70,7 @@
                                     <p class="check-details">
                                         45,770
                                     </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Intermediate </label>
-                                    </div>
-                                    <p class="check-details">
-                                        35,790
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Advanced </label>
-                                    </div>
-                                    <p class="check-details">
-                                        5,770
-                                    </p>
-                                </div>
-                                <div class="accordion-body__item">
-                                    <div class="check-box">
-                                        <input type="checkbox" class="checkbox-primary" />
-                                        <label> Expert </label>
-                                    </div>
-                                    <p class="check-details">
-                                        765
-                                    </p>
-                                </div>
+                                </div>     
                             </form>
                         </div>
                     </div>
@@ -159,6 +78,7 @@
             </div>
         </div>
     </form>
+    
     <button class="button button-lg button--primary button--primary-filter w-100 d-lg-none" type="button">
         <span>
             <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
