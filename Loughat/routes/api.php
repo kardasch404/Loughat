@@ -47,3 +47,4 @@ Route::delete('/delete/{coursId}', [CoursController::class, 'delete']);
 // ============================================================== //
 
 Route::middleware('auth:api')->put('/profile/{id}/password', [UserController::class, 'changePassword'])->name('api.profile.changePassword');
+

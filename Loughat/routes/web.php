@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -144,6 +145,10 @@ Route::get('/teacher-register', function () {
 Route::get('/watch', function () {
     return view('watch');
 })->name('watch');
+Route::get('/pending', function() {
+    return view('pending');
+})->name('pending');
+
 
 // => -/Auth 
 Route::post('/login', [JWTAuthController::class, 'login'])->name('login');
@@ -173,6 +178,21 @@ Route::put('/profile/{id}/info', [UserController::class, 'update'])->name('admin
 Route::put('/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
 Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
 Route::put('/teacher-change-password/{id}', [UserController::class, 'update'])->name('admin.teachers.update');
+Route::get('/teachers', [UserController::class, 'teacherList'])->name('admin.teachers');
+Route::post('/test-route', function() {
+    return 'Route is working';
+});
+Route::post('/test-ajax', function (Request $request) {
+    return response()->json([
+        'success' => true,
+        'message' => 'Test successful',
+        'received_data' => $request->all()
+    ]);
+});
+
+
+Route::post('/update-teacher-status/{id}', [UserController::class, 'updateTeacherStatus'])->name('update.teacher.status');
+
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -217,5 +237,11 @@ Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByte
 Route::prefix('students-profile')->group(function () {
     Route::get('/', [UserController::class, 'edit'])->name('students-profile.edit');
     Route::get('/', [CoursController::class, 'getAllCoursesByStudent'])->name('students-profile.courses');
+    Route::get('/', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.commandes');
     Route::put('/{id}', [UserController::class, 'update'])->name('students-profile.update');
 });
+
+// recherche 
+Route::post('/course-search', [CoursController::class, 'searchCours'])->name('course.search');
+Route::get('/course-search', [CoursController::class, 'showAllCategorie'])->name('course-search.categories');;
+Route::get('/course-search/filter', [CoursController::class, 'filterByCategorieAndLevel'])->name('course-search.filterByCategorieAndLevel');

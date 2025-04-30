@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 
 class UserRepository
 {
@@ -111,5 +112,12 @@ class UserRepository
         $user->password = Hash::make($data['new_password']);
         $user->save();
         return $user;
+    }
+
+    public function updateTeacherStatus( $id, $status)
+    {
+        $teacher = User::find($id);
+        $teacher->status = $status;
+        $teacher->save();
     }
 }
