@@ -220,3 +220,6 @@ Route::prefix('students-profile')->group(function () {
     Route::get('/', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.commandes');
     Route::put('/{id}', [UserController::class, 'update'])->name('students-profile.update');
 });
+
+// recherche 
+Route::post('/course-search', [CoursController::class, 'searchCours'])->name('course.search');

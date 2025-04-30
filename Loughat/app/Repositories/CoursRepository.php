@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Cours;
+use Illuminate\Support\Facades\Request;
+// use Illuminate\Http\Request;
 
 class CoursRepository
 {
@@ -27,30 +29,30 @@ class CoursRepository
         if (!$cours) {
             return false;
         }
-    
+
         if (isset($data['title'])) {
             $cours->title = $data['title'];
         }
-        
+
         if (isset($data['description'])) {
             $cours->description = $data['description'];
         }
-        
+
         if (isset($data['photo'])) {
             $cours->photo = $data['photo'];
         }
-        
+
         if (isset($data['price'])) {
             $cours->price = $data['price'];
         }
-        
+
         if (isset($data['level'])) {
             $cours->level = $data['level'];
         }
         if ($categorieId) {
             $cours->categorie_id = $categorieId;
         }
-        
+
         $cours->save();
         return $cours;
     }
@@ -75,9 +77,12 @@ class CoursRepository
     }
     public function all()
     {
-        return Cours::all(); 
+        return Cours::all();
     }
 
+    public function searchCours($search)
+    {
    
-
+        return Cours::where('title', 'like', "%$search%")->get();
+    }
 }

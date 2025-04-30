@@ -4,15 +4,26 @@
         <div class="row">
             <div class="col-lg-9 mx-auto">
                 <div class="event-search-bar">
-                    <form action="#">
+                    <form action="{{ route('course.search') }}" method="post">
+                        @csrf
+
                         <div class="form-input-group">
-                            <input type="text" class="form-control" placeholder="Search Course..." />
-                            <button class="button button-lg button--primary" type="submit" id="button-addon2">
+                            <input type="text" name="search" class="form-control" placeholder="Search Course..." />
+                            <button class="button button-lg button--primary" type="submit" name="submit"id="button-addon2">
                                 Search
                             </button>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-search">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-search"
+                            >
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
@@ -158,19 +169,26 @@
                     </div>
                 </div>
                 <div class="row event-search-content">
-                    @foreach ($courses as $cours)
-                        <div class="col-md-6 mb-4">
-                            {{-- <form action="{{ route('cours', $cours->id) }}" method="GET">
+                    @if ($courses->isEmpty())
+                        <div class="alert alert-info">
+                            No courses found for 
+                        </div>
+                    @else
+                        @foreach ($courses as $cours)
+                            <div class="col-md-6 mb-4">
+                                {{-- <form action="{{ route('cours', $cours->id) }}" method="GET">
                                 @csrf
                                 @method('POST') --}}
                                 <div class="contentCard contentCard--course">
                                     <div class="contentCard-top">
-                                        <a href="{{ route('cours', $cours->id) }}"><img src="{{ asset('storage/' . $cours->photo) }}"
-                                                alt="images" class="img-fluid" /></a>
+                                        <a href="{{ route('cours', $cours->id) }}"><img
+                                                src="{{ asset('storage/' . $cours->photo) }}" alt="images"
+                                                class="img-fluid" /></a>
                                     </div>
                                     <div class="contentCard-bottom">
                                         <h5>
-                                            <a href="{{ route('cours', $cours->id) }}" class="font-title--card">{{ $cours->title }}</a>
+                                            <a href="{{ route('cours', $cours->id) }}"
+                                                class="font-title--card">{{ $cours->title }}</a>
                                         </h5>
                                         <div
                                             class="contentCard-info d-flex align-items-center justify-content-between">
@@ -214,10 +232,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            {{-- </form> --}}
-                        </div>
-                    @endforeach
-
+                                {{-- </form> --}}
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="pagination-group mt-lg-5 mt-2">
                     <a href="#" class="p_prev">
