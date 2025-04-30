@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Request;
+// use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -124,5 +127,39 @@ class UserController extends Controller
         $user = $this->userRepository->find($id);
 
         return view('teacherdashboard.teacher-change-password', compact('user'));
+    }
+    public function updateTeacherStatus(Request $request, $id)
+    {
+        try {
+            $validated = $request->validate([
+                'status' => 'required|in:valid,pending'
+            ]);
+            $teacher = User::findOrFail($id);
+            $teacher->status = $validated['status'];
+            $teacher->save();
+            return response()->json([
+                'success' => true,
+                'new_status' => $teacher->status
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+               'error' => $e->getMessage()
+            ], 404);
+    }}
+    public function teacherList()
+    {
+        try {
+            $teachers = User::whereHas('roles', function ($query) {
+                $query->where('name', 'Teacher');
+            })->get();
+
+            return view('admindashboard.teacher-list', compact('teachers'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error'=> $e->getMessage()
+            ]);
+        }
     }
 }

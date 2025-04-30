@@ -66,6 +66,12 @@ class JWTAuthController extends Controller
                 $role = 'User';
             }
 
+            if ($role === 'Teacher' && $user->status === 'pending') {
+                $this->setUserSession($user, $role);
+                Cookie::queue('token', $token, 600 * 24);
+                return redirect()->route('pending');
+            }
+
             // return response()->json([
             //     'success' => true,
             //     'user' => [
@@ -107,6 +113,9 @@ class JWTAuthController extends Controller
             case 'user':
                 return view('home');
             case 'Teacher':
+                if (auth()->user()->status === 'pending') {
+                    return redirect()->route('pending');
+                }
                 return view('teacherdashboard.teacher_dashboard');
             case 'admin':
                 return view('admindashboard.admin-dashboard-home');

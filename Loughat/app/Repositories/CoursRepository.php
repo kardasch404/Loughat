@@ -88,7 +88,7 @@ class CoursRepository
 
     public function pagination()
     {
-        return Cours::paginate(8)->get();;
+        return Cours::paginate(8);
     }
     public function filterCourses(Request $request)
     {

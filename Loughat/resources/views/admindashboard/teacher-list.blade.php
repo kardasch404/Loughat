@@ -40,36 +40,50 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        @foreach($teachers as $teacher)
-                                            <tr>
-                                                <td>
-                                                    <h2 class="table-avatar">
-                                                        <a href="" class="avatar avatar-sm mr-2"><img
-                                                                class="avatar-img rounded-circle" src="{{ $teacher->photo }}"
-                                                                alt="User Image"></a>
-                                                        <a href="">{{ $teacher->firstname }}
-                                                            {{ $teacher->lastname }}</a>
-                                                    </h2>
-                                                </td>
-                                                <td>Dental</td>
+                                    @foreach ($teachers as $teacher)
+                                        <tr>
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    <a href="" class="avatar avatar-sm mr-2"><img
+                                                            class="avatar-img rounded-circle" src="{{ $teacher->photo }}"
+                                                            alt="User Image"></a>
+                                                    <a href="">{{ $teacher->firstname }}
+                                                        {{ $teacher->lastname }}</a>
+                                                </h2>
+                                            </td>
+                                            <td>Dental</td>
 
-                                                <td>
-                                                    {{ $teacher->created_at->format('d M Y') }} <br>
-                                                    <small>{{ $teacher->created_at->format('h:i A') }}</small>
-                                                </td>
+                                            <td>
+                                                {{ $teacher->created_at->format('d M Y') }} <br>
+                                                <small>{{ $teacher->created_at->format('h:i A') }}</small>
+                                            </td>
 
-                                                <td>{{ $teacher->email }}</td>
-                                                <td>190</td>
+                                            <td>{{ $teacher->email }}</td>
+                                            <td>190</td>
 
-                                                <td>
+                                            {{-- <td>
                                                     <div class="status-toggle">
                                                         <input type="checkbox" id="status_1" class="check" checked>
                                                         <label for="status_1" class="checktoggle">checkbox</label>
                                                     </div>
-                                                </td>
-                                                <td class="text">
-                                                    <div class="actions">
-                                                        <a class="btn btn-sm bg-success-light" data-toggle="modal"
+                                                </td> --}}
+                                            <td>
+                                                <div class="status-toggle">
+                                                    <input type="checkbox" id="status_{{ $teacher->id }}"
+                                                        class="check teacher-status-toggle"
+                                                        data-teacher-id="{{ $teacher->id }}"
+                                                        {{ $teacher->status === 'valid' ? 'checked' : '' }}>
+                                                    <label for="status_{{ $teacher->id }}" class="checktoggle">
+                                                        {{ $teacher->status === 'valid' ? 'Approved' : 'Pending' }}
+                                                    </label>
+                                                </div>
+                                            </td>
+
+
+
+                                            <td class="text">
+                                                <div class="actions">
+                                                    <a class="btn btn-sm bg-success-light" data-toggle="modal"
                                                         href="#edit_specialities_details" onclick="loadUserData(this)"
                                                         data-id="<?= htmlspecialchars($teacher->id) ?>"
                                                         data-firstname="<?= htmlspecialchars($teacher->firstname) ?>"
@@ -79,11 +93,11 @@
                                                         data-phone="<?= htmlspecialchars($teacher->phone) ?>">
                                                         <i class="fe fe-pencil"></i> Edit
                                                     </a>
-                                                    </div>
-                                                </td>
+                                                </div>
+                                            </td>
 
-                                            </tr>
-                                        @endforeach
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -91,8 +105,8 @@
                 </div>
             </div>
         </div>
-          <!-- Edit Details Modal -->
-          <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
+        <!-- Edit Details Modal -->
+        <div class="modal fade" id="edit_specialities_details" aria-hidden="true" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -149,4 +163,96 @@
         <!-- /Edit Details Modal -->
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log('jQuery version:', $.fn.jquery);
+
+            $('.teacher-status-toggle').change(function(e) {
+                e.preventDefault();
+
+                var checkbox = $(this);
+                var teacherId = checkbox.data('teacher-id');
+                var isChecked = checkbox.prop('checked');
+                var status = isChecked ? 'valid' : 'pending';
+                $.ajax({
+                    url: "{{ route('update.teacher.status', '') }}/" + teacherId,
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        status: status
+                    },
+                    beforeSend: function() {
+                        console.log('Making AJAX request to:',
+                            "{{ route('update.teacher.status', '') }}/" + teacherId);
+                    },
+                    success: function(response) {
+                        console.log('Success response:', response);
+
+                        if (response.success) {
+                            checkbox.next('label').text(isChecked ? 'Approved' : 'Pending');
+                            alert('Status updated successfully');
+                        } else {
+                            checkbox.prop('checked', !isChecked);
+                            alert('Failed to update status: ' + (response.message ||
+                                'Unknown error'));
+                        }
+                    },
+                });
+            });
+        });
+    </script>
+
+
+
+    <style>
+        .status-toggle {
+            position: relative;
+            display: inline-block;
+        }
+
+        .status-toggle .check {
+            display: none;
+        }
+
+        .status-toggle .checktoggle {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 30px;
+            background-color: #dc3545;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            font-size: 12px;
+        }
+
+        .status-toggle .check:checked+.checktoggle {
+            background-color: #28a745;
+        }
+
+        .status-toggle .checktoggle:before {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .status-toggle .check:checked+.checktoggle:before {
+            transform: translateX(50px);
+        }
+    </style>
+
+
+
+
+
 @endsection
