@@ -79,7 +79,7 @@
         </div>
     </form>
     
-    <button class="button button-lg button--primary button--primary-filter w-100 d-lg-none" type="button">
+    <button class="button button-lg button--primary button--primary-filter w-100 " type="button">
         <span>
             <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.3335 14.9999V9.55554" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>

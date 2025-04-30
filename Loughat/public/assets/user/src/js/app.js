@@ -88,80 +88,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-// search course 
-// async function getAllCourses(v) {
+// filter 
 
-//   let response = await fetch(`http://127.0.0.1:8000/api/course-search?content=${v}`);
-//   let data = await response.json(); 3
-//   let courses = data.courses;
-//   let html = ``;
-//   html += ``
-//   let length = (courses.length);
-//   console.log(element);
-//   if (length > 0) {
-//     courses.forEach(cours => {
-//       html += `   <div class="contentCard contentCard--course">
-//                                     <div class="contentCard-top">
-//                                         <a href="{{ route('cours', $cours->id) }}"><img src="{{ asset('storage/' . ${cours.photo} }}"
-//                                                 alt="images" class="img-fluid" /></a>
-//                                     </div>
-//                                     <div class="contentCard-bottom">
-//                                         <h5>
-//                                             <a href="/cours/${cours.id}" class="font-title--card"> ${cours.title}</a>
-//                                         </h5>
-//                                          <div
-//                                             class="contentCard-info d-flex align-items-center justify-content-between">
-//                                             <a href="instructor-profile.html"
-//                                                 class="contentCard-user d-flex align-items-center">
-//                                                 <img src="${cours.teacher.photo}" alt="client-image"
-//                                                     class="rounded-circle " style="width: 40px; height: 40px;" />
-//                                                 <p class="font-para--md"> ${cours.teacher.firstname}
-//                                                      ${cours.teacher.lastname}</p>
-//                                             </a>
-//                                             <div class="price">
-//                                                 <span>${cours.price}</span>
-//                                                 <del>$95</del>
-//                                             </div>
-//                                         </div>
-//                                         <div class="contentCard-more">
-//                                             <div class="d-flex align-items-center">
-//                                                 <div class="icon">
-//                                                     <img src="dist/images/icon/star.png" alt="star" />
-//                                                 </div>
-//                                                 <span>4.5</span>
-//                                             </div>
-//                                             <div class="eye d-flex align-items-center">
-//                                                 <div class="icon">
-//                                                     <img src="dist/images/icon/eye.png" alt="eye" />
-//                                                 </div>
-//                                                 <span>24,517</span>
-//                                             </div>
-//                                             <div class="book d-flex align-items-center">
-//                                                 <div class="icon">
-//                                                     <img src="dist/images/icon/book.png" alt="location" />
-//                                                 </div>
-//                                                 <span>37 Lesson</span>
-//                                             </div>
-//                                             <div class="clock d-flex align-items-center">
-//                                                 <div class="icon">
-//                                                     <img src="dist/images/icon/Clock.png" alt="clock" />
-//                                                 </div>
-//                                                 <span>3 Hours</span>
-//                                             </div>
-//                                         </div>
-//                                     </div>
-//                                 </div>`
-//     });
-//     document.getElementById(element).innerHTML = html;
-//   } else {
-//     document.getElementById(element).innerHTML = `<div>Not Found</div>`
-//   }
-// }
-// searchInput.addEventListener('keypress', function (e) {
-//   if (e.key == "Enter") {
-//     getAllCourses(searchInput.value)
-//   }
-// })
+document.getElementById('filter').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const mainForm = document.getElementById('mainFilterForm');
+  mainForm.querySelectorAll('input').forEach(el => el.remove());
+
+  document.querySelectorAll('input[name="categories[]"]:checked').forEach(input => {
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'categories[]';
+      hiddenInput.value = input.value;
+      mainForm.appendChild(hiddenInput);
+  });
+  document.querySelectorAll('input[name="levels[]"]:checked').forEach(input => {
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'levels[]';
+      hiddenInput.value = input.value;
+      mainForm.appendChild(hiddenInput);
+  });
+  mainForm.submit();
+});
 
 
 

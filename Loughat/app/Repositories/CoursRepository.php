@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Cours;
-use Illuminate\Support\Facades\Request;
-// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class CoursRepository
 {
@@ -82,12 +82,26 @@ class CoursRepository
 
     public function searchCours($search)
     {
-   
-        return Cours::where('title', 'like', "%$search%")->get();
+        return Cours::query()
+            ->where('title', 'like', "%$search%");
     }
-    public function pagination ()
+
+    public function pagination()
     {
-        return Cours::paginate(5);
+        return Cours::paginate(8)->get();;
+    }
+    public function filterCourses(Request $request)
+    {
+        $query = Cours::query();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+        if ($request->has('categories')) {
+            $query->whereIn('categorie_id', $request->categories);
+        }
+        if ($request->has('levels')) {
+            $query->whereIn('level', $request->levels);
+        }
+        return $query->with('teacher')->paginate(8);
     }
 }
-

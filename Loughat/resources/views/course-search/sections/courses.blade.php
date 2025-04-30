@@ -9,21 +9,13 @@
 
                         <div class="form-input-group">
                             <input type="text" name="search" class="form-control" placeholder="Search Course..." />
-                            <button class="button button-lg button--primary" type="submit" name="submit"id="button-addon2">
+                            <button class="button button-lg button--primary" type="submit"
+                                name="submit"id="button-addon2">
                                 Search
                             </button>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-search"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-search">
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
@@ -47,28 +39,24 @@
                         <div id="categoryCollapse" class="accordion-collapse collapse show"
                             aria-labelledby="categoryAcc" data-bs-parent="#sidebarFilter">
                             <div class="accordion-body">
-                                <form action="#">
+                                <div class="accordion-body__item">
+                                    <div class="check-box">
+                                        <input type="checkbox" class="checkbox-primary" />
+                                        <label> All </label>
+                                    </div>
+                                    <p class="check-details">
+                                        1,54,750
+                                    </p>
+                                </div>
+                                @foreach ($categories as $categorie)
                                     <div class="accordion-body__item">
                                         <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> All </label>
+                                            <input type="checkbox" name="categories[]" value="{{ $categorie->id }}"
+                                                class="checkbox-primary" />
+                                            <label>{{ $categorie->name }}</label>
                                         </div>
-                                        <p class="check-details">
-                                            1,54,750
-                                        </p>
                                     </div>
-                                    @foreach ($categories as $categorie)
-                                         <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> {{ $categorie->name}} </label>
-                                        </div>
-                                        <p class="check-details">
-                                            45
-                                        </p>
-                                    </div>
-                                    @endforeach
-                                </form>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -83,73 +71,16 @@
                         <div id="levelCollapse" class="accordion-collapse collapse" aria-labelledby="levelAcc"
                             data-bs-parent="#sidebarFilter">
                             <div class="accordion-body">
-                                <form action="#">
+                                <!-- Level Filter -->
+                                @foreach (['A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as $level)
                                     <div class="accordion-body__item">
                                         <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> All </label>
+                                            <input type="checkbox" name="levels[]" value="{{ $level }}"
+                                                class="checkbox-primary" />
+                                            <label>{{ $level }}</label>
                                         </div>
-                                        <p class="check-details">
-                                            1,54,750
-                                        </p>
                                     </div>
-                                    
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> A1 </label>
-                                        </div>
-                                        <p class="check-details">
-                                            000
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> A2 </label>
-                                        </div>
-                                        <p class="check-details">
-                                            000
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> B1 </label>
-                                        </div>
-                                        <p class="check-details">
-                                            000
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> B2 </label>
-                                        </div>
-                                        <p class="check-details">
-                                            000
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> C1 </label>
-                                        </div>
-                                        <p class="check-details">
-                                            000
-                                        </p>
-                                    </div>
-                                    <div class="accordion-body__item">
-                                        <div class="check-box">
-                                            <input type="checkbox" class="checkbox-primary" />
-                                            <label> C2 </label>
-                                        </div>
-                                        <p class="check-details">
-                                            000
-                                        </p>
-                                    </div>
-
-                                </form>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -161,39 +92,42 @@
                         <div class="" tabindex="0">
                         </div>
                         <p>1, 254 results found.</p>
-                        <button class="button button-lg button--primary button--primary-filter d-lg-none"
-                            id="filter">
-                            <span>
-                                <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.3335 14.9999V9.55554" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M3.3335 6.4444V1" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M9.55469 14.9999V8" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M9.55469 4.88886V1" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M15.7773 14.9999V11.1111" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M15.7773 7.99995V1" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M1 9.55554H5.66663" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M7.22217 4.88867H11.8888" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M13.4443 11.1111H18.111" stroke="white" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
-                            Filter
-                        </button>
+                        <form action="{{ route('course-search.filterByCategorieAndLevel') }}" method="GET"
+                            id="mainFilterForm">
+                            <button class="button button-lg button--primary button--primary-filter " id="filter"
+                                type="submit">
+                                <span>
+                                    <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.3335 14.9999V9.55554" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M3.3335 6.4444V1" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M9.55469 14.9999V8" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M9.55469 4.88886V1" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.7773 14.9999V11.1111" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.7773 7.99995V1" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M1 9.55554H5.66663" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M7.22217 4.88867H11.8888" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M13.4443 11.1111H18.111" stroke="white" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                Filter
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="row event-search-content">
                     @if ($courses->isEmpty())
                         <div class="alert alert-info">
-                            No courses found for 
+                            No courses found for
                         </div>
                     @else
                         @foreach ($courses as $cours)
@@ -284,6 +218,4 @@
             </div>
         </div>
     </div>
-    
-
 </section>

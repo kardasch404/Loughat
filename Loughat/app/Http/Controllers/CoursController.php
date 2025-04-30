@@ -228,9 +228,10 @@ class CoursController extends Controller
     {
         try {
             $search = $request->input('search');
-            $courses = $this->coursRepository->searchCours($search);
+            $courses = $this->coursRepository->searchCours($search)->paginate(8);
+
             $categories = $this->categorieRepository->all();
-            return view('course-search', compact('courses','categories'));
+            return view('course-search', compact('courses', 'categories'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -244,5 +245,16 @@ class CoursController extends Controller
         $courses = $this->coursRepository->pagination();
         return view('course-search', compact('categories', 'courses'));
     }
-
+    public function filterByCategorieAndLevel(Request $request)
+    {
+        try {
+            $categories = $this->categorieRepository->all();
+            $courses = $this->coursRepository->filterCourses($request);
+            return view('course-search', compact('courses', 'categories'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }
