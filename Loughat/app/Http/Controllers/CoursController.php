@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CoursRequest;
 use App\Http\Requests\CoursUpdateRequest;
+use App\Models\Categorie;
+use App\Models\Cours;
 use App\Models\Lesson;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CommandeRepository;
@@ -12,7 +14,10 @@ use App\Repositories\LessonRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\SectionRepository;
 use App\Repositories\UserRepository;
+// use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+
 
 class CoursController extends Controller
 {
@@ -84,7 +89,7 @@ class CoursController extends Controller
 
             $cours = $this->coursRepository->create($data, $data['categorie_id'], $teacher);
 
-            return redirect()->route('courses')->with('success', 'Course created succes');
+            return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to create course');
         }
@@ -217,6 +222,39 @@ class CoursController extends Controller
             return response()->json([
                 'error' => $e->getMessage()
             ], 500);
+        }
+    }
+    public function searchCours(Request $request)
+    {
+        try {
+            $search = $request->input('search');
+            $courses = $this->coursRepository->searchCours($search)->paginate(8);
+
+            $categories = $this->categorieRepository->all();
+            return view('course-search', compact('courses', 'categories'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function showAllCategorie()
+    {
+        $categories = $this->categorieRepository->all();
+        $courses = $this->coursRepository->pagination();
+        return view('course-search', compact('categories', 'courses'));
+    }
+    public function filterByCategorieAndLevel(Request $request)
+    {
+        try {
+            $categories = $this->categorieRepository->all();
+            $courses = $this->coursRepository->filterCourses($request);
+            return view('course-search', compact('courses', 'categories'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

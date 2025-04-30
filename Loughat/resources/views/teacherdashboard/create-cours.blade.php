@@ -50,10 +50,12 @@
                             <div class="form-group">
                                 <label>level</label>
                                 <select class="form-control select" name="level">
-                                    <option>Select</option>
-                                    <option>basic</option>
-                                    <option>intermediar</option>
-                                    <option>advanced</option>
+                                    <option>A1</option>
+                                    <option>A2</option>
+                                    <option>B1</option>
+                                    <option>B2</option>
+                                    <option>C1</option>
+                                    <option>C2</option>
                                 </select>
                             </div>
                         </div>
