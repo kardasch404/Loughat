@@ -11,9 +11,9 @@
                 <div class="col-md-12 col-lg-6">
 
                     <!-- Change Password Form -->
-                    {{-- <form method="POST" action="{{ route('teacher-change-password.changePassword', $user->id) }}"
-                        enctype="multipart/form-data"> --}}
-                        <form action="">
+                    <form method="POST" action="{{ route('teacher-password.changePassword', $teacher->id) }}">
+                        @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label>Old Password</label>
                             <input type="password" id="old_password" name="old_password" class="form-control">

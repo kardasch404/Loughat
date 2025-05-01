@@ -96,6 +96,7 @@ class UserController extends Controller
             $user = $this->userRepository->find($id);
             $user = session('user_id');
             $result = $this->userRepository->updatePassword($password, $user);
+            dd($result);
             return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
@@ -104,12 +105,11 @@ class UserController extends Controller
             ]);
         }
     }
-    public function showChangePasswordForm($id)
-    {
-        $user = $this->userRepository->find($id);
-
-        return view('teacherdashboard.teacher-change-password', compact('user'));
-    }
+    public function showChangePasswordForm()
+{
+    $teacher = auth()->user(); 
+    return view('teacherdashboard.teacher-password', compact('teacher'));
+}
     
     public function updateTeacherStatus(Request $request, $id)
     {
