@@ -11,6 +11,9 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/user/dist/images/favicon/favicon.png') }}" />
 </head>
 <body onload="loader()">
+    <div class="loader">
+        <span class="loader-spinner">Loughat...</span>
+    </div>
     @include('component.header') 
 
     <div >
