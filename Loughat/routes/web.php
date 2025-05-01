@@ -155,6 +155,9 @@ Route::get('/about', function() {
 Route::get('/contact', function() {
     return view('contact');
 })->name('contact');
+Route::get('/comming-soon', function() {
+    return view('comming-soon');
+})->name('comming-soon');
 
 
 // => -/Auth 

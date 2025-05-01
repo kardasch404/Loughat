@@ -12,7 +12,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/become-teacher') }}">Become Teacher</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ url('/event') }}">
+                        <a class="nav-link" aria-current="page" href="{{ url('/comming-soon') }}">
                             Events
                         </a>
                     </li>
