@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -247,3 +248,5 @@ Route::prefix('students-profile')->group(function () {
 Route::post('/course-search', [CoursController::class, 'searchCours'])->name('course.search');
 Route::get('/course-search', [CoursController::class, 'showAllCategorie'])->name('course-search.categories');;
 Route::get('/course-search/filter', [CoursController::class, 'filterByCategorieAndLevel'])->name('course-search.filterByCategorieAndLevel');
+
+

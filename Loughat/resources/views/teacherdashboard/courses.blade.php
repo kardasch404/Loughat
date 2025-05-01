@@ -31,7 +31,7 @@
                                     <h2 class="table-avatar">
                                         <a href="" class="avatar avatar-sm mr-2">
                                             <img class="avatar-img "
-                                                src="{{ asset('storage/' . $course->photo) }}"
+                                                src="{{ $course->photo }}"
                                                 alt="">
                                         </a>
                                         <a href="">{{$course->title}}</a>

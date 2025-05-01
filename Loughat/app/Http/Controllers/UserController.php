@@ -7,6 +7,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Cloudinary\Cloudinary;
 
 class UserController extends Controller
 {
@@ -55,8 +56,21 @@ class UserController extends Controller
             }
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
-                $path = $file->store('users', 'public');
-                $data['photo'] = $path;
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $upload = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                    'folder' => 'users',
+                    'resource_type' => 'image',
+                    'http_options' => [
+                        'verify' => false, 
+                    ],
+                ]);
+                $data['photo'] = $upload['secure_url'];
             }
             $user = $this->userRepository->update($data, $id);
 
