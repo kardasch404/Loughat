@@ -47,14 +47,26 @@ class CommandeRepository
     
         return $commandes;
     }
-    public function getAllCommnadeFromstudentPayedOrNotPayed($studentId)
-    {
-        $commandes = Commande::where('user_id', $studentId)
-            ->with(['cours', 'payments'])
-            ->get();
-        if (! $commandes) {
-            return false;
-        }
-        return $commandes;
+
+public function getAllCommandesForStudentPaidOrNotPaid($studentId)
+{
+    $commandes = Commande::where('user_id', $studentId)
+    ->with(['cours', 'payment']) 
+    ->get();
+    // dd($commandes);
+    
+    if ($commandes->isEmpty()) {
+        return false;
     }
+    
+    $filteredCommandes = $commandes->groupBy('cours_id')->map(function ($group) {
+        $paidCommande = $group->firstWhere('payment', '!=', null);
+        if ($paidCommande) {
+            return $paidCommande;
+        }
+        return $group->first();
+    })->values();
+
+    return $filteredCommandes->isEmpty() ? false : $filteredCommandes;
+}
 }

@@ -236,10 +236,11 @@ Route::get('transactions', [CommandeController::class, 'index'])->name('teacher.
 Route::get('/teacher-transaction', [CommandeController::class, 'showCommandeByteacher'])->name('teacher.teacher-transaction');
 
 // Students Profile Routes
-Route::prefix('students-profile')->group(function () {
-    Route::get('/', [UserController::class, 'edit'])->name('students-profile.edit');
-    Route::get('/', [CoursController::class, 'getAllCoursesByStudent'])->name('students-profile.courses');
-    Route::get('/', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.commandes');
+Route::prefix('students-profile')->withoutMiddleware()->group(function () {
+    Route::get('/', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.index');
+    Route::get('/edit', [UserController::class, 'edit'])->name('students-profile.edit');
+    Route::get('/courses', [CoursController::class, 'getAllCoursesByStudent'])->name('students-profile.courses');
+    Route::get('/commandes', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.commandes');
     Route::put('/{id}', [UserController::class, 'update'])->name('students-profile.update');
     Route::put('/{id}/password', [UserController::class, 'changePassword'])->name('students-profile.changePassword');
 });
