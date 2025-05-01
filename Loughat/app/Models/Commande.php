@@ -21,9 +21,9 @@ class Commande extends Model
         return $this->belongsTo(Cours::class, 'cours_id');
     }
 
-    public function payments()
+    public function payment()
     {
-        return $this->hasMany(Payment::class, 'command_id');
+        return $this->hasOne(Payment::class, 'command_id');
     }
     public function user()
     {

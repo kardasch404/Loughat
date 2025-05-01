@@ -87,7 +87,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/teacher-change-password">
+                        <a href="/teacher-password">
                             <i class="fas fa-lock"></i>
                             <span>Change Password</span>
                         </a>

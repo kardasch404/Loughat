@@ -138,7 +138,7 @@
                                 <div class="contentCard contentCard--course">
                                     <div class="contentCard-top">
                                         <a href="{{ route('cours', $cours->id) }}"><img
-                                                src="{{ asset('storage/' . $cours->photo) }}" alt="images"
+                                                src="{{ $cours->photo }}" alt="images"
                                                 class="img-fluid" /></a>
                                     </div>
                                     <div class="contentCard-bottom">

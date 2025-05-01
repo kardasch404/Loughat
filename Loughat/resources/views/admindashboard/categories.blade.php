@@ -45,7 +45,7 @@
                                             <h2 class="table-avatar">
                                                 <a href="" class="avatar avatar-sm mr-2">
                                                     <img class="avatar-img"
-                                                        src="{{ asset('storage/' . $categorie->logo) }}" alt="Categorie">
+                                                        src="{{ $categorie->logo }}" alt="Categorie">
                                                 </a>
                                                 <a href="">{{$categorie->name}}</a>
                                             </h2>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategorieRequest;
 use App\Repositories\CategorieRepository;
 use Illuminate\Http\Request;
+use Cloudinary\Cloudinary;
 
 class CategorieController extends Controller
 {
@@ -30,8 +31,21 @@ class CategorieController extends Controller
             $data = $request->validated();
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');
-                $path = $file->store('categories', 'public'); 
-                $data['logo'] = $path;
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $upload = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                    'folder' => 'categories',
+                    'resource_type' => 'image',
+                    'http_options' => [
+                        'verify' => false, 
+                    ],
+                ]);
+                $data['logo'] = $upload['secure_url'];
             }
             $categorie = $this->categorieRepository->create($data);
             // return response()->json([
@@ -61,8 +75,21 @@ class CategorieController extends Controller
             $data = $request->validated();
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');
-                $path = $file->store('categories', 'public'); 
-                $data['logo'] = $path;
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $upload = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                    'folder' => 'categories',
+                    'resource_type' => 'image',
+                    'http_options' => [
+                        'verify' => false, 
+                    ],
+                ]);
+                $data['logo'] = $upload['secure_url'];
             }
             $updateCategorie = $this->categorieRepository->update($data, $id);
 
