@@ -149,6 +149,15 @@ Route::get('/watch', function () {
 Route::get('/pending', function() {
     return view('pending');
 })->name('pending');
+Route::get('/about', function() {
+    return view('about');
+})->name('about');
+Route::get('/contact', function() {
+    return view('contact');
+})->name('contact');
+Route::get('/comming-soon', function() {
+    return view('comming-soon');
+})->name('comming-soon');
 
 
 // => -/Auth 
