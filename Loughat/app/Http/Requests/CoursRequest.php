@@ -25,7 +25,7 @@ class CoursRequest extends FormRequest
             //
             'title' => 'required|string|max:250',
             'description' => 'required|string|max:500',
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'required|image|mimes:jpg,jpeg,png',
             'price' => 'required|numeric|max:500', 
             'categorie_id' => 'nullable',   
             'level' => 'required|string|max:500', 

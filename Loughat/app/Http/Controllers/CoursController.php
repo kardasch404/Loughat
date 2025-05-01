@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CoursRequest;
 use App\Http\Requests\CoursUpdateRequest;
-use App\Models\Categorie;
-use App\Models\Cours;
-use App\Models\Lesson;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
@@ -14,9 +11,10 @@ use App\Repositories\LessonRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\SectionRepository;
 use App\Repositories\UserRepository;
-// use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Cloudinary\Cloudinary;
+use Illuminate\Support\Facades\Log;
+
 
 
 class CoursController extends Controller
@@ -79,8 +77,21 @@ class CoursController extends Controller
 
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
-                $path = $file->store('courses', 'public');
-                $data['photo'] = $path;
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $upload = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                    'folder' => 'courses',
+                    'resource_type' => 'image',
+                    'http_options' => [
+                        'verify' => false, 
+                    ],
+                ]);
+                $data['photo'] = $upload['secure_url'];
             }
             $categorie = $this->categorieRepository->find($data['categorie_id']);
             if (!$categorie) {
@@ -98,24 +109,29 @@ class CoursController extends Controller
     public function update(CoursUpdateRequest $request, $coursId)
     {
 
-        dd('fdghjklm');
         try {
             $data = $request->validated();
-            // dd('reached update');
-            // if ($data->fails()) {
-            //     return redirect()->back()
-            //         ->withErrors($data)
-            //         ->withInput();
-            // }
-            // $data = $data->validated();
             $cours = $this->coursRepository->find($coursId);
             if (!$cours) {
                 return response()->json(['error' => 'Cours not found'], 404);
             }
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
-                $path = $file->store('courses', 'public');
-                $data['photo'] = $path;
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key' => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+                $upload = $cloudinary->uploadApi()->upload($file->getRealPath(), [
+                    'folder' => 'courses',
+                    'resource_type' => 'image',
+                    'http_options' => [
+                        'verify' => false, 
+                    ],
+                ]);
+                $data['photo'] = $upload['secure_url'];
             }
 
             $categorieId = $request->input('categorie_id');
