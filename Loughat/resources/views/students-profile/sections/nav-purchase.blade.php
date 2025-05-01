@@ -1,20 +1,20 @@
 <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
 
     <div class="row mt-3">
-        <div class="col-lg-12"> 
+        <div class="col-lg-12">
             @foreach ($commandes as $commande)
-            <div class="purchase-area">
-                <div class="purchase-area-close">
-                    <a href="#">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11 1L1 11" stroke="#F15C4C" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M1 1L11 11" stroke="#F15C4C" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
+                <div class="purchase-area">
+                    <div class="purchase-area-close">
+                        <a href="#">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 1L1 11" stroke="#F15C4C" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M1 1L11 11" stroke="#F15C4C" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
 
                     <div class="d-flex align-items-lg-center align-items-start flex-column flex-lg-row">
                         <div class="purchase-area-items">
@@ -22,36 +22,48 @@
                                 class="purchase-area-items-start mb-0 d-flex align-items-lg-center flex-column flex-lg-row">
                                 <div class="image">
                                     <a href="#">
-                                        <img src="{{$commande->cours->photo}}" alt="Image" />
+                                        <img src="{{ $commande->cours->photo }}" alt="Image" />
                                     </a>
                                 </div>
                                 <div class="text d-flex flex-column flex-lg-row">
                                     <div class="text-main">
                                         <h6>
-                                            <a href="#">{{$commande->cours->title}}</a>
+                                            <a href="#">{{ $commande->cours->title }}</a>
                                         </h6>
-                                        <p>By <a href="instructorcourses.html">{{$commande->cours->teacher->firstname}} {{$commande->cours->teacher->lastname}}</a></p>
+                                        <p>By <a href="instructorcourses.html">{{ $commande->cours->teacher->firstname }}
+                                                {{ $commande->cours->teacher->lastname }}</a></p>
                                     </div>
-                                    <p> ${{$commande->cours->price}}</p>
+                                    <p>${{ $commande->cours->price }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="purchase-area-items-end">
-                            <p>3rd, 2021</p>
+                            <p>{{ $commande->created_at->format('jS, Y') }}</p>
                             <dl class="row">
                                 <dt class="col-sm-4">Subtotal</dt>
-                                <dd class="col-sm-8">{{$commande->montant}} USD</dd>
+                                <dd class="col-sm-8">{{ $commande->montant }} USD</dd>
 
                                 <dt class="col-sm-4">Payment Type</dt>
                                 <dd class="col-sm-8">
-                                    {{-- {{ $commande->payment ? $commande->payment->method : 'Not paid' }} --}}
-
+                                    {{ $commande->payment ? $commande->payment->method : 'Not paid' }}
                                 </dd>
                             </dl>
+                            @if (!$commande->payment)
+                                <form action="{{ route('commande') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="status" value="pending">
+                                    <input type="hidden" name="montant" value="{{ $commande->montant }}">
+                                    <input type="hidden" name="cours_id" value="{{ $commande->cours_id }}">
+                                    <input type="hidden" name="redirect_to_checkout" value="1">
+                                    <button type="submit" name="submit"
+                                        class="button button-lg button--primary w-100">
+                                        Checkout
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
-                
-            </div>
+                </div>
             @endforeach
         </div>
     </div>

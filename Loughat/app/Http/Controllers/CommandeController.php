@@ -7,6 +7,7 @@ use App\Repositories\CommandeRepository;
 use App\Repositories\CoursRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Log;
 
 class CommandeController extends Controller
 {
@@ -109,21 +110,35 @@ class CommandeController extends Controller
         }
     }
 
+
     public function getAllCommandeByStudent()
     {
         try {
             $userId = session('user_id');
             $user = $this->userRepository->find($userId);
-            $commandes = $this->commandeRepository->getAllCommnadeFromstudentPayedOrNotPayed($userId);
+
+            if (!$user) {
+                return redirect()->route('login');
+            }
+
+            $commandes = $this->commandeRepository->getAllCommandesForStudentPaidOrNotPaid($userId);
+            if ($commandes === false) {
+                return view('students-profile', compact('user'))->with('commandes', [])
+                    ->with('courses', []);
+            }
+
             $courses = [];
             foreach ($commandes as $commande) {
                 $payment = $this->paymentRepository->findByCommandId($commande->id);
-                $courses[] = $commande->cours;
+                if ($commande->cours) {
+                    $courses[] = $commande->cours;
+                }
             }
+
             return view('students-profile', compact('commandes', 'user', 'courses'));
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage()
+            return view('error', [
+                'message' => $e->getMessage()
             ]);
         }
     }

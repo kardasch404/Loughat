@@ -14,7 +14,7 @@
                                 ></path>
                             </svg>
                         </a> --}}
-                        <a href="course-details"><img src="{{ asset('storage/' . $cours->photo) }}" alt="images" class="img-fluid" /></a>
+                        <a href="course-details"><img src="{{ $cours->photo }}" alt="images" class="img-fluid" /></a>
                     </div>
                     <ul class="nav course-overview-nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -67,7 +67,6 @@
                     </ul>
                     <div class="tab-content course-overview-content" id="pills-tabContentTwo">
                         <div class="tab-pane fade show active" id="pills-courseoverview" role="tabpanel" aria-labelledby="pills-courseoverview-tab">
-                            <!-- Course Overview Starts Here -->
                             <div class="row course-overview-main mt-4">
                                 <div class="course-overview-main-item">
                                     <h6 class="font-title--card">Description</h6>

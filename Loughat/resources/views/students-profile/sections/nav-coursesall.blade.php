@@ -6,7 +6,7 @@
                     <div class="contentCard contentCard--watch-course">
                         <div class="contentCard-top">
                             <a href="{{ route('cours', $cours->id) }}">
-                                <img src="{{ asset($cours->photo) }}" alt="{{ $cours->title }}" class="img-fluid" />
+                                <img src="{{ $cours->photo }}" alt="{{ $cours->title }}" class="img-fluid" />
                             </a>
                         </div>
                         <div class="contentCard-bottom">
