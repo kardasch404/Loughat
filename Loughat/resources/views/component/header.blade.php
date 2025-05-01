@@ -28,10 +28,7 @@
                         <a href="{{ url('/signin') }}" class="button button--text">Sign in</a>
                         <a href="{{ url('/signup') }}" class="button button--dark">Sign Up</a>
                     @endif
-                </div>
-                
-                
-                
+                </div>  
             </div>
         </div>
     </nav>
