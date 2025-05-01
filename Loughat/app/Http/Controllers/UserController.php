@@ -6,9 +6,6 @@ use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Password;
-// use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -99,21 +96,7 @@ class UserController extends Controller
             $user = $this->userRepository->find($id);
             $user = session('user_id');
             $result = $this->userRepository->updatePassword($password, $user);
-
-            // if ($result === false) {
-            //     return response()->json([
-            //         'message' => 'user not found',
-            //     ],);
-            // }
-            // if ($result === 'old pass incorect') {
-            //     return response()->json([
-            //         'message' => 'old pass incorect',
-            //     ],);
-            // }
-            // return response()->json([
-            //     'message' => 'Password changed succes',
-            //     'user' => $user
-            // ], 200);
+            dd($result);
             return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
@@ -122,12 +105,12 @@ class UserController extends Controller
             ]);
         }
     }
-    public function showChangePasswordForm($id)
-    {
-        $user = $this->userRepository->find($id);
-
-        return view('teacherdashboard.teacher-change-password', compact('user'));
-    }
+    public function showChangePasswordForm()
+{
+    $teacher = auth()->user(); 
+    return view('teacherdashboard.teacher-password', compact('teacher'));
+}
+    
     public function updateTeacherStatus(Request $request, $id)
     {
         try {
