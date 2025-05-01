@@ -38,13 +38,15 @@
             <div class="white-bg mt-4">
                 <div class="students-info-form">
                     <h6 class="font-title--card">Change Password</h6>
-                    <form action="#">
+                    <form action="{{ route('students-profile.changePassword', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-12">
                                 <label for="cpass">Current Password</label>
                                 <div class="input-with-icon">
-                                    <input type="password" id="cpass" class="form-control" placeholder="Enter Password" />
-                                    <div class="input-icon" onclick="showPassword('cpass',this)">
+                                    <input type="password" id="old_password" name="old_password" class="form-control" placeholder="Enter Password" />
+                                    <div class="input-icon" onclick="showPassword('old_password',this)">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="24"
@@ -68,8 +70,8 @@
                             <div class="col-12">
                                 <label for="npass">New Password</label>
                                 <div class="input-with-icon">
-                                    <input type="password" id="npass" class="form-control" placeholder="Enter Password" />
-                                    <div class="input-icon" onclick="showPassword('npass',this)">
+                                    <input type="password" id="new_password" name="new_password" class="form-control" placeholder="Enter Password" />
+                                    <div class="input-icon" onclick="showPassword('new_password',this)">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="24"
@@ -93,8 +95,8 @@
                             <div class="col-12">
                                 <label for="cnpass">Confirm New Password</label>
                                 <div class="input-with-icon">
-                                    <input type="password" id="cnpass" class="form-control" placeholder="Enter Password" />
-                                    <div class="input-icon" onclick="showPassword('cnpass',this)">
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Enter Password" />
+                                    <div class="input-icon" onclick="showPassword('confirm_password',this)">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="24"
@@ -115,7 +117,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-lg-end justify-content-center mt-2">
-                            <button class="button button-lg button--primary" type="submit">Save Changes</button>
+                            <button class="button button-lg button--primary" type="submit" name="submit">Save Changes</button>
                         </div>
                     </form>
                 </div>

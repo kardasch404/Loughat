@@ -239,6 +239,7 @@ Route::prefix('students-profile')->group(function () {
     Route::get('/', [CoursController::class, 'getAllCoursesByStudent'])->name('students-profile.courses');
     Route::get('/', [CommandeController::class, 'getAllCommandeByStudent'])->name('students-profile.commandes');
     Route::put('/{id}', [UserController::class, 'update'])->name('students-profile.update');
+    Route::put('/{id}/password', [UserController::class, 'changePassword'])->name('students-profile.changePassword');
 });
 
 // recherche 
