@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Portfolio extends Model
 {
     use HasFactory;
-    protected $fillable =
-    [
-        'about_me'
-    ];
+    
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');

@@ -23,7 +23,10 @@ class PortfolioUpdateRequest extends FormRequest
     {
         return [
             //
-            'about_me' => 'sometimes|string|max:500',
+            'degree' => 'sometimes|string|max:250',
+            'description' => 'sometimes|string|max:500',
+            'from' => 'sometimes|integer', 
+            'to' => 'sometimes|integer', 
         ];
     }
 }

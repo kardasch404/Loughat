@@ -6,6 +6,7 @@ use App\Http\Controllers\CoursController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
@@ -194,6 +195,8 @@ Route::post('/update-teacher-status/{id}', [UserController::class, 'updateTeache
 
 Route::get('/teacher-profile', [UserController::class, 'editTeacherInfo'])->name('teacher-profile.editTeacherInfo');
 Route::put('/teacher-profile/{id}', [UserController::class, 'update'])->name('teacher-profile.update');
+Route::post('/teacher-profile/{id}/store', [PortfolioController::class, 'store'])->name('teacher-profile.store');
+Route::get('/teacher-profile/afficherTeacherPortfolio', [PortfolioController::class, 'afficherTeacherPortfolio'])->name('teacher-profile.afficherTeacherPortfolio');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
@@ -249,4 +252,4 @@ Route::post('/course-search', [CoursController::class, 'searchCours'])->name('co
 Route::get('/course-search', [CoursController::class, 'showAllCategorie'])->name('course-search.categories');;
 Route::get('/course-search/filter', [CoursController::class, 'filterByCategorieAndLevel'])->name('course-search.filterByCategorieAndLevel');
 
-
+// Portfolio 
