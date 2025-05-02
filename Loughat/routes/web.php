@@ -44,8 +44,8 @@ Route::get('/comming_soon', function () {
     return view('teacherdashboard.comming-soon');
 });
 
-Route::get('/teacher-profile-settings', function () {
-    return view('teacherdashboard.teacher-profile-settings');
+Route::get('/teacher-profile', function () {
+    return view('teacherdashboard.teacher-profile');
 });
 
 Route::get('/teacher-password', function () {
@@ -190,20 +190,10 @@ Route::put('/teachers/{id}', [UserController::class, 'update'])->name('admin.tea
 Route::get('/teacher-password', [UserController::class, 'showChangePasswordForm'])->name('teacher-password.showForm');
 Route::put('/teacher-password/{id}', [UserController::class, 'changePassword'])->name('teacher-password.changePassword');
 Route::get('/teachers', [UserController::class, 'teacherList'])->name('admin.teachers');
-Route::post('/test-route', function() {
-    return 'Route is working';
-});
-Route::post('/test-ajax', function (Request $request) {
-    return response()->json([
-        'success' => true,
-        'message' => 'Test successful',
-        'received_data' => $request->all()
-    ]);
-});
-
-
 Route::post('/update-teacher-status/{id}', [UserController::class, 'updateTeacherStatus'])->name('update.teacher.status');
 
+Route::get('/teacher-profile', [UserController::class, 'editTeacherInfo'])->name('teacher-profile.editTeacherInfo');
+Route::put('/teacher-profile/{id}', [UserController::class, 'update'])->name('teacher-profile.update');
 
 // => -/Course$
 Route::get('/create-cours', [CoursController::class, 'create'])->name('courses.create');
