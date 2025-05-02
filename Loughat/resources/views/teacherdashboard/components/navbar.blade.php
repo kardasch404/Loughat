@@ -81,7 +81,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/teacher-profile-settings">
+                        <a href="/teacher-profile">
                             <i class="fas fa-user-cog"></i>
                             <span>Profile Settings</span>
                         </a>

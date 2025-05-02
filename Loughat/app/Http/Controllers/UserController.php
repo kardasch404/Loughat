@@ -50,7 +50,7 @@ class UserController extends Controller
         try {
             $data = $request->validated();
             $user = $this->userRepository->find($id);
-
+            
             if (!$user) {
                 return redirect()->back()->with('error', 'User not found');
             }
@@ -67,7 +67,7 @@ class UserController extends Controller
                     'folder' => 'users',
                     'resource_type' => 'image',
                     'http_options' => [
-                        'verify' => false, 
+                        'verify' => false,
                     ],
                 ]);
                 $data['photo'] = $upload['secure_url'];
@@ -120,11 +120,16 @@ class UserController extends Controller
         }
     }
     public function showChangePasswordForm()
-{
-    $teacher = auth()->user(); 
-    return view('teacherdashboard.teacher-password', compact('teacher'));
-}
-    
+    {
+        $teacher = auth()->user();
+        return view('teacherdashboard.teacher-password', compact('teacher'));
+    }
+    public function editTeacherInfo()
+    {
+        $teacher = auth()->user();
+        return view('teacherdashboard.teacher-profile', compact('teacher'));
+    }
+
     public function updateTeacherStatus(Request $request, $id)
     {
         try {
@@ -138,13 +143,13 @@ class UserController extends Controller
                 'success' => true,
                 'new_status' => $teacher->status
             ]);
-
         } catch (\Exception $e) {
 
             return response()->json([
-               'error' => $e->getMessage()
+                'error' => $e->getMessage()
             ], 404);
-    }}
+        }
+    }
     public function teacherList()
     {
         try {
@@ -155,7 +160,7 @@ class UserController extends Controller
             return view('admindashboard.teacher-list', compact('teachers'));
         } catch (\Exception $e) {
             return response()->json([
-                'error'=> $e->getMessage()
+                'error' => $e->getMessage()
             ]);
         }
     }
