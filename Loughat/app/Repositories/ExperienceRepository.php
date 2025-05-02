@@ -13,23 +13,18 @@ class ExperienceRepository
         $experience->to = $data['to'];
         $experience->description = $data['description'];
         $experience->portfolio_id = $portfolioId;
-        $experience->save;
+        $experience->save();
         return $experience ; 
     }
-    public function update(array $data, $experienceId)
-    {
-        $experience = Experience::find($experienceId);
-        if(! $experience)
-        {
-            return false;
-        }
-        $experience->degree = $data['degree'];
-        $experience->from = $data['from'];
-        $experience->to = $data['to'];
-        $experience->description = $data['description'];
-        $experience->save;
-        return $experience ;
+    public function update($id, array $data)
+{
+    $experience = Experience::find($id);
+    if ($experience) {
+        $experience->update($data);
+        return $experience;
     }
+    return false;
+}
 
     public function getAllExperienceForPortfolio ()
     {
@@ -49,6 +44,11 @@ class ExperienceRepository
         }
         return $experience ;
     }
+
+public function findByAttributes(array $attributes)
+{
+    return Experience::where($attributes)->first();
+}
 
 
     

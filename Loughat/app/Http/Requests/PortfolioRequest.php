@@ -22,8 +22,14 @@ class PortfolioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'about_me' => 'required|string|max:500',
+            'education.*.degree' => 'required|string|max:1000',
+            'education.*.from' => 'required|numeric',
+            'education.*.to' => 'required|numeric',
+            'education.*.description' => 'required|string|max:1000',
+            'experience.*.degree' => 'required|string|max:1000',
+            'experience.*.from' => 'required|numeric',
+            'experience.*.to' => 'required|numeric',
+            'experience.*.description' => 'required|string|max:1000',
         ];
     }
 }

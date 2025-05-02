@@ -4,39 +4,26 @@ namespace App\Repositories;
 
 use App\Models\Portfolio;
 
-class PortfolioRepository 
+class PortfolioRepository
 {
-    public function create(array $data, int $teacherId )
-    {       
+    public function create(int $teacherId)
+    {
         $portfolio = new Portfolio();
-        $portfolio->about_me = $data['about_me'];
+        if ($portfolio->where('teacher_id', $teacherId)->exists()) {
+            return false;
+        }
         $portfolio->teacher_id = $teacherId;
         $portfolio->save();
         return $portfolio;
     }
-    public function update(array $data, int $portfolioId)
+    public function find(int $teacherId)
     {
-        $portfolio = Portfolio::find($portfolioId);
-        if(! $portfolio){
-            return false;
-        }
-        if (isset($data['about_me'])) {
-            $portfolio->about_me = $data['about_me'];
-        }
-         $portfolio->save();
-         return $portfolio;
+        return Portfolio::where('teacher_id', $teacherId)->first();
     }
-    public function find(int $portfolioId)
+    public function afficherTeacherPortfolio(int $teacherId)
     {
-        $portfolio = Portfolio::find($portfolioId);
-        return $portfolio;
-    }
-    public function getAboutme (int $teacherId)
-    {
-        $portfolio = Portfolio::where('teacher_id', $teacherId)->first();
-        if(! $portfolio){
-            return false;
-        }
-        return $portfolio;
+        return Portfolio::with(['educations', 'experiences'])
+            ->where('teacher_id', $teacherId)
+            ->first();
     }
 }
