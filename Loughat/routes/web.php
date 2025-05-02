@@ -44,8 +44,8 @@ Route::get('/comming_soon', function () {
     return view('teacherdashboard.comming-soon');
 });
 
-Route::get('/teacher-profile-settings', function () {
-    return view('teacherdashboard.teacher-profile-settings');
+Route::get('/teacher-profile', function () {
+    return view('teacherdashboard.teacher-profile');
 });
 
 Route::get('/teacher-password', function () {
