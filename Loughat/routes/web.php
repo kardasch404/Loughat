@@ -159,6 +159,9 @@ Route::get('/contact', function() {
 Route::get('/comming-soon', function() {
     return view('comming-soon');
 })->name('comming-soon');
+Route::get('/instructor-profile', function() {
+    return view('instructor-profile');
+})->name('instructor-profile');
 
 
 // => -/Auth 
