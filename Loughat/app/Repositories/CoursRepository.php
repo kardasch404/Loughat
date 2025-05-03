@@ -104,4 +104,13 @@ class CoursRepository
         }
         return $query->with('teacher')->paginate(8);
     }
+
+    public function getTeacherIdByCoursId ($coursId)
+    {
+        $cours = Cours::find($coursId);
+        if ($cours) {
+            return $cours->teacher_id;
+        }
+        return null;
+    }
 }
