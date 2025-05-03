@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Experience;
 
-class ExperienceRepository 
+class ExperienceRepository
 {
     public function create(array $data, $portfolioId)
     {
@@ -14,49 +15,33 @@ class ExperienceRepository
         $experience->description = $data['description'];
         $experience->portfolio_id = $portfolioId;
         $experience->save();
-        return $experience ; 
-    }
-    public function update($id, array $data)
-{
-    $experience = Experience::find($id);
-    if ($experience) {
-        $experience->update($data);
         return $experience;
     }
-    return false;
-}
-
-    public function getAllExperienceForPortfolio ()
+    public function update($id, array $data)
     {
-        $experiences = Experience::all();
-        if(! $experiences)
-        {
-            return false;
+        $experience = Experience::find($id);
+        if ($experience) {
+            $experience->update($data);
+            return $experience;
         }
-        return $experiences ;
+        return false;
+    }
+
+    public function getAllExperienceByPortfolioId($portfolioId)
+    {
+        return Experience::where('portfolio_id', $portfolioId)->get();
     }
     public function find($experienceId)
     {
         $experience = Experience::find($experienceId);
-        if(! $experience)
-        {
+        if (! $experience) {
             return false;
         }
-        return $experience ;
+        return $experience;
     }
 
-public function findByAttributes(array $attributes)
-{
-    return Experience::where($attributes)->first();
+    public function findByAttributes(array $attributes)
+    {
+        return Experience::where($attributes)->first();
+    }
 }
-
-
-    
-}
-
-
-
-
-
-
-

@@ -25,7 +25,7 @@
                             </div>
                             <div class="created-by-text">
                                 <p>Created by</p>
-                                <h6><a href="{{$cours->teacher->photo}}">{{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</a></h6>
+                                <h6><a href="{{ route('instructor-profile.index', $cours->teacher->id) }}">{{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</a></h6>
                             </div>
                         </div>
                     </div>

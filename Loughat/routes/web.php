@@ -256,3 +256,4 @@ Route::get('/course-search', [CoursController::class, 'showAllCategorie'])->name
 Route::get('/course-search/filter', [CoursController::class, 'filterByCategorieAndLevel'])->name('course-search.filterByCategorieAndLevel');
 
 // Portfolio 
+Route::get('/instructor-profile/{id}', [PortfolioController::class, 'index'])->name('instructor-profile.index');
