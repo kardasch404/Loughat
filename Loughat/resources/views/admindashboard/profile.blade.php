@@ -32,8 +32,7 @@
                             <h4 class="user-name mb-0">{{$admin->firstname }} {{$admin->lastname }}</h4>
                             <h6 class="text-muted">{{$admin->email }}</h6>
                             <div class="user-Location"><i class="fa fa-map-marker"></i> Florida, United States</div>
-                            <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.</div>
+                            <div class="about-text">{{$admin->phone }}</div>
                         </div>
                         <div class="col-auto profile-btn">
 
@@ -70,7 +69,7 @@
                                                         data-id="<?= htmlspecialchars($admin->id) ?>"
                                                         data-firstname="<?= htmlspecialchars($admin->firstname) ?>"
                                                         data-lastname="<?= htmlspecialchars($admin->lastname) ?>"
-                        
+                                                        data-bio="<?= htmlspecialchars($admin->bio) ?>"
                                                         data-email="<?= htmlspecialchars($admin->email) ?>"
                                                         data-phone="<?= htmlspecialchars($admin->phone) ?>"><i
                                                     class="fa fa-edit mr-1"></i>Edit</a>
@@ -143,8 +142,14 @@
                                                                 <input type="text" class="form-control" name="phone" id="phone">
                                                             </div>
                                                         </div>
+                                                        <div class="col-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label>Bio</label>
+                                                                <input type="text" class="form-control" name="bio" id="bio">
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <button type="submit" name="submit" id="submit" class="btn btn-primary btn-block">Save
+                                                    <button type="submit" name="submit" class="btn btn-primary btn-block">Save
                                                         Changes</button>
                                                 </form>
                                             </div>

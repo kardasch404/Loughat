@@ -25,6 +25,7 @@ class UserUpdateRequest extends FormRequest
             //
             'firstname' => 'sometimes|string|max:255',
             'lastname' => 'sometimes|string|max:255',
+            'bio' => 'sometimes|string|max:2000',
             'phone' => 'sometimes',
             'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png',
             'email' => 'sometimes|string|email|max:255|unique:users,email,' . $this->route('id'),

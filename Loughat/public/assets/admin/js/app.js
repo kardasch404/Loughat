@@ -19,6 +19,7 @@ function loadUserData(e)
     document.getElementById('email').value = e.getAttribute('data-email')
     document.getElementById('phone').value = e.getAttribute('data-phone')
     document.getElementById('photo').value = e.getAttribute('data-photo')
+    document.getElementById('bio').value = e.getAttribute('data-bio')
 }
 
 
