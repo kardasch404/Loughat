@@ -25,8 +25,9 @@ class UserRepository
         if (isset($data['specialization'])) {
             $userData['specialization'] = $data['specialization'];
         }
-
+        
         $user = User::create($userData);
+        $this->assignUserRole($user);
 
         return $user;
     }
