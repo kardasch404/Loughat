@@ -182,7 +182,6 @@ Route::get('/roles',[RoleController::class, 'index'])->name('admin.roles');
 Route::post('/roles', [RoleController::class, 'create'])->name('admin.roles.create');
 Route::delete('/roles/{id}', [RoleController::class, 'delete'])->name('admin.roles.delete');
 Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.update');
-Route::get('/reviews',[TeacherReviewController::class, 'getAllReviewsByAdmin'])->name('admin.getAllReviewsByAdmin');
 
 
 // => -/USer
@@ -263,3 +262,6 @@ Route::get('/instructor-profile/{id}', [PortfolioController::class, 'index'])->n
 // teacher Review
 Route::post('/instructor-profile/review', [TeacherReviewController::class, 'store'])->name('instructor-profile.store');
 Route::delete('/review/{id}', [TeacherReviewController::class, 'delete'])->name('review.delete');
+
+Route::get('/reviews',[TeacherReviewController::class, 'getAllReviewsByAdmin'])->name('admin.getAllReviewsByAdmin');
+Route::get('/teacher-reviews', [TeacherReviewController::class, 'getAllReviewsByTeacher'])->name('getAllReviewsByTeacher');

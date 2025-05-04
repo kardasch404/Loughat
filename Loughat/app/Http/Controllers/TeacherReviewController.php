@@ -96,4 +96,26 @@ class TeacherReviewController extends Controller
             ], 500);
         }
     }
+
+    public function getAllReviewsByTeacher()
+    {
+        try {
+            $teacherId = session('user_id');
+            if (!$teacherId) {
+                return redirect()->route('signin');
+            }
+            $reviews = $this->teacherReviewRepository->getAllReviewsByTeacher($teacherId);
+            if (! $reviews)
+            {
+                return response()->json([
+                    'message' => 'Reviews not found'
+                ], 404);
+            }
+            return view('teacherdashboard.reviews', compact('reviews'));
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

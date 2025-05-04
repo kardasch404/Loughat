@@ -46,4 +46,8 @@ class TeacherReviewRepository
     {
         return TeacherReview::all();
     }
+    public function getAllReviewsByTeacher($teacherId)
+    {
+        return TeacherReview::where('teacher_id', $teacherId)->get();
+    }
 }
