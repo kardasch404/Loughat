@@ -8,6 +8,7 @@ use App\Repositories\CoursRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\ExperienceRepository;
 use App\Repositories\PortfolioRepository;
+use App\Repositories\TeacherReviewRepository;
 use App\Repositories\UserRepository;
 
 
@@ -18,14 +19,16 @@ class PortfolioController extends Controller
     protected $expirienceRepository;
     protected $userRepository;
     protected $coursRepository;
+    protected $teacherReviewRepository;
 
-    public function __construct(PortfolioRepository $portfolioRepository, EducationRepository $educationRepository, ExperienceRepository $expirienceRepository, UserRepository $userRepository, CoursRepository $coursRepository)
+    public function __construct(PortfolioRepository $portfolioRepository, EducationRepository $educationRepository, ExperienceRepository $expirienceRepository, UserRepository $userRepository, CoursRepository $coursRepository, TeacherReviewRepository $teacherReviewRepository)
     {
         $this->portfolioRepository = $portfolioRepository;
         $this->educationRepository = $educationRepository;
         $this->expirienceRepository = $expirienceRepository;
         $this->userRepository = $userRepository;
         $this->coursRepository = $coursRepository;
+        $this->teacherReviewRepository = $teacherReviewRepository;
     }
 
     public function index($teacherId)
@@ -45,12 +48,12 @@ class PortfolioController extends Controller
             $education = $this->educationRepository->getAllEducationByPortfolioId($portfolio->id);
             $experience = $this->expirienceRepository->getAllExperienceByPortfolioId($portfolio->id);
             $courses = $this->coursRepository->getCoursesByTeacher($teacherId);
-            return view('instructor-profile', compact('portfolio', 'teacher', 'education', 'experience','courses'));
+            $reviews = $this->teacherReviewRepository->getReviewsByTeacher($teacherId);
+            return view('instructor-profile', compact('portfolio', 'teacher', 'education', 'experience','courses','reviews'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-
 
     public function store(PortfolioRequest $request)
     {

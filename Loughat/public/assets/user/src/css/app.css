@@ -9,3 +9,86 @@
 .scrollable-form::-webkit-scrollbar {
     display: none;
 }
+
+/* Star Rating Styles */
+.my-rating .star {
+    font-size: 24px;
+    color: #ccc; /* Default star color */
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.my-rating .star.selected,
+.my-rating .star:hover,
+.my-rating .star:hover ~ .star {
+    color: #f39c12; /* Highlighted star color */
+}
+
+.rating-icons-2 .star {
+    font-size: 18px;
+    color: #ccc; /* Default color for unselected stars */
+}
+
+.rating-icons-2 .star.selected {
+    color: #f39c12; /* Highlight color for selected stars */
+}
+
+/* buuton delete review */
+.delete-btn {
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.delete-btn i {
+    font-size: 12px;
+}
+
+/* Optional animation on hover */
+.delete-btn:hover i {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+.delete-btn {
+    background-color: #fff;
+    border: none;
+    color: #dc3545;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(220, 53, 69, 0.15);
+}
+
+.delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+
+

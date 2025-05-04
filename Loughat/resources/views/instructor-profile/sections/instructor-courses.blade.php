@@ -140,7 +140,7 @@
                                   </svg>
                               </div>
                               <div class="text text-center">
-                                  <h6>35</h6>
+                                  <h6>({{ $courses->count() }})</h6>
                                   <p>Courses</p>
                               </div>
                           </div>
@@ -203,59 +203,62 @@
                               <div class="row">
                                   {{-- courses --}}
                                   @foreach ($courses as $cours)
-                                  <div class="col-md-6 mb-4">
-                                      <div class="contentCard contentCard--course">
-                                          <div class="contentCard-top">
-                                              <a href="{{ route('cours', $cours->id) }}"><img
-                                                      src="{{$cours->photo}}" alt="images"
-                                                      class="img-fluid" /></a>
-                                          </div>
-                                          <div class="contentCard-bottom">
-                                              <h5>
-                                                  <a href="{{ route('cours', $cours->id) }}" class="font-title--card">{{$cours->title}}</a>
-                                              </h5>
-                                              <div
-                                                  class="contentCard-info d-flex align-items-center justify-content-between">
-                                                  <a href="instructor-profile.html"
-                                                      class="contentCard-user d-flex align-items-center">
-                                                      <img src="{{$cours->teacher->photo}}" alt=""
-                                                          class="rounded-circle" style="width: 40px; height:40px;"/>
-                                                      <p class="font-para--md">{{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</p>
-                                                  </a>
-                                                  <div class="price">
-                                                      <span>${{$cours->price}}</span>
-                                                      <del>$95</del>
-                                                  </div>
+                                      <div class="col-md-6 mb-4">
+                                          <div class="contentCard contentCard--course">
+                                              <div class="contentCard-top">
+                                                  <a href="{{ route('cours', $cours->id) }}"><img
+                                                          src="{{ $cours->photo }}" alt="images"
+                                                          class="img-fluid" /></a>
                                               </div>
-                                              <div class="contentCard-more">
-                                                  <div class="d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/star.png" alt="star" />
+                                              <div class="contentCard-bottom">
+                                                  <h5>
+                                                      <a href="{{ route('cours', $cours->id) }}"
+                                                          class="font-title--card">{{ $cours->title }}</a>
+                                                  </h5>
+                                                  <div
+                                                      class="contentCard-info d-flex align-items-center justify-content-between">
+                                                      <a href="instructor-profile.html"
+                                                          class="contentCard-user d-flex align-items-center">
+                                                          <img src="{{ $cours->teacher->photo }}" alt=""
+                                                              class="rounded-circle"
+                                                              style="width: 40px; height:40px;" />
+                                                          <p class="font-para--md">{{ $cours->teacher->firstname }}
+                                                              {{ $cours->teacher->lastname }}</p>
+                                                      </a>
+                                                      <div class="price">
+                                                          <span>${{ $cours->price }}</span>
+                                                          <del>$95</del>
                                                       </div>
-                                                      <span>4.5</span>
                                                   </div>
-                                                  <div class="eye d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/eye.png" alt="eye" />
+                                                  <div class="contentCard-more">
+                                                      <div class="d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/star.png" alt="star" />
+                                                          </div>
+                                                          <span>4.5</span>
                                                       </div>
-                                                      <span>24,517</span>
-                                                  </div>
-                                                  <div class="book d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/book.png" alt="location" />
+                                                      <div class="eye d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/eye.png" alt="eye" />
+                                                          </div>
+                                                          <span>24,517</span>
                                                       </div>
-                                                      <span>37 Lesson</span>
-                                                  </div>
-                                                  <div class="clock d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/Clock.png" alt="clock" />
+                                                      <div class="book d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/book.png" alt="location" />
+                                                          </div>
+                                                          <span>37 Lesson</span>
                                                       </div>
-                                                      <span>3 Hours</span>
+                                                      <div class="clock d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/Clock.png" alt="clock" />
+                                                          </div>
+                                                          <span>3 Hours</span>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
                                       </div>
-                                  </div>
                                   @endforeach
                                   {{-- end courses  --}}
                               </div>
@@ -671,121 +674,67 @@
                                       </div>
                                       <div class="students-feedback">
                                           <div class="students-feedback-heading">
-                                              <h5>Students Feedback <span>(57,685)</span></h5>
-                                              <div class="right">
-                                                  <h6>Sort by:</h6>
-                                                  <div class="dropdown">
-                                                      <button class="btn dropdown-toggle" type="button"
-                                                          id="dropdownMenu2" data-bs-toggle="dropdown"
-                                                          aria-expanded="false">
-                                                          All Rating
-                                                      </button>
-                                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                          <li><button class="dropdown-item"
-                                                                  type="button">Rating</button></li>
-                                                          <li><button class="dropdown-item" type="button">Another
-                                                                  Rating</button></li>
-                                                          <li><button class="dropdown-item" type="button">Rating else
-                                                                  here</button></li>
-                                                      </ul>
+                                              <h5>Students Feedback <span>({{ $reviews->count() }})</span></h5>
+                                          </div>
+                                          @foreach ($reviews as $review)
+                                              <div class="students-feedback-item border-0">
+                                                  <div class="feedback-rating">
+                                                      <div class="feedback-rating-start">
+                                                          <div class="image">
+                                                              <img src="{{ $review->student->photo }}"
+                                                                  alt="Image" />
+                                                          </div>
+                                                          <div class="text">
+                                                              <h6><a href="#">{{ $review->student->firstname }}
+                                                                      {{ $review->student->lastname }}</a></h6>
+                                                              <p>{{ $review->created_at->diffForHumans() }}</p>
+                                                          </div>
+                                                      </div>
+                                                      <div class="feedback-rating-end">
+                                                          <div class="rating-icons rating-icons-2">
+                                                              @for ($i = 1; $i <= 5; $i++)
+                                                                  @if ($i <= $review->rating)
+                                                                      <span class="star selected">&#9733;</span>
+                                                                  @else
+                                                                      <span class="star">&#9734;</span>
+                                                                  @endif
+                                                              @endfor
+                                                          </div>
+                                                          @if (session('user_id') == $review->student_id)
+                                                          <form action="{{ route('review.delete', $review->id) }}" method="POST" style="display: inline;">
+                                                              @csrf
+                                                              @method('DELETE')
+                                                              <button type="submit" class="delete-btn">
+                                                                  <i class="fas fa-trash-alt"></i> Delete
+                                                              </button>
+                                                          </form>
+                                                      @endif
+                                                      
+                                                      </div>
+                                                       
                                                   </div>
+                                                  <p>{{ $review->message }}</p>
+                                                 
                                               </div>
-                                          </div>
-                                          <div class="students-feedback-item">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/user.jpg" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Harry Pinsky</a></h6>
-                                                          <p>1 hour ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Aliquam eget leo quis neque molestie dictum. Etiam ut tortor tempor,
-                                                  vestibulum ante non, vulputate nibh. Cras non molestie diam. Great
-                                                  Course for Beginner 😀
-                                              </p>
-                                          </div>
-                                          <div class="students-feedback-item">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/1.png" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Harry Pinsky</a></h6>
-                                                          <p>2 hour ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Aliquam eget leo quis neque molestie dictum. Etiam ut tortor tempor,
-                                                  vestibulum ante non, vulputate nibh.
-                                              </p>
-                                          </div>
-                                          <div class="students-feedback-item">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/2.png" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Watcraz Eggsy</a></h6>
-                                                          <p>1 day ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Aenean vulputate nisi ligula. Quisque in tempus sapien. Quisque
-                                                  vestibulum massa eget consequat scelerisque. Phasellus varius risus
-                                                  nec maximus auctor.
-                                              </p>
-                                          </div>
-                                          <div class="students-feedback-item border-0">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/3.png" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Watcraz Eggsy</a></h6>
-                                                          <p>1 day ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Cras non molestie diam. Aenean vulputate nisi ligula. Quisque in
-                                                  tempus sapien. Quisque vestibulum massa eget consequat scelerisque.
-                                              </p>
-                                          </div>
-                                          <div class="text-center">
-                                              <button class="button button-md button--primary-outline">Load
-                                                  more</button>
-                                          </div>
+                                          @endforeach
                                       </div>
                                       <div class="feedback-comment">
                                           <h6 class="font-title--card">Leave a Rating</h6>
                                           <span>Rating</span>
-                                          <!-- <div id="my-rating"></div> -->
-                                          <div class="my-rating rating-icons rating-icons-modal"></div>
-                                          <form action="#">
+                                          <div class="my-rating rating-icons rating-icons-modal">
+                                              <!-- Star Rating -->
+                                              <span class="star" data-value="1">&#9733;</span>
+                                              <span class="star" data-value="2">&#9733;</span>
+                                              <span class="star" data-value="3">&#9733;</span>
+                                              <span class="star" data-value="4">&#9733;</span>
+                                              <span class="star" data-value="5">&#9733;</span>
+                                          </div>
+                                          <form action="{{ route('instructor-profile.store') }}" method="POST">
+                                              @csrf
+                                              <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                                              <input type="hidden" name="rating" id="rating">
                                               <label for="comment">Message</label>
-                                              <textarea class="form-control" id="comment" placeholder="how is your feeling about the instructor"></textarea>
+                                              <textarea class="form-control" id="comment" name="message" placeholder="How is your feeling about the instructor"></textarea>
                                               <button type="submit"
                                                   class="button button-lg button--primary float-end">Post
                                                   Review</button>
