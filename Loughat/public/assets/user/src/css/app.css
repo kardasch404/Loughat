@@ -1,0 +1,11 @@
+.scrollable-form {
+    max-height: 500px; 
+    overflow-y: auto; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    padding-right: 10px; 
+}
+
+.scrollable-form::-webkit-scrollbar {
+    display: none;
+}
