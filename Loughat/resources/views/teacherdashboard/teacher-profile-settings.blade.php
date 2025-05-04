@@ -52,24 +52,23 @@
                             <input type="text" name="phone" id="phone" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                </div>
+
+                    <!-- About Me -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">About Me</h4>
+                            <div class="form-group mb-0">
+                                <label>Biography</label>
+                                <textarea class="form-control" rows="5" name="bio" id="bio"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /About Me -->
             </div>
         </div>
     </form>
     <!-- /Basic Information -->
 
-    <!-- About Me -->
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">About Me</h4>
-            <div class="form-group mb-0">
-                <label>Biography</label>
-                <textarea class="form-control" rows="5"></textarea>
-            </div>
-        </div>
-    </div>
-    <!-- /About Me -->
     <!-- Education -->
     <div class="card">
         <div class="card-body">

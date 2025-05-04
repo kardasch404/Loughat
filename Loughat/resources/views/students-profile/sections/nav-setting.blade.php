@@ -17,16 +17,21 @@
                                 <input type="text" class="form-control"  name="lastname" id="lastname" value="{{ $user->lastname }}" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" class="form-control"  value="{{ $user->email }}" />
                             </div>
-                        </div>
-                        <div class="row g-3">
+
                             <div class="col-lg-6">
                                 <label for="phone">Phone Number</label>
                                 <input type="text" class="form-control"  id="phone" name="phone" value="{{ $user->phone }}" />
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="bio">bio</label>
+                                <input type="bio" name="bio" id="bio" class="form-control"  value="{{ $user->bio }}" />
                             </div>
                         </div>
                         <div class="d-flex justify-content-lg-end justify-content-center mt-2">

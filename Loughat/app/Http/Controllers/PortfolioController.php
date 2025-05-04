@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PortfolioRequest;
+use App\Models\Cours;
+use App\Repositories\CoursRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\ExperienceRepository;
 use App\Repositories\PortfolioRepository;
+use App\Repositories\TeacherReviewRepository;
 use App\Repositories\UserRepository;
 
 
@@ -15,15 +18,42 @@ class PortfolioController extends Controller
     protected $educationRepository;
     protected $expirienceRepository;
     protected $userRepository;
+    protected $coursRepository;
+    protected $teacherReviewRepository;
 
-    public function __construct(PortfolioRepository $portfolioRepository, EducationRepository $educationRepository, ExperienceRepository $expirienceRepository, UserRepository $userRepository)
+    public function __construct(PortfolioRepository $portfolioRepository, EducationRepository $educationRepository, ExperienceRepository $expirienceRepository, UserRepository $userRepository, CoursRepository $coursRepository, TeacherReviewRepository $teacherReviewRepository)
     {
         $this->portfolioRepository = $portfolioRepository;
         $this->educationRepository = $educationRepository;
         $this->expirienceRepository = $expirienceRepository;
         $this->userRepository = $userRepository;
+        $this->coursRepository = $coursRepository;
+        $this->teacherReviewRepository = $teacherReviewRepository;
     }
 
+    public function index($teacherId)
+    {
+        try {
+
+            $teacher = $this->userRepository->find($teacherId);
+            if (!$teacher) {
+                return response()->json([
+                    'error' => 'Teacher not found'
+                ], 404);
+            }
+            $portfolio = $this->portfolioRepository->afficherTeacherPortfolio($teacherId);
+            if (!$portfolio) {
+                return redirect()->back();
+            }
+            $education = $this->educationRepository->getAllEducationByPortfolioId($portfolio->id);
+            $experience = $this->expirienceRepository->getAllExperienceByPortfolioId($portfolio->id);
+            $courses = $this->coursRepository->getCoursesByTeacher($teacherId);
+            $reviews = $this->teacherReviewRepository->getReviewsByTeacher($teacherId);
+            return view('instructor-profile', compact('portfolio', 'teacher', 'education', 'experience','courses','reviews'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
 
     public function store(PortfolioRequest $request)
     {
@@ -39,7 +69,7 @@ class PortfolioController extends Controller
                     ], 500);
                 }
             }
-    
+
             foreach ($data['education'] as $education) {
                 if (!empty($education['id'])) {
                     $existingEducation = $this->educationRepository->find($education['id']);
@@ -53,13 +83,13 @@ class PortfolioController extends Controller
                         'to' => $education['to'],
                         'portfolio_id' => $portfolio->id,
                     ]);
-    
+
                     if (!$duplicateEducation) {
                         $this->educationRepository->create($education, $portfolio->id);
                     }
                 }
             }
-    
+
             foreach ($data['experience'] as $experience) {
                 if (!empty($experience['id'])) {
                     $existingExperience = $this->expirienceRepository->find($experience['id']);
@@ -73,13 +103,13 @@ class PortfolioController extends Controller
                         'to' => $experience['to'],
                         'portfolio_id' => $portfolio->id,
                     ]);
-    
+
                     if (!$duplicateExperience) {
                         $this->expirienceRepository->create($experience, $portfolio->id);
                     }
                 }
             }
-    
+
             return redirect()->route('teacher-profile.afficherTeacherPortfolio')
                 ->with('success', 'Portfolio updated successfully.');
         } catch (\Exception $e) {

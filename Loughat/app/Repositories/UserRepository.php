@@ -25,8 +25,9 @@ class UserRepository
         if (isset($data['specialization'])) {
             $userData['specialization'] = $data['specialization'];
         }
-
+        
         $user = User::create($userData);
+        $this->assignUserRole($user);
 
         return $user;
     }
@@ -89,6 +90,9 @@ class UserRepository
         }
         if (isset($data['email'])) {
             $user->email = $data['email'];
+        }
+        if (isset($data['bio'])) {
+            $user->bio = $data['bio'];
         }
         $user->save();
         return $user;

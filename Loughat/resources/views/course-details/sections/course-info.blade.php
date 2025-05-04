@@ -685,14 +685,14 @@
                                     <div class="course-instructor">
                                         <div class="course-instructor-info">
                                             <div class="instructor-image">
-                                                <a href="./teacher-profile.php">
+                                                <a href="{{ route('instructor-profile.index', $cours->teacher->id) }}">
 
                                                     <img  src="{{ $cours->teacher->photo }}" alt="Teacher" />
                                                 </a>
                                             </div>
                                             <div class="instructor-text">
                                                 <h6 class="font-title--xs mb-0">
-                                                    <a href="./teacher-profile.php"> {{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</a>
+                                                    <a href="{{ route('instructor-profile.index', $cours->teacher->id) }}"> {{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</a>
                                                 </h6>
                                                 <p class="font-para--md">Senior Teacher</p>
                                                 <div class="d-flex align-items-center instructor-text-bottom">

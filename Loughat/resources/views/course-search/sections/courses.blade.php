@@ -148,7 +148,7 @@
                                         </h5>
                                         <div
                                             class="contentCard-info d-flex align-items-center justify-content-between">
-                                            <a href="instructor-profile.html"
+                                            <a href="{{ route('instructor-profile.index', $cours->teacher->id) }}"
                                                 class="contentCard-user d-flex align-items-center">
                                                 <img src="{{ $cours->teacher->photo }}" alt="client-image"
                                                     class="rounded-circle " style="width: 40px; height: 40px;" />

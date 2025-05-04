@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('assets/user/dist/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/user/src/scss/vendors/plugin/css/star-rating-svg.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/user/src/css/app.css') }}" />
     <link rel="icon" type="image/png" href="{{ asset('assets/user/dist/images/favicon/favicon.png') }}" />
 </head>
 <body onload="loader()">

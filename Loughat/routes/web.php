@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TeacherReviewController;
 use App\Http\Controllers\UserController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Request;
@@ -159,6 +160,9 @@ Route::get('/contact', function() {
 Route::get('/comming-soon', function() {
     return view('comming-soon');
 })->name('comming-soon');
+Route::get('/instructor-profile', function() {
+    return view('instructor-profile');
+})->name('instructor-profile');
 
 
 // => -/Auth 
@@ -253,3 +257,11 @@ Route::get('/course-search', [CoursController::class, 'showAllCategorie'])->name
 Route::get('/course-search/filter', [CoursController::class, 'filterByCategorieAndLevel'])->name('course-search.filterByCategorieAndLevel');
 
 // Portfolio 
+Route::get('/instructor-profile/{id}', [PortfolioController::class, 'index'])->name('instructor-profile.index');
+
+// teacher Review
+Route::post('/instructor-profile/review', [TeacherReviewController::class, 'store'])->name('instructor-profile.store');
+Route::delete('/review/{id}', [TeacherReviewController::class, 'delete'])->name('review.delete');
+
+Route::get('/reviews',[TeacherReviewController::class, 'getAllReviewsByAdmin'])->name('admin.getAllReviewsByAdmin');
+Route::get('/teacher-reviews', [TeacherReviewController::class, 'getAllReviewsByTeacher'])->name('getAllReviewsByTeacher');

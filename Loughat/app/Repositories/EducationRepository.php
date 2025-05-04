@@ -32,9 +32,9 @@ class EducationRepository
         return Education::find($id);
     }
 
-    public function getAllEducationFromPortfolio()
+    public function getAllEducationByPortfolioId ($portfolioId)
     {
-        return Education::all();
+        return Education::where('portfolio_id', $portfolioId)->get();
     }
 
 public function findByAttributes(array $attributes)
