@@ -6,7 +6,6 @@ use App\Http\Requests\TeacherReviewRequest;
 use App\Repositories\CommandeRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\TeacherReviewRepository;
-use Illuminate\Http\Request;
 
 class TeacherReviewController extends Controller
 {
@@ -54,6 +53,25 @@ class TeacherReviewController extends Controller
             $data['student_id'] = $studentId;
             $review = $this->teacherReviewRepository->create($data, $teacherId, $studentId);
             // dd($review);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function delete($id)
+    {
+        try {
+            $studentId = session('user_id');
+            $review = $this->teacherReviewRepository->find($id);
+    
+            if (!$review) {
+                return response()->json([
+                    'message' => 'Review not found'
+                ], 404);
+            }
+            $this->teacherReviewRepository->delete($id);
             return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([

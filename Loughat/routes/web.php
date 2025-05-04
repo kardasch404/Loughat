@@ -261,3 +261,4 @@ Route::get('/instructor-profile/{id}', [PortfolioController::class, 'index'])->n
 
 // teacher Review
 Route::post('/instructor-profile/review', [TeacherReviewController::class, 'store'])->name('instructor-profile.store');
+Route::delete('/review/{id}', [TeacherReviewController::class, 'delete'])->name('review.delete');

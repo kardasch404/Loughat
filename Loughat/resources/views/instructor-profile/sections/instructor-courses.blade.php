@@ -673,42 +673,52 @@
                                           </div>
                                       </div>
                                       <div class="students-feedback">
-                                        <div class="students-feedback-heading">
-                                            <h5>Students Feedback <span>({{ $reviews->count() }})</span></h5>
-                                        </div>
-                                        @foreach ($reviews as $review)
-                                            <div class="students-feedback-item border-0">
-                                                <div class="feedback-rating">
-                                                    <div class="feedback-rating-start">
-                                                        <div class="image">
-                                                            <img src="{{ $review->student->photo}}" alt="Image" />
-                                                        </div>
-                                                        <div class="text">
-                                                            <h6><a href="#">{{ $review->student->firstname }} {{ $review->student->lastname }}</a></h6>
-                                                            <p>{{ $review->created_at->diffForHumans() }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="feedback-rating-end">
-                                                        <div class="rating-icons rating-icons-2">
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= $review->rating)
-                                                                    <span class="star selected">&#9733;</span>
-                                                                @else
-                                                                    <span class="star">&#9734;</span>
-                                                                @endif
-                                                            @endfor
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p>{{ $review->message }}</p>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                        {{-- <div class="text-center">
-                                            <button class="button button-md button--primary-outline">Load
-                                                more</button>
-                                        </div> --}}
-                                        <div class="feedback-comment">
+                                          <div class="students-feedback-heading">
+                                              <h5>Students Feedback <span>({{ $reviews->count() }})</span></h5>
+                                          </div>
+                                          @foreach ($reviews as $review)
+                                              <div class="students-feedback-item border-0">
+                                                  <div class="feedback-rating">
+                                                      <div class="feedback-rating-start">
+                                                          <div class="image">
+                                                              <img src="{{ $review->student->photo }}"
+                                                                  alt="Image" />
+                                                          </div>
+                                                          <div class="text">
+                                                              <h6><a href="#">{{ $review->student->firstname }}
+                                                                      {{ $review->student->lastname }}</a></h6>
+                                                              <p>{{ $review->created_at->diffForHumans() }}</p>
+                                                          </div>
+                                                      </div>
+                                                      <div class="feedback-rating-end">
+                                                          <div class="rating-icons rating-icons-2">
+                                                              @for ($i = 1; $i <= 5; $i++)
+                                                                  @if ($i <= $review->rating)
+                                                                      <span class="star selected">&#9733;</span>
+                                                                  @else
+                                                                      <span class="star">&#9734;</span>
+                                                                  @endif
+                                                              @endfor
+                                                          </div>
+                                                          @if (session('user_id') == $review->student_id)
+                                                          <form action="{{ route('review.delete', $review->id) }}" method="POST" style="display: inline;">
+                                                              @csrf
+                                                              @method('DELETE')
+                                                              <button type="submit" class="delete-btn">
+                                                                  <i class="fas fa-trash-alt"></i> Delete
+                                                              </button>
+                                                          </form>
+                                                      @endif
+                                                      
+                                                      </div>
+                                                       
+                                                  </div>
+                                                  <p>{{ $review->message }}</p>
+                                                 
+                                              </div>
+                                          @endforeach
+                                      </div>
+                                      <div class="feedback-comment">
                                           <h6 class="font-title--card">Leave a Rating</h6>
                                           <span>Rating</span>
                                           <div class="my-rating rating-icons rating-icons-modal">

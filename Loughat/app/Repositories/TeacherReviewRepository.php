@@ -27,4 +27,18 @@ class TeacherReviewRepository
     {
         return TeacherReview::where('teacher_id', $teacherId)->get();
     }
+
+    public function find ($id)
+    {
+        return TeacherReview::find($id);
+    }
+    public function delete($id)
+    {
+        $review = TeacherReview::find($id);
+        if (!$review) {
+            return false;
+        }
+        $review->delete();
+        return true;
+    }
 }
