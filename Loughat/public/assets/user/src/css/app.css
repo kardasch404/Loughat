@@ -23,3 +23,12 @@
 .my-rating .star:hover ~ .star {
     color: #f39c12; /* Highlighted star color */
 }
+
+.rating-icons-2 .star {
+    font-size: 18px;
+    color: #ccc; /* Default color for unselected stars */
+}
+
+.rating-icons-2 .star.selected {
+    color: #f39c12; /* Highlight color for selected stars */
+}

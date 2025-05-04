@@ -21,7 +21,7 @@ class TeacherReviewController extends Controller
         $this->paymentRepository = $paymentRepository;
         $this->commandeRepository = $commandeRepository;
     }
-
+    
     public function store(TeacherReviewRequest $request)
     {
         // dd('vbhjkl');
@@ -53,8 +53,8 @@ class TeacherReviewController extends Controller
             $data['teacher_id'] = $teacherId;
             $data['student_id'] = $studentId;
             $review = $this->teacherReviewRepository->create($data, $teacherId, $studentId);
-            dd($review);
-            return response()->json($review, 201);
+            // dd($review);
+            return redirect()->back();
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

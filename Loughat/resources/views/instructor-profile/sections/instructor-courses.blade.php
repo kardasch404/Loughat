@@ -140,7 +140,7 @@
                                   </svg>
                               </div>
                               <div class="text text-center">
-                                  <h6>35</h6>
+                                  <h6>({{ $courses->count() }})</h6>
                                   <p>Courses</p>
                               </div>
                           </div>
@@ -673,116 +673,42 @@
                                           </div>
                                       </div>
                                       <div class="students-feedback">
-                                          <div class="students-feedback-heading">
-                                              <h5>Students Feedback <span>(57,685)</span></h5>
-                                              <div class="right">
-                                                  <h6>Sort by:</h6>
-                                                  <div class="dropdown">
-                                                      <button class="btn dropdown-toggle" type="button"
-                                                          id="dropdownMenu2" data-bs-toggle="dropdown"
-                                                          aria-expanded="false">
-                                                          All Rating
-                                                      </button>
-                                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                          <li><button class="dropdown-item"
-                                                                  type="button">Rating</button></li>
-                                                          <li><button class="dropdown-item" type="button">Another
-                                                                  Rating</button></li>
-                                                          <li><button class="dropdown-item" type="button">Rating else
-                                                                  here</button></li>
-                                                      </ul>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="students-feedback-item">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/user.jpg" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Harry Pinsky</a></h6>
-                                                          <p>1 hour ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Aliquam eget leo quis neque molestie dictum. Etiam ut tortor tempor,
-                                                  vestibulum ante non, vulputate nibh. Cras non molestie diam. Great
-                                                  Course for Beginner 😀
-                                              </p>
-                                          </div>
-                                          <div class="students-feedback-item">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/1.png" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Harry Pinsky</a></h6>
-                                                          <p>2 hour ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Aliquam eget leo quis neque molestie dictum. Etiam ut tortor tempor,
-                                                  vestibulum ante non, vulputate nibh.
-                                              </p>
-                                          </div>
-                                          <div class="students-feedback-item">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="dist/images/ellipse/2.png" alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Watcraz Eggsy</a></h6>
-                                                          <p>1 day ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Aenean vulputate nisi ligula. Quisque in tempus sapien. Quisque
-                                                  vestibulum massa eget consequat scelerisque. Phasellus varius risus
-                                                  nec maximus auctor.
-                                              </p>
-                                          </div>
-                                          <div class="students-feedback-item border-0">
-                                              <div class="feedback-rating">
-                                                  <div class="feedback-rating-start">
-                                                      <div class="image">
-                                                          <img src="{{ asset('assets/user/dist/images/ellipse/3.png') }}"
-                                                              alt="Image" />
-                                                      </div>
-                                                      <div class="text">
-                                                          <h6><a href="#">Watcraz Eggsy</a></h6>
-                                                          <p>1 day ago</p>
-                                                      </div>
-                                                  </div>
-                                                  <div class="feedback-rating-end">
-                                                      <div class="rating-icons rating-icons-2"></div>
-                                                  </div>
-                                              </div>
-                                              <p>
-                                                  Cras non molestie diam. Aenean vulputate nisi ligula. Quisque in
-                                                  tempus sapien. Quisque vestibulum massa eget consequat scelerisque.
-                                              </p>
-                                          </div>
-                                          <div class="text-center">
-                                              <button class="button button-md button--primary-outline">Load
-                                                  more</button>
-                                          </div>
-                                      </div>
-                                      <div class="feedback-comment">
+                                        <div class="students-feedback-heading">
+                                            <h5>Students Feedback <span>({{ $reviews->count() }})</span></h5>
+                                        </div>
+                                        @foreach ($reviews as $review)
+                                            <div class="students-feedback-item border-0">
+                                                <div class="feedback-rating">
+                                                    <div class="feedback-rating-start">
+                                                        <div class="image">
+                                                            <img src="{{ $review->student->photo}}" alt="Image" />
+                                                        </div>
+                                                        <div class="text">
+                                                            <h6><a href="#">{{ $review->student->firstname }} {{ $review->student->lastname }}</a></h6>
+                                                            <p>{{ $review->created_at->diffForHumans() }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feedback-rating-end">
+                                                        <div class="rating-icons rating-icons-2">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $review->rating)
+                                                                    <span class="star selected">&#9733;</span>
+                                                                @else
+                                                                    <span class="star">&#9734;</span>
+                                                                @endif
+                                                            @endfor
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>{{ $review->message }}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                        {{-- <div class="text-center">
+                                            <button class="button button-md button--primary-outline">Load
+                                                more</button>
+                                        </div> --}}
+                                        <div class="feedback-comment">
                                           <h6 class="font-title--card">Leave a Rating</h6>
                                           <span>Rating</span>
                                           <div class="my-rating rating-icons rating-icons-modal">
