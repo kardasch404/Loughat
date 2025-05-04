@@ -126,7 +126,7 @@
             </div>
             <div class="col-xl-7 order-1 order-xl-0">
                 <div class="signup-area-image">
-                    <img src="{{asset("assets/dist/images/signup/Illustration.png")}}" alt="Illustration Image" class="img-fluid" />
+                    <img src="{{asset("assets/user/dist/images/signup/Illustration.png")}}" alt="Illustration Image" class="img-fluid" />
                 </div>
             </div>
         </div>
