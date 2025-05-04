@@ -58,24 +58,26 @@
                                     value="{{ $teacher->phone }}">
                             </div>
                         </div>
+
                     </div>
+                    <!-- About Me -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">About Me</h4>
+                            <div class="form-group mb-0">
+                                <label>Biography</label>
+                                <textarea class="form-control" rows="5" name="bio" >{{ $teacher->bio }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /About Me -->
                 </div>
                 <div class="submit-section submit-btn-bottom text-center">
                     <button type="submit" name="submit" class="btn btn-primary submit-btn">Save Changes</button>
                 </div>
         </form>
         <!-- /Basic Information -->
-        <!-- About Me -->
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">About Me</h4>
-                <div class="form-group mb-0">
-                    <label>Biography</label>
-                    <textarea class="form-control" rows="5"></textarea>
-                </div>
-            </div>
-        </div>
-        <!-- /About Me -->
+
 
         <form action="{{ route('teacher-profile.store', $teacher->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

@@ -91,6 +91,9 @@ class UserRepository
         if (isset($data['email'])) {
             $user->email = $data['email'];
         }
+        if (isset($data['bio'])) {
+            $user->bio = $data['bio'];
+        }
         $user->save();
         return $user;
     }

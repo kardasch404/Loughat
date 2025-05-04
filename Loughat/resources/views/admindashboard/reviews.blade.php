@@ -72,7 +72,7 @@
                                                     @endif
                                                 @endfor
                                             </td>
-                                            <td>
+                                            <td class="w-25 text-wrap" style="word-break: break-word;">
                                                 {{ $review->message }}
                                             </td>
                                             <td>
