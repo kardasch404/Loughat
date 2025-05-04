@@ -182,6 +182,7 @@ Route::get('/roles',[RoleController::class, 'index'])->name('admin.roles');
 Route::post('/roles', [RoleController::class, 'create'])->name('admin.roles.create');
 Route::delete('/roles/{id}', [RoleController::class, 'delete'])->name('admin.roles.delete');
 Route::put('/roles/{id}', [RoleController::class, 'update'])->name('admin.roles.update');
+Route::get('/reviews',[TeacherReviewController::class, 'getAllReviewsByAdmin'])->name('admin.getAllReviewsByAdmin');
 
 
 // => -/USer

@@ -37,129 +37,64 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Charlene Reed </a>
-                                            </h2>
-                                        </td>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Dr. Ruby Perrin</a>
-                                            </h2>
-                                        </td>
+                                    @foreach ($reviews as $review)
+                                        <tr>
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    <a href="" class="avatar avatar-sm mr-2">
+                                                        <img class="avatar-img rounded-circle"
+                                                            src="{{ $review->student->photo }}" alt="Student Image">
+                                                    </a>
+                                                    <a href="{{ $review->student_id }}">
+                                                        {{ $review->student->firstname }}
+                                                        {{ $review->student->lastname }}
+                                                    </a>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    <a href="{{ $review->teacher_id }}" class="avatar avatar-sm mr-2">
+                                                        <img class="avatar-img rounded-circle"
+                                                            src="{{ $review->teacher->photo }}" alt="Teacher Image">
+                                                    </a>
+                                                    <a href="{{ $review->teacher_id }}">
+                                                        {{ $review->teacher->firstname }}
+                                                        {{ $review->teacher->lastname }}
+                                                    </a>
+                                                </h2>
+                                            </td>
+                                            <td>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="fe fe-star text-warning"></i>
+                                                    @else
+                                                        <i class="fe fe-star-o text-secondary"></i>
+                                                    @endif
+                                                @endfor
+                                            </td>
+                                            <td>
+                                                {{ $review->message }}
+                                            </td>
+                                            <td>
+                                                {{ $review->created_at->format('d M Y') }}<br>
+                                                <small>{{ $review->created_at->format('h:i A') }}</small>
+                                            </td>
+                                            <td class="text-right">
+                                                <div class="actions">
 
-                                        <td>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star-o text-secondary"></i>
-                                        </td>
-
-                                        <td>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                        </td>
-                                        <td>3 Nov 2019 <br><small>09.59 AM</small></td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                    href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> Delete
-                                                </a>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient2.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Travis Trimble </a>
-                                            </h2>
-                                        </td>
-
-
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Dr. Darren Elder</a>
-                                            </h2>
-                                        </td>
-
-                                        <td>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star-o text-secondary"></i>
-                                        </td>
-
-                                        <td>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                        </td>
-                                        <td>2 Nov 2019<br> <small>08.50 AM</small></td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                    href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> Delete
-                                                </a>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/patients/patient3.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Carl Kelly</a>
-                                            </h2>
-                                        </td>
-
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm mr-2"><img
-                                                        class="avatar-img rounded-circle"
-                                                        src="assets/img/doctors/doctor-thumb-03.jpg" alt="User Image"></a>
-                                                <a href="profile.html">Dr. Deborah Angel</a>
-                                            </h2>
-                                        </td>
-
-                                        <td>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star text-warning"></i>
-                                            <i class="fe fe-star-o text-secondary"></i>
-                                        </td>
-
-                                        <td>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                        </td>
-                                        <td>1 Nov 2019<br> <small>02.59 PM</small></td>
-                                        <td class="text-right">
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-danger-light" data-toggle="modal"
-                                                    href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> Delete
-                                                </a>
-
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    <form action="{{ route('review.delete', $review->id) }}" method="POST"
+                                                        class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm bg-danger-light"
+                                                            onclick="return confirm('Are you sure ?')">
+                                                            <i class="fe fe-trash"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>

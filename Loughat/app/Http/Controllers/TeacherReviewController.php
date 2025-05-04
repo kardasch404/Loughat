@@ -20,7 +20,7 @@ class TeacherReviewController extends Controller
         $this->paymentRepository = $paymentRepository;
         $this->commandeRepository = $commandeRepository;
     }
-    
+
     public function store(TeacherReviewRequest $request)
     {
         // dd('vbhjkl');
@@ -65,7 +65,7 @@ class TeacherReviewController extends Controller
         try {
             $studentId = session('user_id');
             $review = $this->teacherReviewRepository->find($id);
-    
+
             if (!$review) {
                 return response()->json([
                     'message' => 'Review not found'
@@ -73,6 +73,23 @@ class TeacherReviewController extends Controller
             }
             $this->teacherReviewRepository->delete($id);
             return redirect()->back();
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getAllReviewsByAdmin()
+    {
+        try {
+            $reviews = $this->teacherReviewRepository->getAllReviews();
+            if (! $reviews)
+            {
+                return response()->json([
+                    'message' => 'Reviews not found'
+                ], 404);
+            }
+            return view('admindashboard.reviews', compact('reviews'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

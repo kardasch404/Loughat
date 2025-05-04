@@ -41,4 +41,9 @@ class TeacherReviewRepository
         $review->delete();
         return true;
     }
+
+    public function getAllReviews()
+    {
+        return TeacherReview::all();
+    }
 }
