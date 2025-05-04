@@ -33,6 +33,7 @@ class UserController extends Controller
     {
         try {
             $students = $this->userRepository->allStudents();
+            // dd($students);
             return view('admindashboard.students-list', compact('students'));
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -134,7 +135,7 @@ class UserController extends Controller
     {
         try {
             $validated = $request->validate([
-                'status' => 'required|in:valid,pending'
+                'status' => 'required|in:Valide,pending'
             ]);
             $teacher = User::findOrFail($id);
             $teacher->status = $validated['status'];

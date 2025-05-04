@@ -10,7 +10,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="page-title">List of Doctors</h3>
+                    <h3 class="page-title">List of Teacher</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
@@ -59,7 +59,7 @@
                                             </td>
 
                                             <td>{{ $teacher->email }}</td>
-                                            <td>190</td>
+                                            <td class="text-start">{{ $teacher->courses->count() }}</td>
 
                                             {{-- <td>
                                                     <div class="status-toggle">
