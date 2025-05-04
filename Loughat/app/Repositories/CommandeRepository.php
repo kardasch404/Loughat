@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Commande;
+use Illuminate\Console\Command;
 
 class CommandeRepository
 {
@@ -40,33 +41,46 @@ class CommandeRepository
         $commandes = Commande::where('user_id', $studentId)
             ->with(['cours', 'payments'])
             ->get();
-    
+
         if ($commandes->isEmpty()) {
             return false;
         }
-    
+
         return $commandes;
     }
 
-public function getAllCommandesForStudentPaidOrNotPaid($studentId)
-{
-    $commandes = Commande::where('user_id', $studentId)
-    ->with(['cours', 'payment']) 
-    ->get();
-    // dd($commandes);
-    
-    if ($commandes->isEmpty()) {
-        return false;
-    }
-    
-    $filteredCommandes = $commandes->groupBy('cours_id')->map(function ($group) {
-        $paidCommande = $group->firstWhere('payment', '!=', null);
-        if ($paidCommande) {
-            return $paidCommande;
-        }
-        return $group->first();
-    })->values();
+    public function getAllCommandesForStudentPaidOrNotPaid($studentId)
+    {
+        $commandes = Commande::where('user_id', $studentId)
+            ->with(['cours', 'payment'])
+            ->get();
+        // dd($commandes);
 
-    return $filteredCommandes->isEmpty() ? false : $filteredCommandes;
-}
+        if ($commandes->isEmpty()) {
+            return false;
+        }
+
+        $filteredCommandes = $commandes->groupBy('cours_id')->map(function ($group) {
+            $paidCommande = $group->firstWhere('payment', '!=', null);
+            if ($paidCommande) {
+                return $paidCommande;
+            }
+            return $group->first();
+        })->values();
+
+        return $filteredCommandes->isEmpty() ? false : $filteredCommandes;
+    }
+    public function getCommandsByStudent($studentId)
+    {
+        return Commande::where('user_id', $studentId)
+            ->get();
+    }
+    public function hasPaidCommandForTeacher($studentId, $teacherId)
+    {
+        return Commande::join('cours', 'commandes.cours_id', '=', 'cours.id')
+            ->join('payments', 'commandes.id', '=', 'payments.command_id')
+            ->where('commandes.user_id', $studentId)
+            ->where('cours.teacher_id', $teacherId)
+            ->exists();
+    }
 }

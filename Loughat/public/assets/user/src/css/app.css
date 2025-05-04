@@ -9,3 +9,17 @@
 .scrollable-form::-webkit-scrollbar {
     display: none;
 }
+
+/* Star Rating Styles */
+.my-rating .star {
+    font-size: 24px;
+    color: #ccc; /* Default star color */
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.my-rating .star.selected,
+.my-rating .star:hover,
+.my-rating .star:hover ~ .star {
+    color: #f39c12; /* Highlighted star color */
+}

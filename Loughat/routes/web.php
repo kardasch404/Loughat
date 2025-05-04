@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TeacherReviewController;
 use App\Http\Controllers\UserController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Request;
@@ -257,3 +258,6 @@ Route::get('/course-search/filter', [CoursController::class, 'filterByCategorieA
 
 // Portfolio 
 Route::get('/instructor-profile/{id}', [PortfolioController::class, 'index'])->name('instructor-profile.index');
+
+// teacher Review
+Route::post('/instructor-profile/review', [TeacherReviewController::class, 'store'])->name('instructor-profile.store');

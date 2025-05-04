@@ -49,6 +49,24 @@ function showPassword(inputId, icon) {
   }
 }
 
+// star rating
+
+document.addEventListener('DOMContentLoaded', function () {
+  const stars = document.querySelectorAll('.my-rating .star'); 
+  const ratingInput = document.getElementById('rating'); 
+
+  stars.forEach((star) => {
+    star.addEventListener('click', function () {
+      const rating = this.getAttribute('data-value'); 
+      ratingInput.value = rating; 
+
+      stars.forEach((s, index) => {
+        s.classList.toggle('selected', index < rating); 
+      });
+    });
+  });
+});
+
 
 
 // watch course 

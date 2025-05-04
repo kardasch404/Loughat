@@ -203,59 +203,62 @@
                               <div class="row">
                                   {{-- courses --}}
                                   @foreach ($courses as $cours)
-                                  <div class="col-md-6 mb-4">
-                                      <div class="contentCard contentCard--course">
-                                          <div class="contentCard-top">
-                                              <a href="{{ route('cours', $cours->id) }}"><img
-                                                      src="{{$cours->photo}}" alt="images"
-                                                      class="img-fluid" /></a>
-                                          </div>
-                                          <div class="contentCard-bottom">
-                                              <h5>
-                                                  <a href="{{ route('cours', $cours->id) }}" class="font-title--card">{{$cours->title}}</a>
-                                              </h5>
-                                              <div
-                                                  class="contentCard-info d-flex align-items-center justify-content-between">
-                                                  <a href="instructor-profile.html"
-                                                      class="contentCard-user d-flex align-items-center">
-                                                      <img src="{{$cours->teacher->photo}}" alt=""
-                                                          class="rounded-circle" style="width: 40px; height:40px;"/>
-                                                      <p class="font-para--md">{{$cours->teacher->firstname}} {{$cours->teacher->lastname}}</p>
-                                                  </a>
-                                                  <div class="price">
-                                                      <span>${{$cours->price}}</span>
-                                                      <del>$95</del>
-                                                  </div>
+                                      <div class="col-md-6 mb-4">
+                                          <div class="contentCard contentCard--course">
+                                              <div class="contentCard-top">
+                                                  <a href="{{ route('cours', $cours->id) }}"><img
+                                                          src="{{ $cours->photo }}" alt="images"
+                                                          class="img-fluid" /></a>
                                               </div>
-                                              <div class="contentCard-more">
-                                                  <div class="d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/star.png" alt="star" />
+                                              <div class="contentCard-bottom">
+                                                  <h5>
+                                                      <a href="{{ route('cours', $cours->id) }}"
+                                                          class="font-title--card">{{ $cours->title }}</a>
+                                                  </h5>
+                                                  <div
+                                                      class="contentCard-info d-flex align-items-center justify-content-between">
+                                                      <a href="instructor-profile.html"
+                                                          class="contentCard-user d-flex align-items-center">
+                                                          <img src="{{ $cours->teacher->photo }}" alt=""
+                                                              class="rounded-circle"
+                                                              style="width: 40px; height:40px;" />
+                                                          <p class="font-para--md">{{ $cours->teacher->firstname }}
+                                                              {{ $cours->teacher->lastname }}</p>
+                                                      </a>
+                                                      <div class="price">
+                                                          <span>${{ $cours->price }}</span>
+                                                          <del>$95</del>
                                                       </div>
-                                                      <span>4.5</span>
                                                   </div>
-                                                  <div class="eye d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/eye.png" alt="eye" />
+                                                  <div class="contentCard-more">
+                                                      <div class="d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/star.png" alt="star" />
+                                                          </div>
+                                                          <span>4.5</span>
                                                       </div>
-                                                      <span>24,517</span>
-                                                  </div>
-                                                  <div class="book d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/book.png" alt="location" />
+                                                      <div class="eye d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/eye.png" alt="eye" />
+                                                          </div>
+                                                          <span>24,517</span>
                                                       </div>
-                                                      <span>37 Lesson</span>
-                                                  </div>
-                                                  <div class="clock d-flex align-items-center">
-                                                      <div class="icon">
-                                                          <img src="dist/images/icon/Clock.png" alt="clock" />
+                                                      <div class="book d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/book.png" alt="location" />
+                                                          </div>
+                                                          <span>37 Lesson</span>
                                                       </div>
-                                                      <span>3 Hours</span>
+                                                      <div class="clock d-flex align-items-center">
+                                                          <div class="icon">
+                                                              <img src="dist/images/icon/Clock.png" alt="clock" />
+                                                          </div>
+                                                          <span>3 Hours</span>
+                                                      </div>
                                                   </div>
                                               </div>
                                           </div>
                                       </div>
-                                  </div>
                                   @endforeach
                                   {{-- end courses  --}}
                               </div>
@@ -757,7 +760,8 @@
                                               <div class="feedback-rating">
                                                   <div class="feedback-rating-start">
                                                       <div class="image">
-                                                          <img src="dist/images/ellipse/3.png" alt="Image" />
+                                                          <img src="{{ asset('assets/user/dist/images/ellipse/3.png') }}"
+                                                              alt="Image" />
                                                       </div>
                                                       <div class="text">
                                                           <h6><a href="#">Watcraz Eggsy</a></h6>
@@ -781,11 +785,20 @@
                                       <div class="feedback-comment">
                                           <h6 class="font-title--card">Leave a Rating</h6>
                                           <span>Rating</span>
-                                          <!-- <div id="my-rating"></div> -->
-                                          <div class="my-rating rating-icons rating-icons-modal"></div>
-                                          <form action="#">
+                                          <div class="my-rating rating-icons rating-icons-modal">
+                                              <!-- Star Rating -->
+                                              <span class="star" data-value="1">&#9733;</span>
+                                              <span class="star" data-value="2">&#9733;</span>
+                                              <span class="star" data-value="3">&#9733;</span>
+                                              <span class="star" data-value="4">&#9733;</span>
+                                              <span class="star" data-value="5">&#9733;</span>
+                                          </div>
+                                          <form action="{{ route('instructor-profile.store') }}" method="POST">
+                                              @csrf
+                                              <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                                              <input type="hidden" name="rating" id="rating">
                                               <label for="comment">Message</label>
-                                              <textarea class="form-control" id="comment" placeholder="how is your feeling about the instructor"></textarea>
+                                              <textarea class="form-control" id="comment" name="message" placeholder="How is your feeling about the instructor"></textarea>
                                               <button type="submit"
                                                   class="button button-lg button--primary float-end">Post
                                                   Review</button>
