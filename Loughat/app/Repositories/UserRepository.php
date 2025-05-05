@@ -124,4 +124,8 @@ class UserRepository
         $teacher->status = $status;
         $teacher->save();
     }
+    public function pagination()
+    {
+        return User::paginate(6);
+    }
 }

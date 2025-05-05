@@ -245,7 +245,6 @@ class CoursController extends Controller
         try {
             $search = $request->input('search');
             $courses = $this->coursRepository->searchCours($search)->paginate(8);
-
             $categories = $this->categorieRepository->all();
             return view('course-search', compact('courses', 'categories'));
         } catch (\Exception $e) {
