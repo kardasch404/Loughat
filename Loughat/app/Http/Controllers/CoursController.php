@@ -179,7 +179,7 @@ class CoursController extends Controller
             // dd($commandes);
             $courses = [];
             foreach ($commandes as $commande) {
-                $payment = $this->paymentRepository->findByCommandId($commande->id);
+                $payment = $this->paymentRepository->   findByCommandId($commande->id);
                 if (!$payment) {
                     dd('No payment found ' . $commande->id);
                 }
