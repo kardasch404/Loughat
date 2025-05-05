@@ -202,9 +202,6 @@
             });
         });
     </script>
-
-
-
     <style>
         .status-toggle {
             position: relative;
@@ -250,9 +247,4 @@
             transform: translateX(50px);
         }
     </style>
-
-
-
-
-
 @endsection

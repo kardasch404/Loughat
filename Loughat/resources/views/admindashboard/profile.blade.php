@@ -148,7 +148,7 @@
                                                                 <input type="text" class="form-control" name="bio" id="bio">
                                                             </div>
                                                         </div>
-                                                    </div>
+                      !                              </div>
                                                     <button type="submit" name="submit" class="btn btn-primary btn-block">Save
                                                         Changes</button>
                                                 </form>
