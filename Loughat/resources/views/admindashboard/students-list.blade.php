@@ -33,7 +33,7 @@
                                         <th>Member Since</th>
                                         <th>Email</th>
                                         <th>Account Status</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,12 +58,12 @@
 
                                             <td>{{ $student->email }}</td>
 
-                                            <td>
+                                            {{-- <td>
                                                 <div class="status-toggle">
                                                     <input type="checkbox" id="status_1" class="check" checked>
                                                     <label for="status_1" class="checktoggle">checkbox</label>
                                                 </div>
-                                            </td>
+                                            </td> --}}
                                             <td class="text">
                                                 <div class="actions">
                                                     <a class="btn btn-sm bg-success-light" data-toggle="modal"

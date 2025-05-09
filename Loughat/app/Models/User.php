@@ -92,7 +92,6 @@ class User extends Authenticatable implements JWTSubject
     }
     public function commandes()
     {
-
         return $this->hasMany(Commande::class);
     }
 }
