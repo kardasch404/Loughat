@@ -7,7 +7,7 @@ use App\Repositories\CategorieRepository;
 use Illuminate\Http\Request;
 use Cloudinary\Cloudinary;
 
-class CategorieController extends Controller
+class CategorieController extends Controller 
 {
     //
     protected $categorieRepository;

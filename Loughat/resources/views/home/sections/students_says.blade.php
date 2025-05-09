@@ -4,12 +4,12 @@
          <div class="row align-items-center">
              <div class="col-xl-5 col-lg-6">
                  <div class="testimonial__img">
-                     <img src="dist/images/hero/hero-img-02.png" alt="image" />
+                     <img src="{{ asset('assets/user/dist/images/hero/hero-img-02.png') }}" alt="image" />
                      <div class="dot">
-                         <img src="dist/images/shape/dots/dots-img-04.png" alt="dot images" />
+                         <img src=" {{ asset('assets/user/dist/images/shape/dots/dots-img-04.png') }}" alt="dot images" />
                      </div>
                      <div class="rectangle">
-                         <img src="dist/images/shape/rectangle.png" alt="rectangle" />
+                         <img src="{{ asset('assets/user/dist/images/shape/rectangle.png') }}" alt="rectangle" />
                      </div>
                      <div class="play-video">
                          <a class="popup-video play-button" href="https://www.youtube.com">
@@ -39,7 +39,7 @@
                              <div class="testimonial__user-wrapper d-flex justify-content-between">
                                  <div class="testimonial__user d-flex align-items-center">
                                      <div class="testimonial__user-img">
-                                         <img src="dist/images/avatar/avatar-img-01.png" alt="Client" />
+            <img src="{{ asset('assets/user/dist/images/avatar/avatar-img-01.png') }}" alt="Client" />
                                      </div>
                                      <div class="testimonial__user-info">
                                          <h6>Sheikh Rashed</h6>
@@ -109,7 +109,7 @@
                              <div class="testimonial__user-wrapper d-flex justify-content-between">
                                  <div class="testimonial__user d-flex align-items-center">
                                      <div class="testimonial__user-img">
-                                         <img src="dist/images/avatar/avatar-img-01.png" alt="Client" />
+                                         <img src="{{ asset('assets/user/dist/images/avatar/avatar-img-01.png') }}" alt="Client" />
                                      </div>
                                      <div class="testimonial__user-info">
                                          <h6>Sheikh Rashed</h6>
@@ -179,7 +179,7 @@
                              <div class="testimonial__user-wrapper d-flex justify-content-between">
                                  <div class="testimonial__user d-flex align-items-center">
                                      <div class="testimonial__user-img">
-                                         <img src="dist/images/avatar/avatar-img-01.png" alt="Client" />
+                                         <img src="{{ asset('assets/user/dist/images/avatar/avatar-img-01.png') }}" alt="Client" />
                                      </div>
                                      <div class="testimonial__user-info">
                                          <h6>Sheikh Rashed</h6>

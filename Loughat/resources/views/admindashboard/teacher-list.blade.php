@@ -35,7 +35,7 @@
                                         <th>Email</th>
                                         <th>Courses</th>
                                         <th>Account Status</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
 
                                     </tr>
                                 </thead>
@@ -60,13 +60,6 @@
 
                                             <td>{{ $teacher->email }}</td>
                                             <td class="text-start">{{ $teacher->courses->count() }}</td>
-
-                                            {{-- <td>
-                                                    <div class="status-toggle">
-                                                        <input type="checkbox" id="status_1" class="check" checked>
-                                                        <label for="status_1" class="checktoggle">checkbox</label>
-                                                    </div>
-                                                </td> --}}
                                             <td>
                                                 <div class="status-toggle">
                                                     <input type="checkbox" id="status_{{ $teacher->id }}"
@@ -81,7 +74,7 @@
 
 
 
-                                            <td class="text">
+                                            {{-- <td class="text">
                                                 <div class="actions">
                                                     <a class="btn btn-sm bg-success-light" data-toggle="modal"
                                                         href="#edit_specialities_details" onclick="loadUserData(this)"
@@ -94,7 +87,7 @@
                                                         <i class="fe fe-pencil"></i> Edit
                                                     </a>
                                                 </div>
-                                            </td>
+                                            </td> --}}
 
                                         </tr>
                                     @endforeach
@@ -187,11 +180,9 @@
                             "{{ route('update.teacher.status', '') }}/" + teacherId);
                     },
                     success: function(response) {
-                        console.log('Success response:', response);
-
                         if (response.success) {
                             checkbox.next('label').text(isChecked ? 'Approved' : 'Pending');
-                            alert('Status updated successfully');
+                            alert('Status updated success');
                         } else {
                             checkbox.prop('checked', !isChecked);
                             alert('Failed to update status: ' + (response.message ||
@@ -202,57 +193,4 @@
             });
         });
     </script>
-
-
-
-    <style>
-        .status-toggle {
-            position: relative;
-            display: inline-block;
-        }
-
-        .status-toggle .check {
-            display: none;
-        }
-
-        .status-toggle .checktoggle {
-            position: relative;
-            display: inline-block;
-            width: 80px;
-            height: 30px;
-            background-color: #dc3545;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            color: white;
-            text-align: center;
-            line-height: 30px;
-            font-size: 12px;
-        }
-
-        .status-toggle .check:checked+.checktoggle {
-            background-color: #28a745;
-        }
-
-        .status-toggle .checktoggle:before {
-            content: '';
-            position: absolute;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background-color: white;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s;
-        }
-
-        .status-toggle .check:checked+.checktoggle:before {
-            transform: translateX(50px);
-        }
-    </style>
-
-
-
-
-
 @endsection

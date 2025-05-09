@@ -23,7 +23,8 @@ class UserController extends Controller
     {
         try {
             $teachers = $this->userRepository->allTeachers();
-            return view('admindashboard.teacher-list', compact('teachers'));
+            $teachersPaginated = $this->userRepository->pagination();
+            return view('admindashboard.teacher-list', compact('teachers','teachersPaginated'));
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
@@ -135,7 +136,7 @@ class UserController extends Controller
     {
         try {
             $validated = $request->validate([
-                'status' => 'required|in:Valide,pending'
+                'status' => 'required|in:valid,pending'
             ]);
             $teacher = User::findOrFail($id);
             $teacher->status = $validated['status'];

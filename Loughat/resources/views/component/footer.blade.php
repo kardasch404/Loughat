@@ -4,7 +4,7 @@
             <div class="col-lg-6">
                 <div class="footer__wrapper">
                     <div class="footer__wrapper_logo">
-                        <img src="" alt="logo" class="img-fluid" />
+                        <img src="{{ asset('assets\user\src\images\loughat-logo.png') }}" alt="logo" class="img-fluid" style="width: 400px; height: 100px;" />
                     </div>
                     <p>
                         Duis posuere maximus arcu eu tincidunt. Nam rutrum, nibh vitae tempus venenatis, ex tortor

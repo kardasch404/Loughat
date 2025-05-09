@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             iframe = document.createElement('iframe');
             iframe.id = 'youtube-iframe';
             iframe.width = "100%";
-            iframe.height = "500";
+            iframe.height = "600";
             iframe.allow =
               "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
@@ -106,21 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
             embedUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
           }
           iframe.src = embedUrl;
-        } else {
-          const videoPlayer = document.getElementById('main-video-player');
-          videoPlayer.style.display = 'block';
-          const iframe = document.getElementById('youtube-iframe');
-          if (iframe) iframe.style.display = 'none';
-
-          while (videoPlayer.firstChild) {
-            videoPlayer.removeChild(videoPlayer.firstChild);
-          }
-          const source = document.createElement('source');
-          source.src = videoUrl;
-          source.className = 'w-100';
-          videoPlayer.appendChild(source);
-          videoPlayer.load();
-          videoPlayer.play();
         }
       }
     });

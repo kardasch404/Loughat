@@ -179,7 +179,7 @@ class CoursController extends Controller
             // dd($commandes);
             $courses = [];
             foreach ($commandes as $commande) {
-                $payment = $this->paymentRepository->findByCommandId($commande->id);
+                $payment = $this->paymentRepository->   findByCommandId($commande->id);
                 if (!$payment) {
                     dd('No payment found ' . $commande->id);
                 }
@@ -245,7 +245,6 @@ class CoursController extends Controller
         try {
             $search = $request->input('search');
             $courses = $this->coursRepository->searchCours($search)->paginate(8);
-
             $categories = $this->categorieRepository->all();
             return view('course-search', compact('courses', 'categories'));
         } catch (\Exception $e) {

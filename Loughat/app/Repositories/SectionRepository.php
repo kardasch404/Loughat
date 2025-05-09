@@ -32,7 +32,6 @@ class SectionRepository
 
     public function getCoursesWithSection ($coursId)
     {
-        // return Section::with('cours')->with('course_id', $coursId)->get();
         return Section::with('cours')
         ->where('course_id', $coursId)
         ->orderBy('order')

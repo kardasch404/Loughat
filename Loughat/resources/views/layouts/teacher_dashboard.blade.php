@@ -6,7 +6,7 @@
     <title>Teacher Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <!-- Favicons -->
-    <link href="{{ asset('assets/teacher/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets\teacher\img\loughat-blue-logo.png') }}" rel="icon">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href=" {{asset('assets/teacher/css/bootstrap.min.css') }}">
