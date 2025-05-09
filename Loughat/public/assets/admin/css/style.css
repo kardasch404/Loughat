@@ -4141,3 +4141,47 @@ table.table-inbox tbody tr.checked {
 		display: none;
 	}
 }
+
+.status-toggle {
+	position: relative;
+	display: inline-block;
+}
+
+.status-toggle .check {
+	display: none;
+}
+
+.status-toggle .checktoggle {
+	position: relative;
+	display: inline-block;
+	width: 80px;
+	height: 30px;
+	background-color: #dc3545;
+	border-radius: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+	font-size: 12px;
+}
+
+.status-toggle .check:checked+.checktoggle {
+	background-color: #28a745;
+}
+
+.status-toggle .checktoggle:before {
+	content: '';
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	border-radius: 50%;
+	background-color: white;
+	top: 2px;
+	left: 2px;
+	transition: transform 0.3s;
+}
+
+.status-toggle .check:checked+.checktoggle:before {
+	transform: translateX(50px);
+}

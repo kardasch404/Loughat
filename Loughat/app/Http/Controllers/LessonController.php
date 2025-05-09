@@ -66,7 +66,7 @@ class LessonController extends Controller
                 'message' => 'Course not found'
             ]);
         }
-
+        
         $sections = $this->sectionRepository->getSectionsByCourse($coursId);
         $lessons = $this->lessonRepository->getAllLessonBySection($sections);
 

@@ -53,7 +53,7 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </span>
-                                <p>Chikago, USA</p>
+                                <p>ElYoussoufia, Marokko</p>
                             </li>
                             <li>
                                 <span>
@@ -69,7 +69,7 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </span>
-                                <p>Mumbai, India</p>
+                                <p>Casablnaca, Marokko</p>
                             </li>
                             <li>
                                 <span>
@@ -124,7 +124,7 @@
                         <div class="contact-feature-text">
                             <h6>Address</h6>
                             <p>Street NO. #15, House NO.</p>
-                            <p>#15/B Chicago-60827, USA</p>
+                            <p>#15/B Elyoussofia-60827, Marokko</p>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                         </div>
                         <div class="contact-feature-text">
                             <h6>Email</h6>
-                            <h5>Edu.bd@gmail.com</h5>
+                            <h5>contact@loghat.cc</h5>
                         </div>
                     </div>
 
@@ -158,7 +158,7 @@
                         </div>
                         <div class="contact-feature-text">
                             <h6>Phone</h6>
-                            <h5>+1202-555-0621</h5>
+                            <h5>+212-555-0621</h5>
                         </div>
                     </div>
                     <img src="{{ asset('assets/user/dist/images/shape/dots/dots-img-03.png') }}" alt="Shape"

@@ -136,7 +136,7 @@ class UserController extends Controller
     {
         try {
             $validated = $request->validate([
-                'status' => 'required|in:Valide,pending'
+                'status' => 'required|in:valid,pending'
             ]);
             $teacher = User::findOrFail($id);
             $teacher->status = $validated['status'];

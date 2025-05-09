@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-xl navbar-light bg-transparent">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('dist/images/logo/logo.png') }}" alt="Logo" class="img-fluid" />
+                <img src="{{ asset('assets\user\src\images\loughat-logo.png') }}" alt="Logo" class="img-fluid" style="width: 200px; height: 80px;"/>
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
